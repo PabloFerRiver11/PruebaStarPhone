@@ -6,5 +6,5 @@ Desarrollo de una app para una operadora virtual de telecomunicaciones (OMV) don
 - Carlos Beltrán Romero 
 - Martín Nieto Pinteño 
 
-## Rubrica de Auto-evaluación
+## Rúbrica de Auto-evaluación
 https://docs.google.com/spreadsheets/d/1bGOZdtdP_sDQvfPiE4MWxG_Al-saQQta7J35YxnSny0/edit?usp=sharing

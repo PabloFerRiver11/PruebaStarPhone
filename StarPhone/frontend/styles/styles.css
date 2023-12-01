@@ -46,3 +46,90 @@
     background-color: rgba(135, 206, 235, 0.7);
     
 }
+
+.loginformfield {
+    width: 360px;
+    height: 80px;
+    padding: 0 20px 0;
+    margin-top: 25px;
+}
+
+vaadin-email-field.loginformfield::part(label), 
+vaadin-password-field.loginformfield::part(label) {
+    color: black;
+    font-size: 23px;
+}
+
+vaadin-email-field.loginformfield::part(input-field),
+vaadin-password-field.loginformfield::part(input-field) {
+    border: 2px solid black;
+    font-size: 18px;
+}
+
+.loginformbutton {
+    width: 120px;
+    height: 40px;
+    margin-top: 40px;
+    border: 3px solid black;
+    cursor: pointer;
+    background-color: var(--lumo-contrast-10pct);
+}
+
+vaadin-button.loginformbutton::part(label)
+{
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.bodysregister {
+    width: 33%;
+    height: 100%;
+    align-items: center;
+    padding-top: 15px;
+    gap: 15px;
+}
+
+.registerformfield {
+    width: 270px;
+    height: 60px;
+    padding: 0 10px 0;
+    margin-top: 12px;
+}
+
+vaadin-text-field.registerformfield::part(label),
+vaadin-number-field.registerformfield::part(label),
+vaadin-date-picker.registerformfield::part(label),
+vaadin-radio-group.registerformfield::part(label),
+vaadin-email-field.registerformfield::part(label), 
+vaadin-checkbox-group.registerformfield::part(label),
+vaadin-password-field.registerformfield::part(label) {
+    color: black;
+    font-size: 17px;
+}
+
+vaadin-text-field.registerformfield::part(input-field),
+vaadin-number-field.registerformfield::part(input-field),
+vaadin-date-picker.registerformfield::part(input-field),
+vaadin-radio-group.registerformfield::part(input-field),
+vaadin-email-field.registerformfield::part(input-field),
+vaadin-checkbox-group.registerformfield::part(input-field),
+vaadin-password-field.registerformfield::part(input-field) {
+    border: 2px solid black;
+    font-size: 13px;
+}
+
+.registerformbutton {
+    width: 150px;
+    height: 50px;
+    border: 3px solid black;
+    cursor: pointer;
+    background-color: var(--lumo-contrast-10pct);
+}
+
+vaadin-button.registerformbutton::part(label)
+{
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
+}

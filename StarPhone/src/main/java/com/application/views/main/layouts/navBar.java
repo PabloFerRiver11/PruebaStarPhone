@@ -8,6 +8,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 @CssImport("./styles/styles.css")
 public class navBar extends HorizontalLayout {
+
+    VerticalLayout firstDiv, secondDiv, thirdDiv, fourthDiv;
+    Anchor a1, a2, a3, a4;
+
     public navBar() {
         setWidth(70, Unit.PERCENTAGE);
         setHeight("50px");
@@ -17,30 +21,30 @@ public class navBar extends HorizontalLayout {
         setPadding(false);
         setSpacing(false);
 
-        VerticalLayout firstDiv = new VerticalLayout();
+        firstDiv = new VerticalLayout();
         firstDiv.addClassName("vlNavBar");
-        Anchor a1 = new Anchor("#", "MÓVIL+FIBRA");
+        a1 = new Anchor("#", "MÓVIL+FIBRA");
         a1.addClassName("anchor1");
         firstDiv.add(a1);
         add(firstDiv);
 
-        VerticalLayout secondDiv = new VerticalLayout();
+        secondDiv = new VerticalLayout();
         secondDiv.addClassName("vlNavBar");
-        Anchor a2 = new Anchor("#", "OFERTAS");
+        a2 = new Anchor("#", "OFERTAS");
         a2.addClassName("anchor1");
         secondDiv.add(a2);
         add(secondDiv);
 
-        VerticalLayout thirdDiv = new VerticalLayout();
+        thirdDiv = new VerticalLayout();
         thirdDiv.addClassName("vlNavBar");
         add(thirdDiv);
-        Anchor a3 = new Anchor("#", "ATENCIÓN AL CLIENTE");
+        a3 = new Anchor("#", "ATENCIÓN AL CLIENTE");
         a3.addClassName("anchor1");
         thirdDiv.add(a3);
 
-        VerticalLayout fourthDiv = new VerticalLayout();
+        fourthDiv = new VerticalLayout();
         fourthDiv.addClassName("vlNavBar");
-        Anchor a4 = new Anchor("#", "NUESTROS VALORES");
+        a4 = new Anchor("#", "NUESTROS VALORES");
         a4.addClassName("anchor1");
         fourthDiv.add(a4);
         add(fourthDiv);

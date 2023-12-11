@@ -17,7 +17,7 @@ public class MainView extends VerticalLayout {
 
     header h;
     navBar m;
-    VerticalLayout centerDiv, leftIntoCenterDiv, rightIntoCenterDiv;
+    VerticalLayout centerDiv, leftIntoCenterDiv, centerIntoCenterDiv, rightIntoCenterDiv;
     footer f;
     HorizontalLayout intoCenterDiv;
     Button butcliente, butnocliente;
@@ -49,24 +49,36 @@ public class MainView extends VerticalLayout {
         intoCenterDiv.getStyle().set("background-color", "rgba(255, 255, 255, 0.2)");
 
         leftIntoCenterDiv = new VerticalLayout();
-        leftIntoCenterDiv.setWidth(50, Unit.PERCENTAGE);
+        leftIntoCenterDiv.setWidth(33, Unit.PERCENTAGE);
         leftIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
         leftIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         leftIntoCenterDiv.setAlignItems(Alignment.CENTER);
         butcliente = new Button("Soy Cliente");
-        butcliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/login"));
+        butcliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menusuario"));
         butcliente.addClassName("mainViewButton");
         butcliente.getStyle().set("cursor", "pointer");
         leftIntoCenterDiv.add(butcliente);
         intoCenterDiv.add(leftIntoCenterDiv);
 
+        centerIntoCenterDiv = new VerticalLayout();
+        centerIntoCenterDiv.setWidth(34, Unit.PERCENTAGE);
+        centerIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
+        centerIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
+        centerIntoCenterDiv.setAlignItems(Alignment.CENTER);
+        butnocliente = new Button("Regístrate");
+        butnocliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/tarifas"));
+        butnocliente.addClassName("mainViewButton");
+        butnocliente.getStyle().set("cursor", "pointer");
+        centerIntoCenterDiv.add(butnocliente);
+        intoCenterDiv.add(centerIntoCenterDiv);
+
         rightIntoCenterDiv = new VerticalLayout();
-        rightIntoCenterDiv.setWidth(50, Unit.PERCENTAGE);
+        rightIntoCenterDiv.setWidth(33, Unit.PERCENTAGE);
         rightIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
         rightIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         rightIntoCenterDiv.setAlignItems(Alignment.CENTER);
-        butnocliente = new Button("Regístrate");
-        butnocliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/registro"));
+        butnocliente = new Button("Soy Empleado");
+        butnocliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menuempleado"));
         butnocliente.addClassName("mainViewButton");
         butnocliente.getStyle().set("cursor", "pointer");
         rightIntoCenterDiv.add(butnocliente);

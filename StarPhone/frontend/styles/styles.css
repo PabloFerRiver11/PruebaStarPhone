@@ -35,7 +35,7 @@
 }
 
 .mainViewButton {
-    width: 240px;
+    width: 280px;
     height: 80px;
     justify-content: center;
     align-items: center;
@@ -103,7 +103,8 @@ vaadin-date-picker.registerformfield::part(label),
 vaadin-radio-group.registerformfield::part(label),
 vaadin-email-field.registerformfield::part(label), 
 vaadin-checkbox-group.registerformfield::part(label),
-vaadin-password-field.registerformfield::part(label) {
+vaadin-password-field.registerformfield::part(label),
+vaadin-select.registerformfield::part(label) {
     color: black;
     font-size: 17px;
 }
@@ -114,7 +115,8 @@ vaadin-date-picker.registerformfield::part(input-field),
 vaadin-radio-group.registerformfield::part(input-field),
 vaadin-email-field.registerformfield::part(input-field),
 vaadin-checkbox-group.registerformfield::part(input-field),
-vaadin-password-field.registerformfield::part(input-field) {
+vaadin-password-field.registerformfield::part(input-field),
+vaadin-select.registerformfield::part(input-field) {
     border: 2px solid black;
     font-size: 13px;
 }

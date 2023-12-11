@@ -12,6 +12,7 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -28,7 +29,8 @@ public class registro extends VerticalLayout {
     VerticalLayout centerDiv, registerSquare, bodyLeftDiv, bodyCenterDiv, bodyRightDiv;
     HorizontalLayout titleDiv, bodyDiv, footerDiv, footerBodyDiv, footerBodyDivLeft, footerBodyDivRight;
     H3 register;
-    TextField username, surname, country, DNI, city, agreement;
+    TextField username, surname, country, DNI, city;
+    Select<String> agreement;
     NumberField phone;
     DatePicker birthdate;
     EmailField email;
@@ -63,7 +65,6 @@ public class registro extends VerticalLayout {
         registerSquare.setPadding(false);
         registerSquare.setSpacing(false);
         registerSquare.setAlignItems(Alignment.CENTER);
-        registerSquare.getStyle().set("background-color", "rgba(3, 3, 28, 0.7)");
         registerSquare.getStyle().set("border-radius", "12px");
 
         titleDiv = new HorizontalLayout();
@@ -136,9 +137,11 @@ public class registro extends VerticalLayout {
         DNI.addClassName("registerformfield");
         DNI.setId("DNI");
         bodyRightDiv.add(DNI);
-        agreement = new TextField("Tipo de Contrato:");
+        agreement = new Select<>();
         agreement.addClassName("registerformfield");
-        agreement.setId("agreement");
+        agreement.setLabel("Tipo de Contrato:");
+        agreement.setItems("Contrato1", "Contrato2", "Contrato3", "Contrato4", "Contrato5");
+        agreement.setValue("Contrato1");
         bodyRightDiv.add(agreement);
         repetpassword = new PasswordField("Repetir Contraseña:");
         repetpassword.addClassName("registerformfield");

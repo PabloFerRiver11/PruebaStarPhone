@@ -51,7 +51,6 @@ public class login extends VerticalLayout {
         loginSquare.setPadding(false);
         loginSquare.setSpacing(false);
         loginSquare.setAlignItems(Alignment.CENTER);
-        loginSquare.getStyle().set("background-color", "rgba(3, 3, 28, 0.7)");
         loginSquare.getStyle().set("border-radius", "12px");
 
         titleDiv = new HorizontalLayout();

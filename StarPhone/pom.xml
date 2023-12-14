@@ -13,7 +13,13 @@
         <java.version>17</java.version>
         <vaadin.version>24.2.1</vaadin.version>
     </properties>
-
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/mnpx01/iw2023-2024-StarPhone</url>
+        </repository>
+    </distributionManagement>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

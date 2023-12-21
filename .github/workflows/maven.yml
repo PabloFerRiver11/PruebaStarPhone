@@ -38,7 +38,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mnpx01_iw2023-2024-StarPhone      - name: Build and Deploy to GitHub Packages
+        run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mnpx01_iw2023-2024-StarPhone      
+        
+      - name: Build and Deploy to GitHub Packages
         run: mvn deploy -Dmaven.test.skip=true -U -B -Pproduction
         env:
           GITHUB_TOKEN: ${{ github.token }}

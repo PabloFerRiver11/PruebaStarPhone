@@ -38,7 +38,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mnpx01_iw2023-2024-StarPhonene
+        run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mnpx01_iw2023-2024-StarPhone
 
       - name: Build and Deploy to GitHub Packages
         run: mvn deploy -Dmaven.test.skip=true -U -B -Pproduction
@@ -51,7 +51,7 @@ jobs:
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          application_name: *******fullstackwebapp*******   # Configurar nombre de la app
+          application_name: StarPhone   # Configurar nombre de la app
           environment_name: *********fullstackwebapp-env**********  # Configurar nombre del entorno
           region: us-east-1 # Configurar región
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}

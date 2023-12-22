@@ -9,7 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "LineaMovil")
+@Table(name = "LineaMovil", indexes = {
+        @Index(
+                name = "idx_contrato",
+                columnList = "contrato_id",
+                unique =false
+        )
+}
+)
 public class LineaMovil extends AbstractEntity {
 
     @Id
@@ -17,6 +24,11 @@ public class LineaMovil extends AbstractEntity {
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "ID")
     private UUID id;
+
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "contrato_id")
+    private Contrato contrato;
 
     @NotEmpty
     @Column(name = "Nombre", nullable = false)
@@ -39,6 +51,14 @@ public class LineaMovil extends AbstractEntity {
     @NotEmpty
     @Column(name = "Teléfono", nullable = false)
     private int Telefono;
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+
 
     @NotEmpty
     @Column(name = "Nombre_Teléfono", nullable = false)

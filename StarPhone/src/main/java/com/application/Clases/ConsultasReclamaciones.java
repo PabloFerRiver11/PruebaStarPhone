@@ -20,9 +20,13 @@ public class ConsultasReclamaciones extends AbstractEntity {
     private UUID id;
 
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "LineaMovil_ID")
     private LineaMovil lineamovil;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "contrato_id")
+    private Contrato contrato;
 
     @NotEmpty
     @Column(name = "Descripcion")

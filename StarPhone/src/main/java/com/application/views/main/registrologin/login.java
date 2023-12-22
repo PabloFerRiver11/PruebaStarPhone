@@ -1,5 +1,7 @@
 package com.application.views.main.registrologin;
 
+import com.application.Clases.User;
+import com.application.Servicios.UserService;
 import com.application.views.main.layouts.footer;
 import com.application.views.main.layouts.header;
 import com.vaadin.flow.component.Unit;
@@ -13,10 +15,13 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.util.Optional;
+
 @CssImport("./styles/styles.css")
 @PageTitle("InicioDeSesion")
 @Route(value = "/login")
 public class login extends VerticalLayout {
+    UserService service;
 
     header h;
     VerticalLayout centerDiv, loginSquare, bodyDiv;
@@ -27,7 +32,8 @@ public class login extends VerticalLayout {
     Button confirmar;
     footer f;
 
-    public login() {
+    public login(UserService service){
+        this.service = service;
         setWidthFull();
         setHeightFull();
         addClassName("mainView");
@@ -79,7 +85,7 @@ public class login extends VerticalLayout {
         password.addClassName("loginformfield");
         password.setId("password");
         bodyDiv.add(password);
-        confirmar = new Button("Confirmar");
+        confirmar = new Button("Confirmar", e -> attemptLogin(email.getValue(), password.getValue()));
         confirmar.addClassName("loginformbutton");
         bodyDiv.add(confirmar);
         loginSquare.add(bodyDiv);
@@ -99,4 +105,22 @@ public class login extends VerticalLayout {
         footer f = new footer();
         add(f);
     }
+
+
+
+    private void attemptLogin(String email, String password) {
+        Optional<User> user = service.loadUserByEmail(email);
+        if (user.isPresent()) {
+            if (user.get().getContrasenna().equals(password)) {
+                System.out.println("Login successful");
+            } else {
+                System.out.println("Login failed");
+            }
+        } else {
+            System.out.println("Login failed");
+
+
+        }
+    }
 }
+

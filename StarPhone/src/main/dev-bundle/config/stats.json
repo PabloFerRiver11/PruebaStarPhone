@@ -74,6 +74,7 @@
   "construct-style-sheets-polyfill": "3.1.0",
   "date-fns": "2.29.3",
   "lit": "2.8.0",
+  "lumo-css-framework": "^4.0.10",
   "mobile-drag-drop": "2.3.0-rc.2",
   "proj4": "2.9.2"
  },
@@ -328,7 +329,7 @@
    "version": "24.2.1"
   }
  },
- "packageJsonHash": "24c5f324a8f0c89b5a3dfc4787237e0df6132f871afd17a0a0b85c2ec8e8d40d",
+ "packageJsonHash": "725cab2b22619b7260fab84fb2aefd17681e2e5ca65374e39d60c60298999453",
  "indexHtmlGenerated": [
   "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-ae3a8e49.js\"></script>"
  ]

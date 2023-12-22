@@ -2,6 +2,7 @@ package com.application.Clases;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -10,13 +11,26 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Contrato")
+@Table(name = "Contrato", indexes = {
+        @Index(
+                name = "idx_usuario",
+                columnList = "usuario_id",
+                unique =false
+        )
+})
 public class Contrato extends AbstractEntity {
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "ID")
     private UUID id;
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn( name = "usuario_id")
+    @NotNull
+    private User usuario;
 
 
     @NotEmpty
@@ -32,20 +46,18 @@ public class Contrato extends AbstractEntity {
     private String Estado;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "LineaMovil_ID")
+   @OneToMany(mappedBy = "contrato")
     private List<LineaMovil> lineamovil;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "Factura_ID")
+
+   @OneToMany(mappedBy = "contrato")
     private List<Factura> Facturas;
 
 
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ConsultasReclamaciones_ID")
+    @OneToMany(mappedBy = "contrato")
     private List<ConsultasReclamaciones> ConsultasReclamaciones;
 
 
@@ -56,6 +68,14 @@ public class Contrato extends AbstractEntity {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
     }
 
     public LocalDate getFechaInicio() {

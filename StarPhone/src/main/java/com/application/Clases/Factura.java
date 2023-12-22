@@ -10,7 +10,16 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Factura")
+@Table(name = "Factura", indexes = {
+        @Index(
+                name = "idx_contrato",
+                columnList = "contrato_id",
+                unique = false
+
+        )
+}
+)
+
 public class Factura extends AbstractEntity {
     @jakarta.persistence.Id
     @Id
@@ -18,6 +27,12 @@ public class Factura extends AbstractEntity {
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "ID")
     private UUID id;
+
+
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "contrato_id")
+    private Contrato contrato;
 
 
     @NotEmpty
@@ -50,6 +65,14 @@ public class Factura extends AbstractEntity {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
     }
 
     public LocalDate getFechaInicio() {

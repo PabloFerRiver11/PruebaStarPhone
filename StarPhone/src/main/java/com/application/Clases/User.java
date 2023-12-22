@@ -3,6 +3,8 @@ package com.application.Clases;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import jakarta.persistence.Id;
@@ -14,12 +16,23 @@ import java.util.List;
 import java.util.UUID;
 
 enum Rol {
-    Cliente, Marketing, Finanzas, Atencion_Cliente
+    Cliente, Marketing, Finanzas, Atencion_Cliente, ADMIN
 }
 
 
+
 @Entity
-@Table(name = "User")
+//Hacer @Table llamada Usuario y que contenga index
+@Table(name= "user",
+        indexes = {
+                @Index(
+                        name = "idx_correo_electronico",
+                        columnList = "Correo_electronico",
+                        unique =true
+                )
+        }
+
+)
 public class User extends AbstractEntity {
     @Id
     @GeneratedValue
@@ -28,56 +41,56 @@ public class User extends AbstractEntity {
     private UUID id;
 
 
-    @NotEmpty
+    @NotNull(message = "El DNI no puede estar vacío, por favor introduzca su DNI")
+    @Size(min = 9, max = 9, message = "Introduca de nuevo su dni")
     @Column(name = "DNI", unique = true)
     private String DNI;
 
-    @NotEmpty
+    @NotNull(message = "El nombre no puede estar vacío, por favor introduzca su nombre")
     @Column(name = "Nombre")
     private String Nombre;
 
-    @NotEmpty
+    @NotNull(message = "El apellido no puede estar vacío, por favor introduzca su apellido")
     @Column(name = "Apellido")
     private String Apellido;
 
-    @NotEmpty
+    @NotNull(message = "La ciudad no puede estar vacía, por favor introduzca su ciudad")
     @Column(name = "Ciudad")
     private String Ciudad;
 
-    @NotEmpty
+    @NotNull(message = "El país no puede estar vacío, por favor introduzca su país")
     @Column(name = "Pais")
     private String Pais;
 
-    @NotEmpty
+    @NotNull(message = "La fecha de nacimiento no puede estar vacía, por favor introduzca su fecha de nacimiento")
     @Column(name = "Fecha_Nacimiento")
     private LocalDate FechaNacimiento;
 
-    @NotEmpty
+    @NotNull(message = "El teléfono no puede estar vacío, por favor introduzca su teléfono")
     @Column(name = "Telefono")
     private int Telefono;
 
-    @NotEmpty
+    @NotNull(message = "El género no puede estar vacío, por favor introduzca su género")
     @Column(name = "Sexo")
     private String Sexo;
 
-    @NotEmpty
+    @NotNull(message = "El correo electrónico no puede estar vacío, por favor introduzca su correo electrónico")
     @Column(name = "Correo_electronico", unique = true)
-    private String CorreoElectronico;
+    private String email;
 
-    @NotEmpty
+    @NotNull(message = "La contraseña no puede estar vacía, por favor introduzca su contraseña")
     @Column(name = "Contrasenna")
     private String Contrasenna;
 
 
-    @NotEmpty
+    @NotNull(message = "El rol no puede estar vacío, por favor introduzca su rol")
     @Column(name = "Rol")
     @Enumerated(EnumType.STRING)
     private Rol Rol;
 
 
     //Contratos
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "Contrato_ID")
+    @OneToMany(mappedBy = "usuario")
     private List<Contrato> Contratos;
 
 
@@ -155,11 +168,11 @@ public class User extends AbstractEntity {
     }
 
     public String getCorreoElectronico() {
-        return CorreoElectronico;
+        return email;
     }
 
     public void setCorreoElectronico(String correoElectronico) {
-        CorreoElectronico = correoElectronico;
+        email = correoElectronico;
     }
 
     public String getContrasenna() {

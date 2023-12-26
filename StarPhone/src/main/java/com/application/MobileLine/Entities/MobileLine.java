@@ -1,4 +1,4 @@
-package com.application.MobileLine;
+package com.application.MobileLine.Entities;
 
 import com.application.General.AbstractEntity;
 import com.application.Contract.Entities.Contract;
@@ -41,7 +41,7 @@ public class MobileLine extends AbstractEntity {
 
     @NotEmpty
     @Column(name = "monthlyPrice", nullable = false)
-    private Double monthlyPrice;
+    private double monthlyPrice;
 
     @NotEmpty
     @Column(name = "phoneNumber", nullable = false)
@@ -57,8 +57,8 @@ public class MobileLine extends AbstractEntity {
     @Column(name = "shareData", nullable = false)
     private boolean shareData;
 
-    @Column(name = "Volumen_Mensual", nullable = false)
-    private Double Volumen_Mensual;
+    @Column(name = "monthlyDataVolume", nullable = false)
+    private double monthlyDataVolume;
 
     @Column(name = "totalCalls", nullable = false)
     private int totalCalls;
@@ -66,12 +66,12 @@ public class MobileLine extends AbstractEntity {
     @Column(name = "SMS", nullable = false)
     private int SMS;
 
-    @Column(name = "Datos", nullable = false)
-    private Double Datos;
+    @Column(name = "dataContract", nullable = false)
+    private double dataContract;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "linea_movil_id")
-    private List<NumerosBloqueados> numerosBloqueados;
+    private List<BlockedNumbers> numerosBloqueados;
 
     @Override
     public UUID getId() {
@@ -90,76 +90,76 @@ public class MobileLine extends AbstractEntity {
         this.contract = contract;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setNombre(String name) {
+        this.name = name;
     }
 
-    public String getApellido() {
-        return Apellido;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setApellido(String apellido) {
-        Apellido = apellido;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public Double getTarifa() {
-        return Tarifa;
+    public double getMonthlyPrice() {
+        return monthlyPrice;
     }
 
-    public void setTarifa(Double tarifa) {
-        Tarifa = tarifa;
+    public void setMonthlyPrice(double monthlyPrice) {
+        this.monthlyPrice = monthlyPrice;
     }
 
-    public int getTelefono() {
-        return Telefono;
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelefono(int telefono) {
-        Telefono = telefono;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getNombre_Telefono() {
-        return Nombre_Telefono;
+    public String getPhoneModel() {
+        return phoneModel;
     }
 
-    public void setNombre_Telefono(String nombre_Telefono) {
-        Nombre_Telefono = nombre_Telefono;
+    public void setPhoneModel(String phoneModel) {
+        this.phoneModel = phoneModel;
     }
 
     public boolean isRoaming() {
-        return Roaming;
+        return roaming;
     }
 
     public void setRoaming(boolean roaming) {
-        Roaming = roaming;
+        this.roaming = roaming;
     }
 
-    public boolean isCompartir_Datos() {
-        return Compartir_Datos;
+    public boolean isShareData() {
+        return shareData;
     }
 
-    public void setCompartir_Datos(boolean compartir_Datos) {
-        Compartir_Datos = compartir_Datos;
+    public void setShareData(boolean shareData) {
+        this.shareData = shareData;
     }
 
-    public Double getVolumen_Mensual() {
-        return Volumen_Mensual;
+    public Double getMonthlyDataVolume() {
+        return monthlyDataVolume;
     }
 
-    public void setVolumen_Mensual(Double volumen_Mensual) {
-        Volumen_Mensual = volumen_Mensual;
+    public void setMonthlyDataVolume(Double monthlyDataVolume) {
+        this.monthlyDataVolume = monthlyDataVolume;
     }
 
-    public int getLlamadas() {
-        return Llamadas;
+    public int getTotalCalls() {
+        return totalCalls;
     }
 
-    public void setLlamadas(int llamadas) {
-        Llamadas = llamadas;
+    public void setTotalCalls(int totalcalls) {
+        this.totalCalls = totalcalls;
     }
 
     public int getSMS() {
@@ -170,20 +170,19 @@ public class MobileLine extends AbstractEntity {
         this.SMS = SMS;
     }
 
-    public Double getDatos() {
-        return Datos;
+    public Double getDataContract() {
+        return dataContract;
     }
 
-    public void setDatos(Double datos) {
-        Datos = datos;
+    public void setDataContract(Double dataContract) {
+        this.dataContract = dataContract;
     }
 
-    public ServiceType getTipoServicio() {
-        return tipoServicio;
+    public ServiceType getServiceType() {
+        return serviceType;
     }
 
-    public void setTipoServicio(ServiceType tipoServicio) {
-        this.tipoServicio = tipoServicio;
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
     }
-
 }

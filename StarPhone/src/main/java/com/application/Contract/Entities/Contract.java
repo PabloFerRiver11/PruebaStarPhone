@@ -1,6 +1,7 @@
 package com.application.Contract.Entities;
 
 import com.application.General.AbstractEntity;
+import com.application.MobileLine.Entities.MobileLine;
 import com.application.User.Entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,7 +27,7 @@ public class Contract extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @NotNull
-    private User usuario;
+    private User user;
 
     @NotEmpty
     @Column(name = "startDate")
@@ -40,14 +41,14 @@ public class Contract extends AbstractEntity {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(mappedBy = "contrato")
-    private List<MobileLine> lineamovil;
+    @OneToMany(mappedBy = "contract")
+    private List<MobileLine> mobileLines;
 
-    @OneToMany(mappedBy = "contrato")
-    private List<Factura> Facturas;
+    @OneToMany(mappedBy = "contract")
+    private List<Bill> bills;
 
-    @OneToMany(mappedBy = "contrato")
-    private List<ConsultasReclamaciones> ConsultasReclamaciones;
+    @OneToMany(mappedBy = "contract")
+    private List<QueryComplaints> queryComplaints;
 
     @Override
     public UUID getId() {
@@ -58,60 +59,60 @@ public class Contract extends AbstractEntity {
         this.id = id;
     }
 
-    public User getUsuario() {
-        return usuario;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public LocalDate getFechaInicio() {
-        return FechaInicio;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
-        FechaInicio = fechaInicio;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getFechaFin() {
-        return FechaFin;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setFechaFin(LocalDate fechaFin) {
-        FechaFin = fechaFin;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    public String getEstado() {
-        return Estado;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEstado(String estado) {
-        Estado = estado;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public List<MobileLine> getLineamovil() {
-        return lineamovil;
+    public List<MobileLine> getMobileLines() {
+        return mobileLines;
     }
 
-    public void setLineamovil(List<MobileLine> lineamovil) {
-        this.lineamovil = lineamovil;
+    public void setMobileLines(MobileLine mobileLine) {
+        mobileLines.add(mobileLine);
     }
 
-    public List<Factura> getFacturas() {
-        return Facturas;
+    public List<Bill> getBills() {
+        return bills;
     }
 
-    public void setFacturas(List<Factura> facturas) {
-        Facturas = facturas;
+    public void setFacturas(Bill bill) {
+        bills.add(bill);
     }
 
-    public List<com.application.Clases.ConsultasReclamaciones> getConsultasReclamaciones() {
-        return ConsultasReclamaciones;
+    public List<QueryComplaints> getQueryComplaints() {
+        return queryComplaints;
     }
 
-    public void setConsultasReclamaciones(List<com.application.Clases.ConsultasReclamaciones> consultasReclamaciones) {
-        ConsultasReclamaciones = consultasReclamaciones;
+    public void setQueryComplaints(QueryComplaints queryComplaint) {
+        queryComplaints.add(queryComplaint);
     }
 
 }

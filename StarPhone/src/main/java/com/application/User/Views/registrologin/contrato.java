@@ -1,4 +1,4 @@
-package com.application.views.main.registrologin;
+package com.application.User.Views.registrologin;
 
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.H3;

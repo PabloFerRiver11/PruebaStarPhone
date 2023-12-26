@@ -1,5 +1,4 @@
-package com.application.views.main.registrologin;
-
+package com.application.User.Views.registrologin;
 
 import com.application.User.Entities.User;
 import com.application.User.Services.UserService;
@@ -33,7 +32,7 @@ public class login extends VerticalLayout {
     Button confirmar;
     footer f;
 
-    public login(UserService service){
+    public login(UserService service) {
         this.service = service;
         setWidthFull();
         setHeightFull();
@@ -107,8 +106,6 @@ public class login extends VerticalLayout {
         add(f);
     }
 
-
-
     private void attemptLogin(String email, String password) {
         Optional<User> user = Optional.ofNullable(service.loadUserByEmail(email));
         if (user.isPresent()) {
@@ -120,8 +117,6 @@ public class login extends VerticalLayout {
         } else {
             System.out.println("Login failed");
 
-
         }
     }
 }
-

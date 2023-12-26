@@ -1,6 +1,6 @@
 package com.application.User.Entities;
 
-import com.application.General.*;
+import com.application.General.AbstractEntity;
 import com.application.Contract.Entities.Contract;
 
 import jakarta.persistence.*;
@@ -8,10 +8,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import jakarta.persistence.Id;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -73,11 +74,12 @@ public class User extends AbstractEntity {
     private boolean activate;
 
     // Roles
-    @OneToMany(mappedBy = "usuario")
-    private List<Rol> roles;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Rol> roles = new HashSet<>();
 
     // Contratos
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "user")
     private List<Contract> contracts;
 
     @Override
@@ -177,7 +179,7 @@ public class User extends AbstractEntity {
         this.activate = activate;
     }
 
-    public List<Rol> getRoles() {
+    public Set<Rol> getRoles() {
         return roles;
     }
 

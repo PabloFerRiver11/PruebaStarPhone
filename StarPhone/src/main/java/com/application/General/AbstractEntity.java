@@ -1,7 +1,6 @@
-package com.application.Clases;
+package com.application.General;
 
 import jakarta.persistence.MappedSuperclass;
-
 import java.util.Objects;
 import java.util.UUID;
 

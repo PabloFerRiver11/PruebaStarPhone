@@ -8,21 +8,20 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
-// Hacer @Table llamada Usuario y que contenga index
+
 @Table(name = "user", indexes = {
         @Index(name = "idx_email", columnList = "email", unique = true)
 }
 
 )
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements UserDetails {
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -41,6 +40,9 @@ public class User extends AbstractEntity {
     @NotNull(message = "Por favor,introduzca su apellido")
     @Column(name = "surname")
     private String surname;
+    @NotNull(message = "Por favor, introduzca su Username")
+    @Column(name = "username", unique = true)
+    private String username;
 
     @NotNull(message = "Por favor, introduzca su ciudad")
     @Column(name = "city")
@@ -69,6 +71,9 @@ public class User extends AbstractEntity {
     @NotNull(message = "Por favor, introduzca su contraseña")
     @Column(name = "password")
     private String password;
+
+
+
 
     @Column(name = "activate")
     private boolean activate;
@@ -163,8 +168,38 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public void setPassword(String password) {

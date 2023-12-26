@@ -13,6 +13,8 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
 
         Optional<User> findByEmail(String email);
+        //username
+        Optional<User> findByUsername(String username);
 
-        List<User> findByActiveTrue();
+        List<User> findByActivateTrue();
 }

@@ -1,7 +1,8 @@
 package com.application.views.main.registrologin;
 
-import com.application.Clases.User;
-import com.application.Servicios.UserService;
+
+import com.application.User.Entities.User;
+import com.application.User.Services.UserService;
 import com.application.views.main.layouts.footer;
 import com.application.views.main.layouts.header;
 import com.vaadin.flow.component.Unit;
@@ -109,9 +110,9 @@ public class login extends VerticalLayout {
 
 
     private void attemptLogin(String email, String password) {
-        Optional<User> user = service.loadUserByEmail(email);
+        Optional<User> user = Optional.ofNullable(service.loadUserByEmail(email));
         if (user.isPresent()) {
-            if (user.get().getContrasenna().equals(password)) {
+            if (user.get().getPassword().equals(password)) {
                 System.out.println("Login successful");
             } else {
                 System.out.println("Login failed");

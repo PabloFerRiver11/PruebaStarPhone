@@ -1,5 +1,7 @@
-package com.application.Clases;
+package com.application.MobileLine;
 
+import com.application.General.AbstractEntity;
+import com.application.Contract.Entities.Contract;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -9,72 +11,57 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "LineaMovil", indexes = {
-        @Index(
-                name = "idx_contrato",
-                columnList = "contrato_id",
-                unique =false
-        )
-}
-)
-public class LineaMovil extends AbstractEntity {
+@Table(name = "mobileline", indexes = {
+        @Index(name = "idx_contract", columnList = "contract_id", unique = false)
+})
+public class MobileLine extends AbstractEntity {
 
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
-    @Column(name = "ID")
+    @Column(name = "id")
     private UUID id;
 
-
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "contrato_id")
-    private Contrato contrato;
-
-    @NotEmpty
-    @Column(name = "Nombre", nullable = false)
-    private String Nombre;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "contract_id")
+    private Contract contract;
 
     @NotEmpty
-    @Column(name = "Apellido", nullable = false)
-    private String Apellido;
-
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotEmpty
-    @Column(name = "Tipo_Servicio", nullable = false)
+    @Column(name = "surname", nullable = false)
+    private String surname;
+
+    @NotEmpty
+    @Column(name = "serviceType", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TipoServicio tipoServicio;
+    private ServiceType serviceType;
 
     @NotEmpty
-    @Column(name = "Tarifa", nullable = false)
-    private Double Tarifa;
+    @Column(name = "monthlyPrice", nullable = false)
+    private Double monthlyPrice;
 
     @NotEmpty
-    @Column(name = "Teléfono", nullable = false)
-    private int Telefono;
-    public Contrato getContrato() {
-        return contrato;
-    }
-
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
-    }
-
+    @Column(name = "phoneNumber", nullable = false)
+    private int phoneNumber;
 
     @NotEmpty
-    @Column(name = "Nombre_Teléfono", nullable = false)
-    private String Nombre_Telefono;
+    @Column(name = "phoneModel", nullable = false)
+    private String phoneModel;
 
-    @Column(name = "Roaming", nullable = false)
-    private boolean Roaming;
+    @Column(name = "roaming", nullable = false)
+    private boolean roaming;
 
-    @Column(name = "Compartir_Datos", nullable = false)
-    private boolean Compartir_Datos;
+    @Column(name = "shareData", nullable = false)
+    private boolean shareData;
 
     @Column(name = "Volumen_Mensual", nullable = false)
     private Double Volumen_Mensual;
 
-    @Column(name = "Llamadas", nullable = false)
-    private int Llamadas;
+    @Column(name = "totalCalls", nullable = false)
+    private int totalCalls;
 
     @Column(name = "SMS", nullable = false)
     private int SMS;
@@ -82,11 +69,9 @@ public class LineaMovil extends AbstractEntity {
     @Column(name = "Datos", nullable = false)
     private Double Datos;
 
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "linea_movil_id")
     private List<NumerosBloqueados> numerosBloqueados;
-
 
     @Override
     public UUID getId() {
@@ -95,6 +80,14 @@ public class LineaMovil extends AbstractEntity {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 
     public String getNombre() {
@@ -112,7 +105,6 @@ public class LineaMovil extends AbstractEntity {
     public void setApellido(String apellido) {
         Apellido = apellido;
     }
-
 
     public Double getTarifa() {
         return Tarifa;
@@ -186,13 +178,12 @@ public class LineaMovil extends AbstractEntity {
         Datos = datos;
     }
 
-    public TipoServicio getTipoServicio() {
+    public ServiceType getTipoServicio() {
         return tipoServicio;
     }
 
-    public void setTipoServicio(TipoServicio tipoServicio) {
+    public void setTipoServicio(ServiceType tipoServicio) {
         this.tipoServicio = tipoServicio;
     }
-
 
 }

@@ -11,14 +11,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "Factura", indexes = {
-        @Index(
-                name = "idx_contrato",
-                columnList = "contrato_id",
-                unique = false
+        @Index(name = "idx_contrato", columnList = "contrato_id", unique = false
 
         )
-}
-)
+})
 
 public class Factura extends AbstractEntity {
     @jakarta.persistence.Id
@@ -28,12 +24,9 @@ public class Factura extends AbstractEntity {
     @Column(name = "ID")
     private UUID id;
 
-
-
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contrato_id")
-    private Contrato contrato;
-
+    private Contract contrato;
 
     @NotEmpty
     @Column(name = "Fecha_Inicio")
@@ -51,8 +44,7 @@ public class Factura extends AbstractEntity {
     @Column(name = "Estado_Pago")
     private String EstadoPago;
 
-
-    //Guardar un pdf
+    // Guardar un pdf
     @NotEmpty
     @Column(name = "PDF_Factura", columnDefinition = "BLOB")
     @Lob
@@ -67,11 +59,11 @@ public class Factura extends AbstractEntity {
         this.id = id;
     }
 
-    public Contrato getContrato() {
+    public Contract getContrato() {
         return contrato;
     }
 
-    public void setContrato(Contrato contrato) {
+    public void setContrato(Contract contrato) {
         this.contrato = contrato;
     }
 
@@ -114,7 +106,5 @@ public class Factura extends AbstractEntity {
     public void setPDFFactura(byte[] PDFFactura) {
         this.PDFFactura = PDFFactura;
     }
-
-
 
 }

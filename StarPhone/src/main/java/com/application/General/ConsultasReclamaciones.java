@@ -19,33 +19,30 @@ public class ConsultasReclamaciones extends AbstractEntity {
     @Column(name = "ID")
     private UUID id;
 
-
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "LineaMovil_ID")
-    private LineaMovil lineamovil;
+    private MobileLine lineamovil;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contrato_id")
-    private Contrato contrato;
+    private Contract contrato;
 
     @NotEmpty
     @Column(name = "Descripcion")
     private String Descripcion;
-    //Estado
+    // Estado
     @NotEmpty
     @Column(name = "Estado")
     private String Estado;
-    //Fecha Creacion
+    // Fecha Creacion
     @NotEmpty
 
     @Column(name = "Fecha_Creacion")
     private LocalDate FechaCreacion;
 
-
     @NotEmpty
     @Column(name = "Fecha_Resolucion")
     private LocalDate FechaResolucion;
-
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "RespuestaReclamacion_ID")
@@ -59,7 +56,6 @@ public class ConsultasReclamaciones extends AbstractEntity {
         this.respuestasReclamaciones = respuestasReclamaciones;
     }
 
-
     @Override
     public UUID getId() {
         return id;
@@ -69,11 +65,11 @@ public class ConsultasReclamaciones extends AbstractEntity {
         this.id = id;
     }
 
-    public LineaMovil getLineamovil() {
+    public MobileLine getLineamovil() {
         return lineamovil;
     }
 
-    public void setLineamovil(LineaMovil lineamovil) {
+    public void setLineamovil(MobileLine lineamovil) {
         this.lineamovil = lineamovil;
     }
 
@@ -108,6 +104,5 @@ public class ConsultasReclamaciones extends AbstractEntity {
     public void setFechaResolucion(LocalDate fechaResolucion) {
         FechaResolucion = fechaResolucion;
     }
-
 
 }

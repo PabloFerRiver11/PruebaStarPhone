@@ -1,5 +1,7 @@
-package com.application.Clases;
+package com.application.Contract.Entities;
 
+import com.application.General.AbstractEntity;
+import com.application.User.Entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,55 +13,41 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Contrato", indexes = {
-        @Index(
-                name = "idx_usuario",
-                columnList = "usuario_id",
-                unique =false
-        )
+@Table(name = "contract", indexes = {
+        @Index(name = "idx_user", columnList = "user_id", unique = false)
 })
-public class Contrato extends AbstractEntity {
+public class Contract extends AbstractEntity {
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
-    @Column(name = "ID")
+    @Column(name = "id")
     private UUID id;
 
-
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn( name = "usuario_id")
+    @JoinColumn(name = "user_id")
     @NotNull
     private User usuario;
 
+    @NotEmpty
+    @Column(name = "startDate")
+    private LocalDate startDate;
 
     @NotEmpty
-    @Column(name = "Fecha_Inicio")
-    private LocalDate FechaInicio;
+    @Column(name = "endDate")
+    private LocalDate endDate;
 
     @NotEmpty
-    @Column(name = "Fecha_Fin")
-    private LocalDate FechaFin;
+    @Column(name = "status")
+    private String status;
 
-    @NotEmpty
-    @Column(name = "Estado")
-    private String Estado;
+    @OneToMany(mappedBy = "contrato")
+    private List<MobileLine> lineamovil;
 
-
-   @OneToMany(mappedBy = "contrato")
-    private List<LineaMovil> lineamovil;
-
-
-
-   @OneToMany(mappedBy = "contrato")
+    @OneToMany(mappedBy = "contrato")
     private List<Factura> Facturas;
-
-
-
 
     @OneToMany(mappedBy = "contrato")
     private List<ConsultasReclamaciones> ConsultasReclamaciones;
-
 
     @Override
     public UUID getId() {
@@ -102,12 +90,11 @@ public class Contrato extends AbstractEntity {
         Estado = estado;
     }
 
-
-    public List<LineaMovil> getLineamovil() {
+    public List<MobileLine> getLineamovil() {
         return lineamovil;
     }
 
-    public void setLineamovil(List<LineaMovil> lineamovil) {
+    public void setLineamovil(List<MobileLine> lineamovil) {
         this.lineamovil = lineamovil;
     }
 
@@ -128,4 +115,3 @@ public class Contrato extends AbstractEntity {
     }
 
 }
-

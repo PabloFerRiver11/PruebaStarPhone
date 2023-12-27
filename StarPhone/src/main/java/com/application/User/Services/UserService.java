@@ -3,7 +3,6 @@ package com.application.User.Services;
 import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,6 +33,7 @@ public class UserService   {
             return user.get();
         }
     }
+
     public User loadUserByEmail(String email) throws UsernameNotFoundException {
 
         Optional<User> user = userRepository.findByEmail(email);
@@ -44,7 +44,7 @@ public class UserService   {
             throw new UsernameNotFoundException(email);
         }
     }
-    //update User
+    // update User
 
     public User updateUser(User user) {
         return userRepository.save(user);

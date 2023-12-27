@@ -28,14 +28,6 @@ public class Bill extends AbstractEntity {
     private Contract contract;
 
     @NotEmpty
-    @Column(name = "startDate")
-    private LocalDate startDate;
-
-    @NotEmpty
-    @Column(name = "endDate")
-    private LocalDate endDate;
-
-    @NotEmpty
     @Column(name = "amount")
     private double amount;
 
@@ -48,6 +40,14 @@ public class Bill extends AbstractEntity {
     @Column(name = "PDF_Bill", columnDefinition = "BLOB")
     @Lob
     private byte[] PDFBill;
+
+    @NotEmpty
+    @Column(name = "startDate")
+    private LocalDate startDate;
+
+    @NotEmpty
+    @Column(name = "endDate")
+    private LocalDate endDate;
 
     @Override
     public UUID getId() {
@@ -64,22 +64,6 @@ public class Bill extends AbstractEntity {
 
     public void setContract(Contract contract) {
         this.contract = contract;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
     }
 
     public double getAmount() {
@@ -106,4 +90,19 @@ public class Bill extends AbstractEntity {
         this.PDFBill = PDFBill;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 }

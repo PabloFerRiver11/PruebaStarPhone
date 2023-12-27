@@ -3,6 +3,7 @@ package com.application.Contract.Entities;
 import com.application.General.AbstractEntity;
 import com.application.MobileLine.Entities.MobileLine;
 import com.application.User.Entities.User;
+import com.application.MobileLine.Entities.Fee;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,15 @@ public class Contract extends AbstractEntity {
     @NotNull
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fee_id")
+    @NotNull
+    private Fee fee;
+
+    @NotEmpty
+    @Column(name = "status")
+    private String status;
+
     @NotEmpty
     @Column(name = "startDate")
     private LocalDate startDate;
@@ -37,10 +47,6 @@ public class Contract extends AbstractEntity {
     @Column(name = "endDate")
     private LocalDate endDate;
 
-    @NotEmpty
-    @Column(name = "status")
-    private String status;
-
     @OneToMany(mappedBy = "contract")
     private List<MobileLine> mobileLines;
 
@@ -48,7 +54,7 @@ public class Contract extends AbstractEntity {
     private List<Bill> bills;
 
     @OneToMany(mappedBy = "contract")
-    private List<QueryComplaints> queryComplaints;
+    private List<QueryComplaint> queryComplaints;
 
     @Override
     public UUID getId() {
@@ -67,6 +73,14 @@ public class Contract extends AbstractEntity {
         this.user = user;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -83,36 +97,28 @@ public class Contract extends AbstractEntity {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public List<MobileLine> getMobileLines() {
         return mobileLines;
     }
 
-    public void setMobileLines(MobileLine mobileLine) {
-        mobileLines.add(mobileLine);
+    public void setMobileLines(List<MobileLine> mobileLines) {
+        this.mobileLines = mobileLines;
     }
 
     public List<Bill> getBills() {
         return bills;
     }
 
-    public void setFacturas(Bill bill) {
-        bills.add(bill);
+    public void setFacturas(List<Bill> bills) {
+        this.bills = bills;
     }
 
-    public List<QueryComplaints> getQueryComplaints() {
+    public List<QueryComplaint> getQueryComplaints() {
         return queryComplaints;
     }
 
-    public void setQueryComplaints(QueryComplaints queryComplaint) {
-        queryComplaints.add(queryComplaint);
+    public void setQueryComplaints(List<QueryComplaint> queryComplaints) {
+        this.queryComplaints = queryComplaints;
     }
 
 }

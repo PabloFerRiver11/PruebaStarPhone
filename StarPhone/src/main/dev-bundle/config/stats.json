@@ -74,7 +74,6 @@
   "construct-style-sheets-polyfill": "3.1.0",
   "date-fns": "2.29.3",
   "lit": "2.8.0",
-  "lumo-css-framework": "^4.0.10",
   "mobile-drag-drop": "2.3.0-rc.2",
   "proj4": "2.9.2"
  },
@@ -269,7 +268,7 @@
   "Frontend/styles/styles.css"
  ],
  "frontendHashes": {
-  "styles/styles.css": "2c354c321ece33e412856c1098ae2a90a8a255a505f669758fd0045bd4183bad",
+  "styles/styles.css": "0459d2f69ceca39662a287696d19f040ec0cf52c81e6da9d64337a20b269e5ee",
   "buttonFunctions.js": "c852123f9b2c44eb75e555119d3e05a7dbe78b91d0ab616feb9df1654474707d",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "8960e00884b9a8b62e24be63e03fe7045dcb9b6844a8a238eb4619d5595e2cfc",
@@ -296,7 +295,7 @@
   "mytodo": "{\n  \"lumoImports\" : [ \"typography\", \"color\", \"spacing\", \"badge\", \"utility\" ]\n}"
  },
  "entryScripts": [
-  "VAADIN/build/indexhtml-ae3a8e49.js"
+  "VAADIN/build/indexhtml-02d218ca.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -329,8 +328,8 @@
    "version": "24.2.1"
   }
  },
- "packageJsonHash": "725cab2b22619b7260fab84fb2aefd17681e2e5ca65374e39d60c60298999453",
+ "packageJsonHash": "24c5f324a8f0c89b5a3dfc4787237e0df6132f871afd17a0a0b85c2ec8e8d40d",
  "indexHtmlGenerated": [
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-ae3a8e49.js\"></script>"
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-02d218ca.js\"></script>"
  ]
 }

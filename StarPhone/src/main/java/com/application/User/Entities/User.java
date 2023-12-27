@@ -210,33 +210,5 @@ public class User extends AbstractEntity  {
         this.contracts = contracts;
     }
 
-    @Override
-    public boolean isEnabled() {
-        // Add implementation for isEnabled()
-        return true;
-    }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // Add implementation for isCredentialsNonExpired()
-        return true;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Add implementation for getAuthorities()
-        return Collections.emptyList();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // Add implementation for isAccountNonExpired()
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // Add implementation for isAccountNonLocked()
-        return true;
-    }
 }

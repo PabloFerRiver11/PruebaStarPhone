@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "fee", indexes = {
-        @Index(name = "idx_fee", columnList = "fee_id", unique = false)
+        @Index(name = "idx_fee", columnList = "id", unique = false)
 })
 public class Fee extends AbstractEntity {
 

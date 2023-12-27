@@ -21,7 +21,7 @@ import java.util.*;
 }
 
 )
-public class User extends AbstractEntity implements UserDetails {
+public class User extends AbstractEntity  {
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -168,39 +168,13 @@ public class User extends AbstractEntity implements UserDetails {
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+
 
     public String getPassword() {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 
     public void setPassword(String password) {
         this.password = password;

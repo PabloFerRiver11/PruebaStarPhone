@@ -1,10 +1,10 @@
 package com.application.User.Security;
 
+import com.application.User.Views.registrologin.login;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +23,8 @@ public class SecurityConfiguration extends VaadinWebSecurity {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
+
         http.authorizeHttpRequests(
                 authorize -> authorize.requestMatchers(new AntPathRequestMatcher("/images/*.*")).permitAll());
 
@@ -30,8 +32,9 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(new AntPathRequestMatcher("/line-awesome/**/*.svg")).permitAll());
 
+
         super.configure(http);
-        setLoginView(http, com.application.User.Views.registrologin.login.class);
+        setLoginView(http, login.class);
     }
 
 }

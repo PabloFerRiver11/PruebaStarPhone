@@ -2,6 +2,7 @@ package com.application.MobileLine.Entities;
 
 import com.application.General.AbstractEntity;
 import jakarta.persistence.*;
+
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -16,9 +17,6 @@ public class BlockedNumbers extends AbstractEntity {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "mobileLine_id")
-    private UUID mobileLine_id;
-
     @Column(name = "blockedNumber")
     private int blockedNumber;
 
@@ -29,14 +27,6 @@ public class BlockedNumbers extends AbstractEntity {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public UUID getMobileLineId() {
-        return mobileLine_id;
-    }
-
-    public void setMobileLineId(UUID mobileLine_id) {
-        this.mobileLine_id = mobileLine_id;
     }
 
     public int getBlockedNumber() {

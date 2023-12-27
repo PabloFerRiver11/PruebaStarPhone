@@ -40,6 +40,7 @@ public class User extends AbstractEntity implements UserDetails {
     @NotNull(message = "Por favor,introduzca su apellido")
     @Column(name = "surname")
     private String surname;
+
     @NotNull(message = "Por favor, introduzca su Username")
     @Column(name = "username", unique = true)
     private String username;
@@ -71,9 +72,6 @@ public class User extends AbstractEntity implements UserDetails {
     @NotNull(message = "Por favor, introduzca su contraseña")
     @Column(name = "password")
     private String password;
-
-
-
 
     @Column(name = "activate")
     private boolean activate;
@@ -120,6 +118,14 @@ public class User extends AbstractEntity implements UserDetails {
         this.surname = surname;
     }
 
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getCity() {
         return city;
     }
@@ -156,7 +162,7 @@ public class User extends AbstractEntity implements UserDetails {
         return gender;
     }
 
-    public void setSexo(String gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -168,38 +174,8 @@ public class User extends AbstractEntity implements UserDetails {
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 
     public void setPassword(String password) {
@@ -218,15 +194,45 @@ public class User extends AbstractEntity implements UserDetails {
         return roles;
     }
 
-    public void setRol(Rol rol) {
-        roles.add(rol);
+    public void setRol(Set<Rol> roles) {
+        this.roles = roles;
     }
 
     public List<Contract> getContracts() {
         return contracts;
     }
 
-    public void setContracts(Contract contract) {
-        contracts.add(contract);
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // Add implementation for isEnabled()
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // Add implementation for isCredentialsNonExpired()
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Add implementation for getAuthorities()
+        return Collections.emptyList();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // Add implementation for isAccountNonExpired()
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // Add implementation for isAccountNonLocked()
+        return true;
     }
 }

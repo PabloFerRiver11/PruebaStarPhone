@@ -47,41 +47,6 @@
     
 }
 
-.loginformfield {
-    width: 360px;
-    height: 80px;
-    padding: 0 20px 0;
-    margin-top: 25px;
-}
-
-vaadin-email-field.loginformfield::part(label), 
-vaadin-password-field.loginformfield::part(label) {
-    color: black;
-    font-size: 23px;
-}
-
-vaadin-email-field.loginformfield::part(input-field),
-vaadin-password-field.loginformfield::part(input-field) {
-    border: 2px solid black;
-    font-size: 18px;
-}
-
-.loginformbutton {
-    width: 120px;
-    height: 40px;
-    margin-top: 40px;
-    border: 3px solid black;
-    cursor: pointer;
-    background-color: var(--lumo-contrast-10pct);
-}
-
-vaadin-button.loginformbutton::part(label)
-{
-    color: black;
-    font-size: 18px;
-    font-weight: 500;
-}
-
 .bodysregister {
     width: 33%;
     height: 100%;
@@ -134,4 +99,9 @@ vaadin-button.registerformbutton::part(label)
     color: black;
     font-size: 18px;
     font-weight: 500;
+}
+
+vaadin-login-overlay-wrapper.loginView::part(backdrop) {
+    background-image: url(images/landscape.jpg) no-repeat;
+    background-size: 100vw 100vh;   
 }

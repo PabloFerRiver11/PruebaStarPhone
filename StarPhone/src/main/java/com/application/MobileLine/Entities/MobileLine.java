@@ -63,14 +63,14 @@ public class MobileLine extends AbstractEntity {
     @Column(name = "totalCalls", nullable = false)
     private int totalCalls;
 
-    @Column(name = "SMS", nullable = false)
-    private int SMS;
+    @Column(name = "totalSMS", nullable = false)
+    private int totalSMS;
 
-    @Column(name = "dataContract", nullable = false)
-    private double dataContract;
+    @Column(name = "totalDataContract", nullable = false)
+    private double totalDataContract;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "linea_movil_id")
+    @JoinColumn(name = "mobileLine_id")
     private List<BlockedNumbers> numerosBloqueados;
 
     @Override
@@ -94,7 +94,7 @@ public class MobileLine extends AbstractEntity {
         return name;
     }
 
-    public void setNombre(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -106,6 +106,14 @@ public class MobileLine extends AbstractEntity {
         this.surname = surname;
     }
 
+    public ServiceType getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
+    }
+
     public double getMonthlyPrice() {
         return monthlyPrice;
     }
@@ -114,20 +122,20 @@ public class MobileLine extends AbstractEntity {
         this.monthlyPrice = monthlyPrice;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getPhoneModel() {
         return phoneModel;
     }
 
     public void setPhoneModel(String phoneModel) {
         this.phoneModel = phoneModel;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean isRoaming() {
@@ -162,27 +170,28 @@ public class MobileLine extends AbstractEntity {
         this.totalCalls = totalcalls;
     }
 
-    public int getSMS() {
-        return SMS;
+    public int getTotalSMS() {
+        return totalSMS;
     }
 
-    public void setSMS(int SMS) {
-        this.SMS = SMS;
+    public void setTotalSMS(int totalSMS) {
+        this.totalSMS = totalSMS;
     }
 
-    public Double getDataContract() {
-        return dataContract;
+    public Double getTotalDataContract() {
+        return totalDataContract;
     }
 
-    public void setDataContract(Double dataContract) {
-        this.dataContract = dataContract;
+    public void setTotalDataContract(Double totalDataContract) {
+        this.totalDataContract = totalDataContract;
     }
 
-    public ServiceType getServiceType() {
-        return serviceType;
+    public List<BlockedNumbers> getNumerosBloqueados() {
+        return this.numerosBloqueados;
     }
 
-    public void setServiceType(ServiceType serviceType) {
-        this.serviceType = serviceType;
+    public void setNumerosBloqueados(List<BlockedNumbers> numerosBloqueados) {
+        this.numerosBloqueados = numerosBloqueados;
     }
+
 }

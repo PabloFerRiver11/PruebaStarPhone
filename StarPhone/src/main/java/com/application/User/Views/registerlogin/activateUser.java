@@ -36,7 +36,10 @@ public class activateUser extends VerticalLayout {
         getStyle().set("font-family", "Kavoon");
 
         // TODO: Comprobar si usuario está activado, entonces redirigir a su menú según
-        // rol
+        // rol, sino activado enviar correo con código de activación y guardar en BD
+        // dicho código, si este código ya estuviese, no enviar correo y mostrar mensaje
+        // en dialogo de que ya se ha enviado un código de activación y que para
+        // más información contacte con el administrador en el correo X
         header h = new header();
         add(h);
 
@@ -48,8 +51,8 @@ public class activateUser extends VerticalLayout {
         centerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
 
         confirmSquare = new VerticalLayout();
-        confirmSquare.setWidth("400px");
-        confirmSquare.setHeight("400px");
+        confirmSquare.setWidth("350px");
+        confirmSquare.setHeight("350px");
         confirmSquare.setPadding(false);
         confirmSquare.setSpacing(false);
         confirmSquare.setAlignItems(Alignment.CENTER);
@@ -63,7 +66,7 @@ public class activateUser extends VerticalLayout {
         titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
         titleDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
         confirmTitle = new H3("Activar Usuario");
-        confirmTitle.getStyle().set("font-size", "26px");
+        confirmTitle.getStyle().set("font-size", "30px");
         confirmTitle.getStyle().set("color", "white");
         titleDiv.add(confirmTitle);
         confirmSquare.add(titleDiv);
@@ -80,7 +83,7 @@ public class activateUser extends VerticalLayout {
         confirmar = new Button("Confirmar");
         confirmar.addClassName("activebutton");
         confirmar.addClickListener(e -> {
-            // comparar código con el almacenado en la BD
+            // TODO: comparar código con el almacenado en la BD
             // dar rol al usuario como USER
             // activate a true
             // redirigi a su menú (menusuario)

@@ -35,8 +35,8 @@ public class MobileLine extends AbstractEntity {
     private String surname;
 
     @NotEmpty
-    @Column(name = "serviceType", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "serviceType", nullable = false)
     private ServiceType serviceType;
 
     @NotEmpty

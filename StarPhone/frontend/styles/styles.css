@@ -48,16 +48,17 @@
 }
 
 .bodysregister {
-    width: 33%;
-    height: 100%;
+    width: 100%;
+    height: 25%;
+    justify-content: center;
     align-items: center;
-    padding-top: 15px;
-    gap: 15px;
+    align-items: center;
+    gap: 60px;
 }
 
 .registerformfield {
     width: 270px;
-    height: 60px;
+    height: 100px;
     padding: 0 10px 0;
     margin-top: 12px;
 }
@@ -71,8 +72,8 @@
 }
 
 .activefield {
-    width: 360px;
-    height: 80px;
+    width: 300px;
+    height: 70px;
     padding: 0 20px 0;
     margin-top: 30px;
 }
@@ -80,20 +81,19 @@
 .activebutton {
     width: 120px;
     height: 40px;
+    margin-top: 20px;
     border: 3px solid black;
     cursor: pointer;
     background-color: var(--lumo-contrast-10pct);
 }
 
+
 vaadin-text-field.registerformfield::part(label),
 vaadin-number-field.registerformfield::part(label),
 vaadin-date-picker.registerformfield::part(label),
-vaadin-radio-group.registerformfield::part(label),
 vaadin-email-field.registerformfield::part(label), 
-vaadin-checkbox-group.registerformfield::part(label),
 vaadin-password-field.registerformfield::part(label),
-vaadin-select.registerformfield::part(label),
-vaadin-number-field.activefield::part(label) {
+vaadin-select.registerformfield::part(label) {
     color: black;
     font-size: 17px;
 }
@@ -101,17 +101,32 @@ vaadin-number-field.activefield::part(label) {
 vaadin-text-field.registerformfield::part(input-field),
 vaadin-number-field.registerformfield::part(input-field),
 vaadin-date-picker.registerformfield::part(input-field),
-vaadin-radio-group.registerformfield::part(input-field),
 vaadin-email-field.registerformfield::part(input-field),
-vaadin-checkbox-group.registerformfield::part(input-field),
 vaadin-password-field.registerformfield::part(input-field),
-vaadin-select.registerformfield::part(input-field), 
-vaadin-number-field.activefield::part(input-field) {
+vaadin-select.registerformfield::part(input-field) {
     border: 2px solid black;
     font-size: 13px;
 }
 
-vaadin-button.activebutton::part(label)
+vaadin-text-field.registerformfield::part(error-message),
+vaadin-number-field.registerformfield::part(error-message),
+vaadin-date-picker.registerformfield::part(error-message),
+vaadin-email-field.registerformfield::part(error-message),
+vaadin-password-field.registerformfield::part(error-message),
+vaadin-select.registerformfield::part(input-field) {
+    color: red;
+    font-size: 15px;
+}
+
+vaadin-number-field.activefield::part(input-field)
+{
+    border: 2px solid black;
+    font-size: 18px;
+}
+
+
+vaadin-button.activebutton::part(label),
+vaadin-number-field.activefield::part(label)
 {
     color: black;
     font-size: 18px;

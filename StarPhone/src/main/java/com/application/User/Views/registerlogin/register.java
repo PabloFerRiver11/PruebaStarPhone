@@ -2,26 +2,26 @@ package com.application.User.Views.registerlogin;
 
 import com.application.views.main.layouts.footer;
 import com.application.views.main.layouts.header;
+import com.application.User.Services.UserService;
+import com.application.User.Entities.User;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.checkbox.CheckboxGroup;
-import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @AnonymousAllowed
 @CssImport("./styles/styles.css")
@@ -30,21 +30,22 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 public class register extends VerticalLayout {
 
     header h;
-    VerticalLayout centerDiv, registerSquare, bodyLeftDiv, bodyCenterDiv, bodyRightDiv;
-    HorizontalLayout titleDiv, bodyDiv, footerDiv, footerBodyDiv, footerBodyDivLeft, footerBodyDivRight;
-    H3 register;
-    TextField username, surname, country, DNI, city;
-    Select<String> agreement;
-    NumberField phone;
-    DatePicker birthdate;
-    EmailField email;
-    PasswordField password, repetpassword;
-    RadioButtonGroup<String> sexo;
-    CheckboxGroup<String> policies;
-    Button confirmar;
+    HorizontalLayout titleDiv, centerDiv, bodySubDiv1, bodySubDiv2, bodySubDiv3,
+            bodySubDiv4, bodySubDiv5, footerDiv;
+    VerticalLayout center, bodyDiv, registerForm;
+    H3 titleRegister;
+    private final TextField name, surname, username, country, DNI, city;
+    private final DatePicker birthdate;
+    private final EmailField email;
+    private final NumberField phone;
+    private final PasswordField password, repeatpassword;
+    private final Select<String> fees;
+    private final Button confirmar;
+    private final BeanValidationBinder<User> binder;
+    private final UserService service;
     footer f;
 
-    public register() {
+    public register(UserService service) {
         setWidthFull();
         setHeightFull();
         addClassName("mainView");
@@ -55,21 +56,84 @@ public class register extends VerticalLayout {
         header h = new header();
         add(h);
 
-        centerDiv = new VerticalLayout();
-        centerDiv.setWidthFull();
-        centerDiv.setPadding(false);
-        centerDiv.setSpacing(false);
-        centerDiv.setAlignItems(Alignment.CENTER);
-        centerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
+        center = new VerticalLayout();
+        center.setWidthFull();
+        center.setPadding(false);
+        center.setSpacing(false);
+        center.setAlignItems(Alignment.CENTER);
+        center.setJustifyContentMode(JustifyContentMode.CENTER);
 
-        registerSquare = new VerticalLayout();
-        registerSquare.setWidth("1200px");
-        registerSquare.setHeight("600px");
-        registerSquare.getStyle().set("margin-top", "10px");
-        registerSquare.setPadding(false);
-        registerSquare.setSpacing(false);
-        registerSquare.setAlignItems(Alignment.CENTER);
-        registerSquare.getStyle().set("border-radius", "12px");
+        registerForm = new VerticalLayout();
+        registerForm.setWidth("1200px");
+        registerForm.setHeight("600px");
+        registerForm.setPadding(false);
+        registerForm.setSpacing(false);
+        registerForm.setAlignItems(Alignment.CENTER);
+        registerForm.getStyle().set("border-radius", "12px");
+
+        // Campos formulario ------------------------------
+        DNI = new TextField("DNI:");
+        DNI.addClassName("registerformfield");
+        DNI.setMinLength(9);
+        DNI.setMaxLength(9);
+        DNI.setId("DNI");
+
+        name = new TextField("Nombre:");
+        name.addClassName("registerformfield");
+        name.setId("name");
+
+        surname = new TextField("Apellido:");
+        surname.addClassName("registerformfield");
+        surname.setId("surname");
+
+        username = new TextField("Nombre de Usuario:");
+        username.addClassName("registerformfield");
+        username.setId("username");
+
+        city = new TextField("Ciudad:");
+        city.addClassName("registerformfield");
+        city.setId("city");
+
+        country = new TextField("País:");
+        country.addClassName("registerformfield");
+        country.setId("country");
+
+        birthdate = new DatePicker("Fecha de Nacimiento:");
+        birthdate.addClassName("registerformfield");
+        birthdate.setId("birthdate");
+
+        phone = new NumberField("Teléfono:");
+        phone.addClassName("registerformfield");
+        phone.setId("phone");
+
+        email = new EmailField("Correo Electrónico:");
+        email.addClassName("registerformfield");
+        email.setId("email");
+
+        password = new PasswordField("Contraseña:");
+        password.addClassName("registerformfield");
+        password.setId("password");
+
+        repeatpassword = new PasswordField("Repetir Contraseña:");
+        repeatpassword.addClassName("registerformfield");
+        repeatpassword.setId("repeatpassword");
+
+        fees = new Select<>();
+        fees.addClassName("registerformfield");
+        fees.setLabel("Tarifa:");
+        fees.setItems("Tarifa 1", "Tarifa 2", "Tarifa 3", "Tarifa 4");
+        fees.setValue("Tarifa 1");
+
+        confirmar = new Button("Registrarse");
+        confirmar.addClassName("registerformbutton");
+        confirmar.addClickListener(e -> {
+            // TODO: comprobar que los campos obligatorios están rellenos
+            // TODO: comprobar que las contraseñas coinciden
+            // TODO: comprobar que ningún campo (unique) este ya registrado
+            UI.getCurrent().getPage().setLocation("/activaruser");
+        });
+
+        // -------------------------------------------------
 
         titleDiv = new HorizontalLayout();
         titleDiv.setWidth(100, Unit.PERCENTAGE);
@@ -77,145 +141,71 @@ public class register extends VerticalLayout {
         titleDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         titleDiv.setAlignItems(Alignment.CENTER);
         titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
-        titleDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
-        register = new H3("Hazte Cliente");
-        register.getStyle().set("font-size", "32px");
-        register.getStyle().set("color", "white");
-        titleDiv.add(register);
-        registerSquare.add(titleDiv);
+        titleDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.9)");
+        titleRegister = new H3("Hazte Cliente");
+        titleRegister.getStyle().set("font-size", "32px");
+        titleRegister.getStyle().set("color", "white");
+        titleDiv.add(titleRegister);
+        registerForm.add(titleDiv);
 
-        bodyDiv = new HorizontalLayout();
+        bodyDiv = new VerticalLayout();
         bodyDiv.setWidth(100, Unit.PERCENTAGE);
         bodyDiv.setPadding(false);
         bodyDiv.setSpacing(false);
-        bodyDiv.getStyle().set("background-color", "rgba(255, 255, 255, 0.9)");
+        bodyDiv.getStyle().set("background-color", "rgba(255, 255, 255, 1)");
 
-        bodyLeftDiv = new VerticalLayout();
-        bodyLeftDiv.addClassName("bodysregister");
-        bodyLeftDiv.setSpacing(false);
-        username = new TextField("Nombre:");
-        username.addClassName("registerformfield");
-        username.setId("username");
-        bodyLeftDiv.add(username);
-        birthdate = new DatePicker("Fecha de Nacimiento:");
-        birthdate.addClassName("registerformfield");
-        birthdate.setId("birthdate");
-        bodyLeftDiv.add(birthdate);
-        email = new EmailField("Correo Electrónico:");
-        email.addClassName("registerformfield");
-        email.setId("email");
-        bodyLeftDiv.add(email);
-        phone = new NumberField("Teléfono:");
-        phone.addClassName("registerformfield");
-        phone.setId("phone");
-        bodyLeftDiv.add(phone);
-        bodyDiv.add(bodyLeftDiv);
+        bodySubDiv1 = new HorizontalLayout(name, surname, DNI);
+        bodySubDiv1.addClassName("bodysregister");
+        bodySubDiv2 = new HorizontalLayout(username, birthdate, fees);
+        bodySubDiv2.addClassName("bodysregister");
+        bodySubDiv3 = new HorizontalLayout(email, password, repeatpassword);
+        bodySubDiv3.addClassName("bodysregister");
+        bodySubDiv4 = new HorizontalLayout(phone, city, country);
+        bodySubDiv4.addClassName("bodysregister");
+        bodySubDiv5 = new HorizontalLayout(confirmar);
+        bodySubDiv5.addClassName("bodysregister");
 
-        bodyCenterDiv = new VerticalLayout();
-        bodyCenterDiv.addClassName("bodysregister");
-        bodyCenterDiv.setSpacing(false);
-        surname = new TextField("Apellido:");
-        surname.addClassName("registerformfield");
-        surname.setId("surname");
-        bodyCenterDiv.add(surname);
-        sexo = new RadioButtonGroup<>();
-        sexo.addClassName("registerformfield");
-        sexo.setLabel("Sexo:");
-        sexo.setItems("Hombre", "Mujer", "Otros");
-        sexo.setId("sexo");
-        bodyCenterDiv.add(sexo);
-        password = new PasswordField("Contraseña:");
-        password.addClassName("registerformfield");
-        password.setId("password");
-        bodyCenterDiv.add(password);
-        city = new TextField("Ciudad:");
-        city.addClassName("registerformfield");
-        city.setId("city");
-        bodyCenterDiv.add(city);
-        bodyDiv.add(bodyCenterDiv);
-
-        bodyRightDiv = new VerticalLayout();
-        bodyRightDiv.addClassName("bodysregister");
-        bodyRightDiv.setSpacing(false);
-        DNI = new TextField("DNI:");
-        DNI.addClassName("registerformfield");
-        DNI.setId("DNI");
-        bodyRightDiv.add(DNI);
-        agreement = new Select<>();
-        agreement.addClassName("registerformfield");
-        agreement.setLabel("Seleccione una tarifa:");
-        agreement.setItems("Tarifa 1", "Tarifa 2", "Tarifa 3", "Tarifa 4");
-        agreement.setValue("Tarifa 1");
-        bodyRightDiv.add(agreement);
-        repetpassword = new PasswordField("Repetir Contraseña:");
-        repetpassword.addClassName("registerformfield");
-        repetpassword.setId("repetpassword");
-        bodyRightDiv.add(repetpassword);
-        country = new TextField("País:");
-        country.addClassName("registerformfield");
-        country.setId("country");
-        bodyRightDiv.add(country);
-        bodyDiv.add(bodyRightDiv);
-        registerSquare.add(bodyDiv);
-
-        footerBodyDiv = new HorizontalLayout();
-        footerBodyDiv.setWidth("100%");
-        footerBodyDiv.setHeight("140px");
-        footerBodyDiv.setPadding(false);
-        footerBodyDiv.setSpacing(false);
-        footerBodyDiv.getStyle().set("background-color", "rgba(255, 255, 255, 0.9)");
-
-        footerBodyDivLeft = new HorizontalLayout();
-        footerBodyDivLeft.setWidth("50%");
-        footerBodyDivLeft.setHeightFull();
-        footerBodyDivLeft.setPadding(false);
-        footerBodyDivLeft.setSpacing(false);
-        footerBodyDivLeft.setAlignItems(Alignment.CENTER);
-        policies = new CheckboxGroup<>();
-        policies.addThemeVariants(CheckboxGroupVariant.LUMO_VERTICAL);
-        policies.addClassName("registerformfield");
-        policies.setWidthFull();
-        policies.setHeightFull();
-        policies.getStyle().set("padding-top", "30px");
-        policies.getStyle().set("padding-left", "20px");
-        policies.setLabel("Políticas:");
-        policies.setItems("He leído y acepto las Condiciones de Uso y la Política de Privacidad.",
-                "Deseo recibir información comercial y promociones por correo electrónico.");
-        policies.setId("policies");
-        policies.setRequired(true); // Mirar Importante
-        footerBodyDivLeft.add(policies);
-        footerBodyDiv.add(footerBodyDivLeft);
-
-        footerBodyDivRight = new HorizontalLayout();
-        footerBodyDivRight.setWidth("50%");
-        footerBodyDivRight.setHeightFull();
-        footerBodyDiv.setPadding(false);
-        footerBodyDiv.setSpacing(false);
-        footerBodyDivRight.setJustifyContentMode(JustifyContentMode.CENTER);
-        footerBodyDivRight.setAlignItems(Alignment.CENTER);
-        confirmar = new Button("Registrarse");
-        confirmar.addClassName("registerformbutton");
-        confirmar.addClickListener(e -> {
-            Notification.show("Registrado Correctamente");
-            UI.getCurrent().getPage().setLocation("/activaruser");
-        });
-        footerBodyDivRight.add(confirmar);
-
-        footerBodyDiv.add(footerBodyDivRight);
-        registerSquare.add(footerBodyDiv);
+        bodyDiv.add(bodySubDiv1, bodySubDiv2, bodySubDiv3, bodySubDiv4, bodySubDiv5);
+        registerForm.add(bodyDiv);
 
         footerDiv = new HorizontalLayout();
         footerDiv.setWidth(100, Unit.PERCENTAGE);
         footerDiv.setHeight("60px");
         footerDiv.getStyle().set("border-radius", "0 0 12px 12px");
-        footerDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
-        registerSquare.add(footerDiv);
+        footerDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.9)");
+        registerForm.add(footerDiv);
         expand(bodyDiv);
 
-        centerDiv.add(registerSquare);
-        add(centerDiv);
-        expand(centerDiv);
+        center.add(registerForm);
+        add(center);
+        expand(center);
+
         footer f = new footer();
         add(f);
+
+        // Registro USUARIO
+        this.service = service;
+        binder = new BeanValidationBinder<>(User.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(new User());
+    }
+
+    public void onRegisterButtonClick() {
+
+        if (binder.validate().isOk() & password.getValue().equals(repeatpassword.getValue())) {
+            if (service.registerUser(binder.getBean())) {
+                // status.setText("Great. Please look at your mail inbox!");
+                // status.setVisible(true);
+                binder.setBean(new User());
+                repeatpassword.setValue("");
+            } else {
+                Notification.show("Please, the username is already in use");
+
+            }
+
+        } else {
+            Notification.show("Please, check input data");
+        }
+
     }
 }

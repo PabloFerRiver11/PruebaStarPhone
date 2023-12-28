@@ -4,6 +4,8 @@ import com.application.General.AbstractEntity;
 import com.application.Contract.Entities.Contract;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -21,71 +23,73 @@ import java.util.*;
 }
 
 )
+<<<<<<< Updated upstream
 public class User implements UserDetails {
+=======
+public class User extends AbstractEntity implements UserDetails {
+>>>>>>> Stashed changes
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "id")
     private UUID id;
 
-    @NotNull(message = "Por favor, introduzca su DNI")
+    @NotEmpty(message = "Por favor, introduzca su DNI")
     @Size(min = 9, max = 9, message = "Introduca de nuevo su dni")
     @Column(name = "DNI", unique = true)
     private String DNI;
 
-    @NotNull(message = "Por favor, introduzca su nombre")
+    @NotEmpty(message = "Por favor, introduzca su nombre")
     @Column(name = "name")
     private String name;
 
-    @NotNull(message = "Por favor,introduzca su apellido")
+    @NotEmpty(message = "Por favor, introduzca su apellido")
     @Column(name = "surname")
     private String surname;
 
-    @NotNull(message = "Por favor, introduzca su Username")
+    @NotEmpty(message = "Por favor, introduzca su Username")
     @Column(name = "username", unique = true)
     private String username;
 
-    @NotNull(message = "Por favor, introduzca su ciudad")
+    @NotEmpty(message = "Por favor, introduzca su ciudad")
     @Column(name = "city")
     private String city;
 
-    @NotNull(message = "Por favor, introduzca su país")
+    @NotEmpty(message = "Por favor, introduzca su país")
     @Column(name = "country")
     private String country;
 
-    @NotNull(message = "Por favor, introduzca su fecha de nacimiento")
     @Column(name = "birthdate")
     private LocalDate birthdate;
 
-    @NotNull(message = "Por favor, introduzca su teléfono")
+    @NotEmpty(message = "Por favor, introduzca su teléfono")
     @Column(name = "phoneNumber")
     private int phoneNumber;
 
-    @NotNull(message = "Por favor, introduzca su género")
-    @Column(name = "gender")
-    private String gender;
-
-    @NotNull(message = "Por favor, introduzca su email")
+    @Email(message = "Por favor, introduzca un email válido")
+    @NotEmpty(message = "Por favor, introduzca su email")
     @Column(name = "email", unique = true)
     private String email;
 
-    @NotNull(message = "Por favor, introduzca su contraseña")
+    @NotEmpty(message = "Por favor, introduzca su contraseña")
     @Column(name = "password")
     private String password;
 
+    @NotNull
     @Column(name = "activate")
     private boolean activate;
 
     @Column(name = "activateCode")
     private int activateCode;
 
+    @NotNull
     @Column(name = "registerDate")
     private LocalDate registerDate;
 
-    // Roles
+    // Rol
     @Enumerated(EnumType.STRING)
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Rol> roles = new HashSet<>();
+    @Column(name = "rol")
+    private Rol rol;
 
     // Contratos
     @OneToMany(mappedBy = "user")
@@ -164,14 +168,6 @@ public class User implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -217,12 +213,12 @@ public class User implements UserDetails {
         this.registerDate = registerDate;
     }
 
-    public Set<Rol> getRoles() {
-        return roles;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRol(Set<Rol> roles) {
-        this.roles = roles;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
     public void setSingleRol(Rol rol) {
         this.roles.add(rol);
@@ -236,6 +232,7 @@ public class User implements UserDetails {
         this.contracts = contracts;
     }
 
+<<<<<<< Updated upstream
 
 
 
@@ -245,12 +242,42 @@ public class User implements UserDetails {
             return id.hashCode();
         }
         return super.hashCode();
+=======
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // No aplica para Starphone
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true; // No aplica para Starphone
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true; // No aplica para Starphone
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return activate;
+>>>>>>> Stashed changes
     }
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof User other)) {
+<<<<<<< Updated upstream
             return false; // null or other class
+=======
+            return false;
+>>>>>>> Stashed changes
         }
 
         if (id != null) {
@@ -258,6 +285,7 @@ public class User implements UserDetails {
         }
         return super.equals(other);
     }
+<<<<<<< Updated upstream
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -277,5 +305,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.activate;
     }
+=======
+>>>>>>> Stashed changes
 
 }

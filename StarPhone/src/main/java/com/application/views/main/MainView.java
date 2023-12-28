@@ -9,9 +9,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.application.views.main.layouts.*;
-import jakarta.annotation.security.PermitAll;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
-@PermitAll
+@AnonymousAllowed
 @CssImport("./styles/styles.css")
 @PageTitle("StarPhone")
 @Route(value = "/")

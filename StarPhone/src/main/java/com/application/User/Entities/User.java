@@ -8,8 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -21,7 +19,7 @@ import java.util.*;
 }
 
 )
-public class User extends AbstractEntity  {
+public class User extends AbstractEntity {
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -75,6 +73,12 @@ public class User extends AbstractEntity  {
 
     @Column(name = "activate")
     private boolean activate;
+
+    @Column(name = "activateCode")
+    private int activateCode;
+
+    @Column(name = "registerDate")
+    private LocalDate registerDate;
 
     // Roles
     @Enumerated(EnumType.STRING)
@@ -174,13 +178,9 @@ public class User extends AbstractEntity  {
         this.email = email;
     }
 
-
-
     public String getPassword() {
         return password;
     }
-
-
 
     public void setPassword(String password) {
         this.password = password;
@@ -192,6 +192,22 @@ public class User extends AbstractEntity  {
 
     public void setActivate(boolean activate) {
         this.activate = activate;
+    }
+
+    public int getActivateCode() {
+        return this.activateCode;
+    }
+
+    public void setActivateCode(int activateCode) {
+        this.activateCode = activateCode;
+    }
+
+    public LocalDate getRegisterDate() {
+        return this.registerDate;
+    }
+
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
     }
 
     public Set<Rol> getRoles() {
@@ -209,6 +225,5 @@ public class User extends AbstractEntity  {
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
     }
-
 
 }

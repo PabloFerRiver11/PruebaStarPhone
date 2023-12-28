@@ -15,7 +15,7 @@ public class navBar extends HorizontalLayout {
     public navBar() {
         setWidth(70, Unit.PERCENTAGE);
         setHeight("50px");
-        getStyle().set("background-color", "rgba(135, 206, 235, 0.7)");
+        getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
         getStyle().set("border", "2px solid black");
         getStyle().set("box-shadow", "4px rgba(0, 0, 0, 0.2)");
         setPadding(false);

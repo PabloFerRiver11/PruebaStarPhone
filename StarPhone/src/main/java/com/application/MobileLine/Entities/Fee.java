@@ -24,8 +24,16 @@ public class Fee extends AbstractEntity {
     private String title;
 
     @NotEmpty
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "descriptionMobile", nullable = false)
+    private String descriptionMobile;
+
+    @NotEmpty
+    @Column(name = "descriptionFiber", nullable = false)
+    private String descriptionFiber;
+
+    @NotEmpty
+    @Column(name = "descriptionTV", nullable = false)
+    private String descriptionTV;
 
     @NotEmpty
     @Column(name = "monthlyprice", nullable = false)
@@ -48,12 +56,28 @@ public class Fee extends AbstractEntity {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionMobile() {
+        return descriptionMobile;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionMobile(String descriptionMobile) {
+        this.descriptionMobile = descriptionMobile;
+    }
+
+    public String getDescriptionFiber() {
+        return descriptionFiber;
+    }
+
+    public void setDescriptionFiber(String descriptionFiber) {
+        this.descriptionFiber = descriptionFiber;
+    }
+
+    public String getDescriptionTV() {
+        return descriptionTV;
+    }
+
+    public void setDescription(String descriptionTV) {
+        this.descriptionTV = descriptionTV;
     }
 
     public double getMonthlyprice() {

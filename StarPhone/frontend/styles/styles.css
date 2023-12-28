@@ -43,7 +43,7 @@
     font-weight: 500;
     color: white;
     border: 5px solid black;
-    background-color: rgba(135, 206, 235, 0.7);
+    background-color: rgba(135, 206, 235, 0.8);
     
 }
 
@@ -62,6 +62,29 @@
     margin-top: 12px;
 }
 
+.registerformbutton {
+    width: 150px;
+    height: 50px;
+    border: 3px solid black;
+    cursor: pointer;
+    background-color: var(--lumo-contrast-10pct);
+}
+
+.activefield {
+    width: 360px;
+    height: 80px;
+    padding: 0 20px 0;
+    margin-top: 30px;
+}
+
+.activebutton {
+    width: 120px;
+    height: 40px;
+    border: 3px solid black;
+    cursor: pointer;
+    background-color: var(--lumo-contrast-10pct);
+}
+
 vaadin-text-field.registerformfield::part(label),
 vaadin-number-field.registerformfield::part(label),
 vaadin-date-picker.registerformfield::part(label),
@@ -69,7 +92,8 @@ vaadin-radio-group.registerformfield::part(label),
 vaadin-email-field.registerformfield::part(label), 
 vaadin-checkbox-group.registerformfield::part(label),
 vaadin-password-field.registerformfield::part(label),
-vaadin-select.registerformfield::part(label) {
+vaadin-select.registerformfield::part(label),
+vaadin-number-field.activefield::part(label) {
     color: black;
     font-size: 17px;
 }
@@ -81,17 +105,17 @@ vaadin-radio-group.registerformfield::part(input-field),
 vaadin-email-field.registerformfield::part(input-field),
 vaadin-checkbox-group.registerformfield::part(input-field),
 vaadin-password-field.registerformfield::part(input-field),
-vaadin-select.registerformfield::part(input-field) {
+vaadin-select.registerformfield::part(input-field), 
+vaadin-number-field.activefield::part(input-field) {
     border: 2px solid black;
     font-size: 13px;
 }
 
-.registerformbutton {
-    width: 150px;
-    height: 50px;
-    border: 3px solid black;
-    cursor: pointer;
-    background-color: var(--lumo-contrast-10pct);
+vaadin-button.activebutton::part(label)
+{
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 vaadin-button.registerformbutton::part(label)
@@ -99,9 +123,4 @@ vaadin-button.registerformbutton::part(label)
     color: black;
     font-size: 18px;
     font-weight: 500;
-}
-
-vaadin-login-overlay-wrapper.loginView::part(backdrop) {
-    background-image: url(images/landscape.jpg) no-repeat;
-    background-size: 100vw 100vh;   
 }

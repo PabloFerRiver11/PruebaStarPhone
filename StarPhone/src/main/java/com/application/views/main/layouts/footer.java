@@ -19,7 +19,7 @@ public class footer extends VerticalLayout {
     public footer() {
         setWidthFull();
         setHeight("90px");
-        getStyle().set("background-color", "rgba(135, 206, 235, 0.7)");
+        getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
         setPadding(false);
         setSpacing(false);
 
@@ -46,19 +46,19 @@ public class footer extends VerticalLayout {
         rightTopDiv.setAlignItems(Alignment.CENTER);
         linkIg = new Anchor("https://www.instagram.com/");
         linkIg.addClassName("footerIcon1");
-        iconIg = new Image("icons/iconIG.svg", "iconIg");
+        iconIg = new Image("images/iconIG.svg", "iconIg");
         iconIg.addClassName("footerIcon1");
         linkIg.add(iconIg);
         rightTopDiv.add(linkIg);
         linkTw = new Anchor("https://twitter.com/");
         linkTw.addClassName("footerIcon1");
-        iconTw = new Image("icons/iconTw.svg", "iconTw");
+        iconTw = new Image("images/iconTw.svg", "iconTw");
         iconTw.addClassName("footerIcon1");
         linkTw.add(iconTw);
         rightTopDiv.add(linkTw);
         linkFb = new Anchor("https://facebook.com/");
         linkFb.addClassName("footerIcon2");
-        iconFb = new Image("icons/iconFb.svg", "iconFb");
+        iconFb = new Image("images/iconFb.svg", "iconFb");
         iconFb.addClassName("footerIcon2");
         linkFb.add(iconFb);
         rightTopDiv.add(linkFb);

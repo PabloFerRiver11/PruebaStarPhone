@@ -14,7 +14,7 @@ public class header extends HorizontalLayout {
     public header() {
         setWidthFull();
         setHeight("80px");
-        getStyle().set("background-color", "rgba(135, 206, 235, 0.7)");
+        getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
         setPadding(false);
         setSpacing(false);
 
@@ -23,7 +23,7 @@ public class header extends HorizontalLayout {
         leftDiv.setHeight(100, Unit.PERCENTAGE);
         leftDiv.setJustifyContentMode(JustifyContentMode.START);
         leftDiv.setAlignItems(Alignment.CENTER);
-        logo = new Image("icons/icoSP.ico", "StarPhone");
+        logo = new Image("images/icoSP.ico", "StarPhone");
         logo.setWidth("70px");
         logo.setHeight("70px");
         logo.getStyle().set("padding-left", "5px");
@@ -46,7 +46,7 @@ public class header extends HorizontalLayout {
         rightDiv.setHeight(100, Unit.PERCENTAGE);
         rightDiv.setJustifyContentMode(JustifyContentMode.END);
         rightDiv.setAlignItems(Alignment.CENTER);
-        start = new Image("icons/Star.svg", "Star");
+        start = new Image("images/Star.svg", "Star");
         start.getStyle().set("width", "65px");
         start.getStyle().set("height", "65px");
         start.getStyle().set("padding-right", "10px");

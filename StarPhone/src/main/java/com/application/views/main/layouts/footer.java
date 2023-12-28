@@ -84,6 +84,7 @@ public class footer extends VerticalLayout {
         a4.addClassName("anchor");
         bottomDiv.add(a4);
         add(bottomDiv);
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.application.User.Views.registerlogin;
 
+import com.application.User.Security.AuthenticatedUser;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -14,10 +15,13 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @AnonymousAllowed
 @PageTitle("Login")
 @Route(value = "/login")
-@CssImport("./styles/styles.css")
-public class login extends LoginOverlay implements BeforeEnterObserver, HasComponents {
 
-    public login() {
+public class login extends LoginOverlay implements BeforeEnterObserver, HasComponents {
+    private final AuthenticatedUser authenticatedUser;
+
+
+    public login(AuthenticatedUser authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
         addClassName("loginView");
         setAction("login");
 
@@ -48,13 +52,13 @@ public class login extends LoginOverlay implements BeforeEnterObserver, HasCompo
     }
 
     @Override
-    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-        // inform the user about an authentication error
-        if (beforeEnterEvent.getLocation()
-                .getQueryParameters()
-                .getParameters()
-                .containsKey("error")) {
-            this.setError(true);
+    public void beforeEnter(BeforeEnterEvent event) {
+        if (authenticatedUser.get().isPresent()) {
+            // Already logged in
+            setOpened(false);
+            event.forwardTo("");
         }
+
+        setError(event.getLocation().getQueryParameters().getParameters().containsKey("error"));
     }
 }

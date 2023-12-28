@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -19,7 +21,7 @@ import java.util.*;
 }
 
 )
-public class User extends AbstractEntity {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -89,7 +91,7 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user")
     private List<Contract> contracts;
 
-    @Override
+
     public UUID getId() {
         return id;
     }
@@ -178,6 +180,11 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -217,6 +224,9 @@ public class User extends AbstractEntity {
     public void setRol(Set<Rol> roles) {
         this.roles = roles;
     }
+    public void setSingleRol(Rol rol) {
+        this.roles.add(rol);
+    }
 
     public List<Contract> getContracts() {
         return contracts;
@@ -224,6 +234,48 @@ public class User extends AbstractEntity {
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+
+
+
+    @Override
+    public int hashCode() {
+        if (id != null) {
+            return id.hashCode();
+        }
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User other)) {
+            return false; // null or other class
+        }
+
+        if (id != null) {
+            return id.equals(other.id);
+        }
+        return super.equals(other);
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.activate;
     }
 
 }

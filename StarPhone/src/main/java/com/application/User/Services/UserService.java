@@ -3,20 +3,20 @@ package com.application.User.Services;
 import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService   {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
 
-
+@Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
 
@@ -25,6 +25,7 @@ public class UserService   {
 
 
     @Transactional
+    @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
         if (!user.isPresent()) {
@@ -46,7 +47,7 @@ public class UserService   {
     }
     // update User
 
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }

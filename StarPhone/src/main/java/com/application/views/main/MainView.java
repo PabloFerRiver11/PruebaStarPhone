@@ -1,15 +1,24 @@
 package com.application.views.main;
 
+import com.application.User.Entities.User;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
+import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.application.views.main.layouts.*;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Optional;
 
 @AnonymousAllowed
 @CssImport("./styles/styles.css")
@@ -94,4 +103,5 @@ public class MainView extends VerticalLayout {
         add(f);
 
     }
+   
 }

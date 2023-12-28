@@ -1,10 +1,11 @@
 package com.application.User.Security;
 
+
+
 import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,19 +22,15 @@ public class AuthenticatedUser {
         this.authenticationContext = authenticationContext;
     }
 
-
     @Transactional
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (!user.isPresent()) {
-            throw new UsernameNotFoundException("No user present with username: " + username);
-        } else {
-            return user.get();
-        }
+    public Optional<User> get() {
+        return authenticationContext.getAuthenticatedUser(User.class)
+                .map(userDetails -> userRepository.findByUsername(userDetails.getUsername()).get());
+
+
     }
 
     public void logout() {
         authenticationContext.logout();
     }
-
 }

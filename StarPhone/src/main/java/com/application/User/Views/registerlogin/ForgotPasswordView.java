@@ -9,6 +9,7 @@ import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import com.application.User.Security.SecurityConfiguration;
 
+import com.application.User.Services.UserEmailService;
 import com.application.User.Services.UserService;
 import com.application.views.main.MainView;
 import org.apache.catalina.security.SecurityConfig;
@@ -50,8 +51,8 @@ public class ForgotPasswordView extends VerticalLayout {
     private UserRepository usuariorepository;
     private UserService usuarioservice;
     private SecurityConfiguration security;
-    private PasswordEncoder encoder;
-    // static UserEmailService UserEmail;
+    private final PasswordEncoder encoder;
+     static UserEmailService UserEmail;
 
     private Button cancelar = new Button("Cancelar", event1 -> {
         Notification.show("Ha sido cancelada la recuperacion de contraseña");
@@ -62,11 +63,11 @@ public class ForgotPasswordView extends VerticalLayout {
 
     private Button crear = new Button("Mandar correo");
 
-    public ForgotPasswordView(UserService usuarioservice, PasswordEncoder encoder/* UserEmailService UserEmail */) {
+    public ForgotPasswordView(UserService usuarioservice, PasswordEncoder encoder, UserEmailService UserEmail ) {
 
         this.usuarioservice = usuarioservice;
         this.encoder = encoder;
-        // this.UserEmail = UserEmail;
+        this.UserEmail = UserEmail;
 
         add(createTitle());
         add(createFormLayout());
@@ -77,15 +78,30 @@ public class ForgotPasswordView extends VerticalLayout {
             try {
 
                 String password;
-                String asunto = "Cambio de contraseña, aqui tiene su nueva contraseña";
-                usu = this.usuarioservice.loadUserByEmail(email.getValue());
+                String asunto = "Solicitud de reestablecimiento de contraseña";
+                //Obtengo usuario a partir de su correo
+                try{
+                    usu = this.usuarioservice.loadUserByEmail(email.getValue());
+                }catch (UsernameNotFoundException dive){
+                    Notification.show("No se ha encontrado el usuario asociado a ese correo. Inténtelo de nuevo");
+                    UI.getCurrent().navigate(ForgotPasswordView.class);
+
+                }
+
+
+
+
+                //Genero contraseña y se la asocio al usuario
                 password = RecuperarContraseña(usu, email.getValue());
                 usu.setPassword(encoder.encode(password));
+                //Activo usuario si no lo esta
                 if (!usu.getActivate()) {
                     usu.setActivate(true);
                 }
+                //Actualizo usuario
                 usuarioservice.updateUser(usu);
-                // UserEmail.sendEmail(email.getValue(),asunto,password,null);
+                //Envio correo
+                 UserEmail.sendEmail( usu,asunto,password,null);
                 UI.getCurrent().navigate(login.class);
                 Notification.show("Ha sido enviado");
 

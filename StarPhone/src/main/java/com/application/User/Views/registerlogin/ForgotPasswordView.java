@@ -2,7 +2,6 @@ package com.application.User.Views.registerlogin;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Optional;
 import java.util.Random;
 
 import com.application.User.Entities.User;
@@ -12,30 +11,20 @@ import com.application.User.Security.SecurityConfiguration;
 import com.application.User.Services.UserEmailService;
 import com.application.User.Services.UserService;
 import com.application.views.main.MainView;
-import org.apache.catalina.security.SecurityConfig;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.formlayout.FormLayout.ResponsiveStep;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -52,7 +41,7 @@ public class ForgotPasswordView extends VerticalLayout {
     private UserService usuarioservice;
     private SecurityConfiguration security;
     private final PasswordEncoder encoder;
-     static UserEmailService UserEmail;
+    static UserEmailService UserEmail;
 
     private Button cancelar = new Button("Cancelar", event1 -> {
         Notification.show("Ha sido cancelada la recuperacion de contraseña");
@@ -63,7 +52,7 @@ public class ForgotPasswordView extends VerticalLayout {
 
     private Button crear = new Button("Mandar correo");
 
-    public ForgotPasswordView(UserService usuarioservice, PasswordEncoder encoder, UserEmailService UserEmail ) {
+    public ForgotPasswordView(UserService usuarioservice, PasswordEncoder encoder, UserEmailService UserEmail) {
 
         this.usuarioservice = usuarioservice;
         this.encoder = encoder;
@@ -79,29 +68,26 @@ public class ForgotPasswordView extends VerticalLayout {
 
                 String password;
                 String asunto = "Solicitud de reestablecimiento de contraseña";
-                //Obtengo usuario a partir de su correo
-                try{
+                // Obtengo usuario a partir de su correo
+                try {
                     usu = this.usuarioservice.loadUserByEmail(email.getValue());
-                }catch (UsernameNotFoundException dive){
+                } catch (UsernameNotFoundException dive) {
                     Notification.show("No se ha encontrado el usuario asociado a ese correo. Inténtelo de nuevo");
                     UI.getCurrent().navigate(ForgotPasswordView.class);
 
                 }
 
-
-
-
-                //Genero contraseña y se la asocio al usuario
+                // Genero contraseña y se la asocio al usuario
                 password = RecuperarContraseña(usu, email.getValue());
                 usu.setPassword(encoder.encode(password));
-                //Activo usuario si no lo esta
+                // Activo usuario si no lo esta
                 if (!usu.getActivate()) {
                     usu.setActivate(true);
                 }
-                //Actualizo usuario
+                // Actualizo usuario
                 usuarioservice.updateUser(usu);
-                //Envio correo
-                 UserEmail.sendEmail( usu,asunto,password,null);
+                // Envio correo
+                UserEmail.sendEmail(usu, asunto, password, null);
                 UI.getCurrent().navigate(login.class);
                 Notification.show("Ha sido enviado");
 

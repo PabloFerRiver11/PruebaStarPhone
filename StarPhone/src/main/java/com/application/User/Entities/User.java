@@ -20,14 +20,9 @@ import java.util.*;
 
 @Table(name = "user", indexes = {
         @Index(name = "idx_email", columnList = "email", unique = true)
-}
+})
 
-)
-<<<<<<< Updated upstream
-public class User implements UserDetails {
-=======
 public class User extends AbstractEntity implements UserDetails {
->>>>>>> Stashed changes
     @Id
     @GeneratedValue
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -94,7 +89,6 @@ public class User extends AbstractEntity implements UserDetails {
     // Contratos
     @OneToMany(mappedBy = "user")
     private List<Contract> contracts;
-
 
     public UUID getId() {
         return id;
@@ -176,11 +170,6 @@ public class User extends AbstractEntity implements UserDetails {
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -220,9 +209,6 @@ public class User extends AbstractEntity implements UserDetails {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    public void setSingleRol(Rol rol) {
-        this.roles.add(rol);
-    }
 
     public List<Contract> getContracts() {
         return contracts;
@@ -232,52 +218,18 @@ public class User extends AbstractEntity implements UserDetails {
         this.contracts = contracts;
     }
 
-<<<<<<< Updated upstream
-
-
-
     @Override
     public int hashCode() {
         if (id != null) {
             return id.hashCode();
         }
         return super.hashCode();
-=======
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true; // No aplica para Starphone
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true; // No aplica para Starphone
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true; // No aplica para Starphone
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return activate;
->>>>>>> Stashed changes
     }
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof User other)) {
-<<<<<<< Updated upstream
             return false; // null or other class
-=======
-            return false;
->>>>>>> Stashed changes
         }
 
         if (id != null) {
@@ -285,7 +237,12 @@ public class User extends AbstractEntity implements UserDetails {
         }
         return super.equals(other);
     }
-<<<<<<< Updated upstream
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -305,7 +262,5 @@ public class User extends AbstractEntity implements UserDetails {
     public boolean isEnabled() {
         return this.activate;
     }
-=======
->>>>>>> Stashed changes
 
 }

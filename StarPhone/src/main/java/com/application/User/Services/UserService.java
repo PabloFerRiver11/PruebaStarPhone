@@ -4,14 +4,10 @@ import com.application.User.Entities.Rol;
 import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
-<<<<<<< Updated upstream
-import org.springframework.beans.factory.annotation.Autowired;
-=======
-
 import org.springframework.dao.DataIntegrityViolationException;
->>>>>>> Stashed changes
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,13 +19,8 @@ public class UserService implements UserDetailsService {
     // private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
 
-<<<<<<< Updated upstream
-
-@Autowired
-    public UserService(UserRepository userRepository) {
-=======
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) { // Falta el EmailService
->>>>>>> Stashed changes
+
         this.userRepository = userRepository;
         // this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
@@ -49,7 +40,6 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    @Override
     @Transactional
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {

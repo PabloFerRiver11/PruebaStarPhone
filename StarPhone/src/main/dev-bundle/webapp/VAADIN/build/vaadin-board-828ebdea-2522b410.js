@@ -1,5 +1,0 @@
-<<<<<<<< Updated upstream:StarPhone/src/main/dev-bundle/webapp/VAADIN/build/vaadin-board-828ebdea-2522b410.js
-import{I as r}from"./indexhtml-63dfa92f.js";const a={tagName:"vaadin-board",displayName:"Board",elements:[{selector:"vaadin-board",displayName:"Layout",properties:[r.backgroundColor,r.borderColor,r.borderWidth,r.borderRadius,r.padding]},{selector:"vaadin-board vaadin-board-row",displayName:"Row",properties:[r.backgroundColor,r.borderColor,r.borderWidth,r.borderRadius,r.padding]}]};export{a as default};
-========
-import{I as r}from"./indexhtml-b49daac0.js";const a={tagName:"vaadin-board",displayName:"Board",elements:[{selector:"vaadin-board",displayName:"Layout",properties:[r.backgroundColor,r.borderColor,r.borderWidth,r.borderRadius,r.padding]},{selector:"vaadin-board vaadin-board-row",displayName:"Row",properties:[r.backgroundColor,r.borderColor,r.borderWidth,r.borderRadius,r.padding]}]};export{a as default};
->>>>>>>> Stashed changes:StarPhone/src/main/dev-bundle/webapp/VAADIN/build/vaadin-board-828ebdea-0af8f1fd.js

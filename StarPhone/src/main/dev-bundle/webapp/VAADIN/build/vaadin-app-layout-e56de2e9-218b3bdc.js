@@ -1,5 +1,0 @@
-<<<<<<<< Updated upstream:StarPhone/src/main/dev-bundle/webapp/VAADIN/build/vaadin-app-layout-e56de2e9-1bf90c81.js
-import{I as a}from"./indexhtml-63dfa92f.js";const r={tagName:"vaadin-app-layout",displayName:"App Layout",elements:[{selector:"vaadin-app-layout",displayName:"Layout",properties:[a.backgroundColor]},{selector:"vaadin-app-layout::part(drawer)",displayName:"Drawer",properties:[a.backgroundColor,a.padding]},{selector:"vaadin-app-layout::part(navbar)",displayName:"Navbar",properties:[a.backgroundColor,a.padding]}]};export{r as default};
-========
-import{I as a}from"./indexhtml-b49daac0.js";const r={tagName:"vaadin-app-layout",displayName:"App Layout",elements:[{selector:"vaadin-app-layout",displayName:"Layout",properties:[a.backgroundColor]},{selector:"vaadin-app-layout::part(drawer)",displayName:"Drawer",properties:[a.backgroundColor,a.padding]},{selector:"vaadin-app-layout::part(navbar)",displayName:"Navbar",properties:[a.backgroundColor,a.padding]}]};export{r as default};
->>>>>>>> Stashed changes:StarPhone/src/main/dev-bundle/webapp/VAADIN/build/vaadin-app-layout-e56de2e9-218b3bdc.js

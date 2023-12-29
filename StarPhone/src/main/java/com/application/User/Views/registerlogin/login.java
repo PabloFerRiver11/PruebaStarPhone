@@ -15,10 +15,9 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @AnonymousAllowed
 @PageTitle("Login")
 @Route(value = "/login")
-
+@CssImport("./styles/styles.css")
 public class login extends LoginOverlay implements BeforeEnterObserver, HasComponents {
     private final AuthenticatedUser authenticatedUser;
-
 
     public login(AuthenticatedUser authenticatedUser) {
         this.authenticatedUser = authenticatedUser;

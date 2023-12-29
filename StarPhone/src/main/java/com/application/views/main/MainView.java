@@ -22,7 +22,7 @@ public class MainView extends VerticalLayout {
     VerticalLayout centerDiv, leftIntoCenterDiv, centerIntoCenterDiv, rightIntoCenterDiv;
     footer f;
     HorizontalLayout intoCenterDiv;
-    Button butcliente, butnocliente;
+    Button butcustomer, butnocustomer;
 
     public MainView() {
         setWidthFull();
@@ -55,11 +55,11 @@ public class MainView extends VerticalLayout {
         leftIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
         leftIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         leftIntoCenterDiv.setAlignItems(Alignment.CENTER);
-        butcliente = new Button("Soy Cliente");
-        butcliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menusuario"));
-        butcliente.addClassName("mainViewButton");
-        butcliente.getStyle().set("cursor", "pointer");
-        leftIntoCenterDiv.add(butcliente);
+        butcustomer = new Button("Soy Cliente");
+        butcustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menusuario"));
+        butcustomer.addClassName("mainViewButton");
+        butcustomer.getStyle().set("cursor", "pointer");
+        leftIntoCenterDiv.add(butcustomer);
         intoCenterDiv.add(leftIntoCenterDiv);
 
         centerIntoCenterDiv = new VerticalLayout();
@@ -67,11 +67,11 @@ public class MainView extends VerticalLayout {
         centerIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
         centerIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         centerIntoCenterDiv.setAlignItems(Alignment.CENTER);
-        butnocliente = new Button("Regístrate");
-        butnocliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/tarifas"));
-        butnocliente.addClassName("mainViewButton");
-        butnocliente.getStyle().set("cursor", "pointer");
-        centerIntoCenterDiv.add(butnocliente);
+        butnocustomer = new Button("Regístrate");
+        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/tarifas"));
+        butnocustomer.addClassName("mainViewButton");
+        butnocustomer.getStyle().set("cursor", "pointer");
+        centerIntoCenterDiv.add(butnocustomer);
         intoCenterDiv.add(centerIntoCenterDiv);
 
         rightIntoCenterDiv = new VerticalLayout();
@@ -79,11 +79,11 @@ public class MainView extends VerticalLayout {
         rightIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
         rightIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         rightIntoCenterDiv.setAlignItems(Alignment.CENTER);
-        butnocliente = new Button("Soy Empleado");
-        butnocliente.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menuempleado"));
-        butnocliente.addClassName("mainViewButton");
-        butnocliente.getStyle().set("cursor", "pointer");
-        rightIntoCenterDiv.add(butnocliente);
+        butnocustomer = new Button("Soy Empleado");
+        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menuempleado"));
+        butnocustomer.addClassName("mainViewButton");
+        butnocustomer.getStyle().set("cursor", "pointer");
+        rightIntoCenterDiv.add(butnocustomer);
         intoCenterDiv.add(rightIntoCenterDiv);
 
         centerDiv.add(intoCenterDiv);

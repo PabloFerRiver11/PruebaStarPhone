@@ -8,6 +8,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
 @Service
 public class UserEmailService implements EmailService {
     private final JavaMailSender mailSender;
@@ -19,10 +20,9 @@ public class UserEmailService implements EmailService {
     }
 
     @Override
-    public boolean sendEmail(User usu, String asunto, String password, String imagen) {
+    public boolean sendActivateEmail(User usu, String asunto, String body) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
-        String body="Su nueva contraseña es: "+password;
         try {
             helper.setFrom(defaultMail);
             helper.setTo(usu.getEmail());
@@ -37,8 +37,4 @@ public class UserEmailService implements EmailService {
         return true;
     }
 
-
-
-
-
-    }
+}

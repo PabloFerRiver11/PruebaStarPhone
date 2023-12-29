@@ -4,13 +4,17 @@ import com.application.views.main.layouts.footer;
 import com.application.views.main.layouts.header;
 import com.application.User.Services.UserService;
 import com.application.User.Entities.User;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -127,10 +131,7 @@ public class register extends VerticalLayout {
         confirmar = new Button("Registrarse");
         confirmar.addClassName("registerformbutton");
         confirmar.addClickListener(e -> {
-            // TODO: comprobar que los campos obligatorios están rellenos
-            // TODO: comprobar que las contraseñas coinciden
-            // TODO: comprobar que ningún campo (unique) este ya registrado
-            UI.getCurrent().getPage().setLocation("/activaruser");
+            onRegisterButtonClick();
         });
 
         // -------------------------------------------------
@@ -193,18 +194,38 @@ public class register extends VerticalLayout {
     public void onRegisterButtonClick() {
 
         if (binder.validate().isOk() & password.getValue().equals(repeatpassword.getValue())) {
+            Button closeButton = new Button(new Icon("lumo", "cross"));
+            closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+            closeButton.getElement().setAttribute("aria-label", "Close");
+            Notification not = new Notification();
             if (service.registerUser(binder.getBean())) {
-                // status.setText("Great. Please look at your mail inbox!");
-                // status.setVisible(true);
+                closeButton.addClickListener(event -> {
+                    not.close();
+                    UI.getCurrent().getPage().setLocation("/activaruser");
+                });
+                Text text = new Text("Genial. Por favor, revisa tu email!");
+                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                layout.setAlignItems(Alignment.CENTER);
+                not.add(layout);
+                not.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                not.open();
+
                 binder.setBean(new User());
                 repeatpassword.setValue("");
             } else {
-                Notification.show("Please, the username is already in use");
-
+                closeButton.addClickListener(event -> {
+                    not.close();
+                });
+                Text text = new Text("Nombre de usuario ya en uso.");
+                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                layout.setAlignItems(Alignment.CENTER);
+                not.add(layout);
+                not.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                not.open();
             }
 
         } else {
-            Notification.show("Please, check input data");
+            Notification.show("Por favor, revise los datos introducidos.");
         }
 
     }

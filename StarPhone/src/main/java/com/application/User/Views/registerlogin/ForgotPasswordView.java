@@ -1,13 +1,6 @@
 package com.application.User.Views.registerlogin;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
-
 import com.application.User.Entities.User;
-import com.application.User.Repositories.UserRepository;
-import com.application.User.Security.SecurityConfiguration;
-
 import com.application.User.Services.UserEmailService;
 import com.application.User.Services.UserService;
 import com.application.views.main.MainView;
@@ -24,10 +17,13 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Random;
 
 @AnonymousAllowed
 @PageTitle("Recuperar")
@@ -36,14 +32,11 @@ public class ForgotPasswordView extends VerticalLayout {
 
     private EmailField email = new EmailField("E-mail");
     private User usu;
-    private Binder<User> binder = new Binder(User.class);
-    private UserRepository usuariorepository;
-    private UserService usuarioservice;
-    private SecurityConfiguration security;
+    private UserService userService;
     private final PasswordEncoder encoder;
-    static UserEmailService UserEmail;
+    private UserEmailService userEmail;
 
-    private Button cancelar = new Button("Cancelar", event1 -> {
+    private Button cancel = new Button("Cancelar", event1 -> {
         Notification.show("Ha sido cancelada la recuperacion de contraseña");
         UI.getCurrent().navigate(MainView.class);
         // A real application would also save the updated person
@@ -52,11 +45,11 @@ public class ForgotPasswordView extends VerticalLayout {
 
     private Button crear = new Button("Mandar correo");
 
-    public ForgotPasswordView(UserService usuarioservice, PasswordEncoder encoder, UserEmailService UserEmail) {
+    public ForgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
 
-        this.usuarioservice = usuarioservice;
+        this.userService = uService;
         this.encoder = encoder;
-        this.UserEmail = UserEmail;
+        this.userEmail = uEmail;
 
         add(createTitle());
         add(createFormLayout());
@@ -70,7 +63,7 @@ public class ForgotPasswordView extends VerticalLayout {
                 String asunto = "Solicitud de reestablecimiento de contraseña";
                 // Obtengo usuario a partir de su correo
                 try {
-                    usu = this.usuarioservice.loadUserByEmail(email.getValue());
+                    usu = this.userService.loadUserByEmail(email.getValue());
                 } catch (UsernameNotFoundException dive) {
                     Notification.show("No se ha encontrado el usuario asociado a ese correo. Inténtelo de nuevo");
                     UI.getCurrent().navigate(ForgotPasswordView.class);
@@ -79,15 +72,15 @@ public class ForgotPasswordView extends VerticalLayout {
 
                 // Genero contraseña y se la asocio al usuario
                 password = RecuperarContraseña(usu, email.getValue());
-                usu.setPassword(encoder.encode(password));
+                usu.setPassword(this.encoder.encode(password));
                 // Activo usuario si no lo esta
                 if (!usu.getActivate()) {
                     usu.setActivate(true);
                 }
                 // Actualizo usuario
-                usuarioservice.updateUser(usu);
+                userService.updateUser(usu);
                 // Envio correo
-                UserEmail.sendEmail(usu, asunto, password, null);
+                userEmail.sendEmail(usu, asunto, password, null);
                 UI.getCurrent().navigate(login.class);
                 Notification.show("Ha sido enviado");
 
@@ -121,7 +114,7 @@ public class ForgotPasswordView extends VerticalLayout {
         buttonLayout.addClassName("button-layout");
         crear.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonLayout.add(crear);
-        buttonLayout.add(cancelar);
+        buttonLayout.add(cancel);
         return buttonLayout;
     }
 

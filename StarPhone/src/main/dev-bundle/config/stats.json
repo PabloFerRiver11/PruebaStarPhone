@@ -268,11 +268,7 @@
   "Frontend/styles/styles.css"
  ],
  "frontendHashes": {
-<<<<<<< Updated upstream
-  "styles/styles.css": "4854667d2a0566dd87d4c148b62265e5d55f95869bd2103726f28dcffa2f7249",
-=======
-  "styles/styles.css": "e6113fe730dce0ba6ad1df6217ecf803b5b95e70c36412afe0945fe41062c761",
->>>>>>> Stashed changes
+  "styles/styles.css": "122852a32da1c0ee4de57e652d7c62eca966303af0f94bb9cb5e4d89e2a2ab87",
   "buttonFunctions.js": "c852123f9b2c44eb75e555119d3e05a7dbe78b91d0ab616feb9df1654474707d",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "8960e00884b9a8b62e24be63e03fe7045dcb9b6844a8a238eb4619d5595e2cfc",
@@ -299,11 +295,7 @@
   "mytodo": "{\n  \"lumoImports\" : [ \"typography\", \"color\", \"spacing\", \"badge\", \"utility\" ]\n}"
  },
  "entryScripts": [
-<<<<<<< Updated upstream
-  "VAADIN/build/indexhtml-63dfa92f.js"
-=======
-  "VAADIN/build/indexhtml-b49daac0.js"
->>>>>>> Stashed changes
+  "VAADIN/build/indexhtml-f10c5c31.js"
  ],
  "webComponents": [],
  "cvdlModules": {
@@ -338,10 +330,6 @@
  },
  "packageJsonHash": "24c5f324a8f0c89b5a3dfc4787237e0df6132f871afd17a0a0b85c2ec8e8d40d",
  "indexHtmlGenerated": [
-<<<<<<< Updated upstream
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-63dfa92f.js\"></script>"
-=======
-  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-b49daac0.js\"></script>"
->>>>>>> Stashed changes
+  "  <script type=\"module\" crossorigin src=\"./VAADIN/build/indexhtml-f10c5c31.js\"></script>"
  ]
 }

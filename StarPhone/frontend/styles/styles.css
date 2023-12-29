@@ -95,7 +95,7 @@ vaadin-email-field.registerformfield::part(label),
 vaadin-password-field.registerformfield::part(label),
 vaadin-select.registerformfield::part(label) {
     color: black;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 vaadin-text-field.registerformfield::part(input-field),
@@ -105,7 +105,7 @@ vaadin-email-field.registerformfield::part(input-field),
 vaadin-password-field.registerformfield::part(input-field),
 vaadin-select.registerformfield::part(input-field) {
     border: 2px solid black;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 vaadin-text-field.registerformfield::part(error-message),

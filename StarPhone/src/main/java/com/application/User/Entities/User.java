@@ -42,7 +42,7 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "surname")
     private String surname;
 
-    @NotEmpty(message = "Por favor, introduzca su Username")
+    @NotEmpty(message = "Por favor, introduzca su nombre de usuario")
     @Column(name = "username", unique = true)
     private String username;
 
@@ -57,7 +57,7 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "birthdate")
     private LocalDate birthdate;
 
-    @NotEmpty(message = "Por favor, introduzca su teléfono")
+    @NotNull(message = "Por favor, introduzca su teléfono")
     @Column(name = "phoneNumber")
     private int phoneNumber;
 
@@ -75,7 +75,7 @@ public class User extends AbstractEntity implements UserDetails {
     private boolean activate;
 
     @Column(name = "activateCode")
-    private int activateCode;
+    private String activateCode;
 
     @NotNull
     @Column(name = "registerDate")
@@ -186,11 +186,11 @@ public class User extends AbstractEntity implements UserDetails {
         this.activate = activate;
     }
 
-    public int getActivateCode() {
+    public String getActivateCode() {
         return this.activateCode;
     }
 
-    public void setActivateCode(int activateCode) {
+    public void setActivateCode(String activateCode) {
         this.activateCode = activateCode;
     }
 

@@ -10,30 +10,36 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    // private final EmailService emailService;
+    private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) { // Falta el EmailService
+    public UserService(UserRepository uRepository, EmailService eService, PasswordEncoder pEncoder) {
 
-        this.userRepository = userRepository;
-        // this.emailService = emailService;
-        this.passwordEncoder = passwordEncoder;
+        this.userRepository = uRepository;
+        this.emailService = eService;
+        this.passwordEncoder = pEncoder;
     }
 
     public boolean registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        // user.setActivateCode(UUID.randomUUID().toString().substring(0, 5));
-        user.setRol(Rol.Cliente);
+        user.setActivate(false); // Por defecto el usuario no está activado
+        user.setActivateCode(UUID.randomUUID().toString().substring(0, 8));
+        user.setRol(Rol.Customer);
+        user.setRegisterDate(LocalDate.now());
 
         try {
             userRepository.save(user);
-            // emailService.sendRegistrationEmail(user);
+            String asunto = "Código de Activación";
+            String body = "Su código de activación es: " + user.getActivateCode();
+            emailService.sendActivateEmail(user, asunto, body);
             return true;
         } catch (DataIntegrityViolationException e) {
             return false;
@@ -49,6 +55,7 @@ public class UserService implements UserDetailsService {
         } else {
             return user.get();
         }
+
     }
 
     public User loadUserByEmail(String email) throws UsernameNotFoundException {

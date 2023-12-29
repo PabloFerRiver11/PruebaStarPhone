@@ -80,7 +80,7 @@ public class ForgotPasswordView extends VerticalLayout {
                 // Actualizo usuario
                 userService.updateUser(usu);
                 // Envio correo
-                userEmail.sendEmail(usu, asunto, password, null);
+                userEmail.sendForgotPasswordEmail(usu, asunto, password, null);
                 UI.getCurrent().navigate(login.class);
                 Notification.show("Ha sido enviado");
 

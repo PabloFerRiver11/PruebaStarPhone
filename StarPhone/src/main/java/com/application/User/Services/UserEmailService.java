@@ -37,4 +37,22 @@ public class UserEmailService implements EmailService {
         return true;
     }
 
+    @Override
+    public boolean sendForgotPasswordEmail(User usu, String asunto, String password, String imagen) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
+        String body = "Su nueva contraseña es: " + password;
+        try {
+            helper.setFrom(defaultMail);
+            helper.setTo(usu.getEmail());
+            helper.setSubject(asunto);
+            helper.setText(body);
+            this.mailSender.send(message);
+        } catch (MailException | MessagingException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 }

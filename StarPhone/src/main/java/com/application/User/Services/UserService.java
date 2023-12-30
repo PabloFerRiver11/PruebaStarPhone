@@ -5,8 +5,6 @@ import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -35,7 +32,6 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActivate(false); // Por defecto el usuario no está activado
         user.setActivateCode(UUID.randomUUID().toString().substring(0, 8));
-        user.setRol(Rol.Customer);
         user.setRegisterDate(LocalDate.now());
 
         try {
@@ -74,7 +70,7 @@ public class UserService implements UserDetailsService {
 
         if (user.isPresent() && user.get().getActivateCode().equals(registerCode)) {
             user.get().setActivate(true);
-            user.get().setRol(Rol.Customer);
+            user.get().setRol(Rol.CUSTOMER);
             userRepository.save(user.get());
             return true;
 

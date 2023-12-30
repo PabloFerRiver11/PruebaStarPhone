@@ -1,7 +1,5 @@
 package com.application.User.Views.registerlogin;
 
-import com.application.views.main.layouts.footer;
-import com.application.views.main.layouts.header;
 import com.application.User.Services.UserService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
@@ -24,14 +22,12 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @CssImport("./styles/styles.css")
 public class activateUserView extends VerticalLayout {
 
-    header h;
     VerticalLayout bodyDiv, centerDiv, confirmSquare;
     HorizontalLayout titleDiv, footerDiv;
     H3 confirmTitle;
     EmailField email;
     TextField confirmCode;
     Button confirmar;
-    footer f;
     UserService userService;
 
     public activateUserView(UserService uService) {
@@ -41,9 +37,6 @@ public class activateUserView extends VerticalLayout {
         setPadding(false);
         setSpacing(false);
         getStyle().set("font-family", "Kavoon");
-
-        header h = new header();
-        add(h);
 
         // Campos formulario
         email = new EmailField("Email:");
@@ -106,9 +99,6 @@ public class activateUserView extends VerticalLayout {
 
         centerDiv.add(confirmSquare);
         add(centerDiv);
-
-        f = new footer();
-        add(f);
         expand(centerDiv);
 
         userService = uService;

@@ -10,6 +10,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Pre;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
@@ -17,7 +18,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -38,7 +39,7 @@ public class registerView extends VerticalLayout {
     private final TextField name, surname, username, country, DNI, city;
     private final DatePicker birthdate;
     private final EmailField email;
-    private final NumberField phone;
+    private final IntegerField phoneNumber;
     private final PasswordField password, repeatpassword;
     private final Select<String> fees;
     private final Button confirmar;
@@ -100,9 +101,9 @@ public class registerView extends VerticalLayout {
         birthdate.addClassName("registerformfield");
         birthdate.setId("birthdate");
 
-        phone = new NumberField("Teléfono:");
-        phone.addClassName("registerformfield");
-        phone.setId("phone");
+        phoneNumber = new IntegerField("Teléfono:");
+        phoneNumber.addClassName("registerformfield");
+        phoneNumber.setId("phoneNumber");
 
         email = new EmailField("Correo Electrónico:");
         email.addClassName("registerformfield");
@@ -159,7 +160,7 @@ public class registerView extends VerticalLayout {
         bodySubDiv3 = new HorizontalLayout(email, password, repeatpassword);
         bodySubDiv3.setSpacing(false);
         bodySubDiv3.addClassName("bodysregister");
-        bodySubDiv4 = new HorizontalLayout(phone, city, country);
+        bodySubDiv4 = new HorizontalLayout(phoneNumber, city, country);
         bodySubDiv4.setSpacing(false);
         bodySubDiv4.addClassName("bodysregister");
         bodySubDiv5 = new HorizontalLayout(confirmar);
@@ -194,7 +195,7 @@ public class registerView extends VerticalLayout {
                     not.close();
                     UI.getCurrent().getPage().setLocation("/activaruser");
                 });
-                Text text = new Text("Genial. Por favor, revisa tu email!");
+                Pre text = new Pre("Genial. Por favor, revisa tu email!\nClick en la cruz para continuar.");
                 HorizontalLayout layout = new HorizontalLayout(text, closeButton);
                 layout.setAlignItems(Alignment.CENTER);
                 not.add(layout);
@@ -207,7 +208,7 @@ public class registerView extends VerticalLayout {
                 closeButton.addClickListener(event -> {
                     not.close();
                 });
-                Text text = new Text("Nombre de usuario ya en uso.");
+                Pre text = new Pre("Nombre de usuario ya en uso.\nClick en la cruz para continuar.");
                 HorizontalLayout layout = new HorizontalLayout(text, closeButton);
                 layout.setAlignItems(Alignment.CENTER);
                 not.add(layout);

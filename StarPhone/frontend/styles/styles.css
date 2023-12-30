@@ -74,7 +74,7 @@
 }
 
 vaadin-text-field.registerformfield::part(label),
-vaadin-number-field.registerformfield::part(label),
+vaadin-integer-field.registerformfield::part(label),
 vaadin-date-picker.registerformfield::part(label),
 vaadin-email-field.registerformfield::part(label), 
 vaadin-password-field.registerformfield::part(label),
@@ -84,7 +84,7 @@ vaadin-select.registerformfield::part(label) {
 }
 
 vaadin-text-field.registerformfield::part(input-field),
-vaadin-number-field.registerformfield::part(input-field),
+vaadin-integer-field.registerformfield::part(input-field),
 vaadin-date-picker.registerformfield::part(input-field),
 vaadin-email-field.registerformfield::part(input-field),
 vaadin-password-field.registerformfield::part(input-field),
@@ -94,7 +94,7 @@ vaadin-select.registerformfield::part(input-field) {
 }
 
 vaadin-text-field.registerformfield::part(error-message),
-vaadin-number-field.registerformfield::part(error-message),
+vaadin-integer-field.registerformfield::part(error-message),
 vaadin-date-picker.registerformfield::part(error-message),
 vaadin-email-field.registerformfield::part(error-message),
 vaadin-password-field.registerformfield::part(error-message),

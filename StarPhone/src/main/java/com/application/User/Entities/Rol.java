@@ -1,5 +1,5 @@
 package com.application.User.Entities;
 
 public enum Rol {
-    Customer, Marketing, Finance, CustomerSupport, Admin
+    CUSTOMER, MARKETING, FINANCE, CUSTOMERSUPPORT, ADMIN
 }

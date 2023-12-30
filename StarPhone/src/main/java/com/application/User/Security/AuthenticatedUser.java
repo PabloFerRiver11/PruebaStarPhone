@@ -1,7 +1,5 @@
 package com.application.User.Security;
 
-
-
 import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import com.vaadin.flow.spring.security.AuthenticationContext;
@@ -26,11 +24,10 @@ public class AuthenticatedUser {
     public Optional<User> get() {
         return authenticationContext.getAuthenticatedUser(User.class)
                 .map(userDetails -> userRepository.findByUsername(userDetails.getUsername()).get());
-
-
     }
 
     public void logout() {
         authenticationContext.logout();
     }
+
 }

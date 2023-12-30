@@ -20,9 +20,11 @@ public class UserEmailService implements EmailService {
     }
 
     @Override
-    public boolean sendActivateEmail(User usu, String asunto, String body) {
+    public boolean sendActivateEmail(User usu) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
+        String asunto = "Código de Activación";
+        String body = "Su código de activación es: " + usu.getActivateCode();
         try {
             helper.setFrom(defaultMail);
             helper.setTo(usu.getEmail());
@@ -38,10 +40,11 @@ public class UserEmailService implements EmailService {
     }
 
     @Override
-    public boolean sendForgotPasswordEmail(User usu, String asunto, String password, String imagen) {
+    public boolean sendForgotPasswordEmail(User usu, String password, String imagen) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
         String body = "Su nueva contraseña es: " + password;
+        String asunto = "Solicitud de reestablecimiento de contraseña";
         try {
             helper.setFrom(defaultMail);
             helper.setTo(usu.getEmail());

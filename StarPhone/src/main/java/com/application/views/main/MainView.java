@@ -56,7 +56,7 @@ public class MainView extends VerticalLayout {
         leftIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         leftIntoCenterDiv.setAlignItems(Alignment.CENTER);
         butcustomer = new Button("Soy Cliente");
-        butcustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menusuario"));
+        butcustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menucliente"));
         butcustomer.addClassName("mainViewButton");
         butcustomer.getStyle().set("cursor", "pointer");
         leftIntoCenterDiv.add(butcustomer);
@@ -80,7 +80,7 @@ public class MainView extends VerticalLayout {
         rightIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         rightIntoCenterDiv.setAlignItems(Alignment.CENTER);
         butnocustomer = new Button("Soy Empleado");
-        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menuempleado"));
+        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menudepartment"));
         butnocustomer.addClassName("mainViewButton");
         butnocustomer.getStyle().set("cursor", "pointer");
         rightIntoCenterDiv.add(butnocustomer);

@@ -20,15 +20,15 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
+//TODO: @PermitAll + import jakarta.annotation.security.PermitAll;
 @AnonymousAllowed
 @PageTitle("Recuperar")
-@Route(value = "Recuperar")
-public class ForgotPasswordView extends VerticalLayout {
+@Route(value = "/recuperarcredenciales")
+public class forgotPasswordView extends VerticalLayout {
 
     private EmailField email = new EmailField("E-mail");
     private User usu;
@@ -45,7 +45,7 @@ public class ForgotPasswordView extends VerticalLayout {
 
     private Button crear = new Button("Mandar correo");
 
-    public ForgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
+    public forgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
 
         this.userService = uService;
         this.encoder = encoder;
@@ -60,13 +60,12 @@ public class ForgotPasswordView extends VerticalLayout {
             try {
 
                 String password;
-                String asunto = "Solicitud de reestablecimiento de contraseña";
                 // Obtengo usuario a partir de su correo
                 try {
                     usu = this.userService.loadUserByEmail(email.getValue());
                 } catch (UsernameNotFoundException dive) {
                     Notification.show("No se ha encontrado el usuario asociado a ese correo. Inténtelo de nuevo");
-                    UI.getCurrent().navigate(ForgotPasswordView.class);
+                    UI.getCurrent().navigate(forgotPasswordView.class);
 
                 }
 
@@ -80,13 +79,13 @@ public class ForgotPasswordView extends VerticalLayout {
                 // Actualizo usuario
                 userService.updateUser(usu);
                 // Envio correo
-                userEmail.sendForgotPasswordEmail(usu, asunto, password, null);
-                UI.getCurrent().navigate(login.class);
+                userEmail.sendForgotPasswordEmail(usu, password, null);
+                UI.getCurrent().navigate(loginView.class);
                 Notification.show("Ha sido enviado");
 
             } catch (UsernameNotFoundException dive) {
                 Notification.show("Ha sido enviado");
-                UI.getCurrent().navigate(login.class);
+                UI.getCurrent().navigate(loginView.class);
             }
 
         });

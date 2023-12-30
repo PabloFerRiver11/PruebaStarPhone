@@ -14,7 +14,7 @@ public class header extends HorizontalLayout {
     public header() {
         setWidthFull();
         setHeight("80px");
-        getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
+        getStyle().set("background-color", "rgb(135, 206, 235)");
         setPadding(false);
         setSpacing(false);
 

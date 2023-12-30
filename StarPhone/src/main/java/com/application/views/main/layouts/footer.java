@@ -19,7 +19,7 @@ public class footer extends VerticalLayout {
     public footer() {
         setWidthFull();
         setHeight("90px");
-        getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
+        getStyle().set("background-color", "rgb(135, 206, 235)");
         setPadding(false);
         setSpacing(false);
 

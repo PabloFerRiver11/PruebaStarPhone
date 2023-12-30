@@ -25,7 +25,7 @@ public class contracts extends VerticalLayout {
         titleDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         titleDiv.setAlignItems(Alignment.CENTER);
         titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
-        titleDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
+        titleDiv.getStyle().set("background-color", "rgb(135, 206, 235)");
         titleText = new H3(title);
         titleText.getStyle().set("font-size", "24px");
         titleText.getStyle().set("color", "white");
@@ -36,7 +36,7 @@ public class contracts extends VerticalLayout {
         bodyDiv.setWidth(100, Unit.PERCENTAGE);
         bodyDiv.setJustifyContentMode(JustifyContentMode.START);
         bodyDiv.setAlignItems(Alignment.CENTER);
-        bodyDiv.getStyle().set("background-color", "rgba(255, 255, 255, 0.8)");
+        bodyDiv.getStyle().set("background-color", "rgb(255, 255, 255)");
         bodyDiv.add(new H3("Móvil"));
         bodyDiv.add(new H4(descMobile));
         bodyDiv.add(new H3("Fibra"));
@@ -51,7 +51,7 @@ public class contracts extends VerticalLayout {
         footerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         footerDiv.setAlignItems(Alignment.CENTER);
         footerDiv.getStyle().set("border-radius", "0 0 12px 12px");
-        footerDiv.getStyle().set("background-color", "rgba(135, 206, 235, 0.8)");
+        footerDiv.getStyle().set("background-color", "rgb(135, 206, 235)");
         monthlyPriceField = new H3("Precio mensual: " + p + " €");
         monthlyPriceField.getStyle().set("font-size", "24px");
         monthlyPriceField.getStyle().set("color", "white");

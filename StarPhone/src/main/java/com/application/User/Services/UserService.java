@@ -5,6 +5,8 @@ import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -37,25 +40,47 @@ public class UserService implements UserDetailsService {
 
         try {
             userRepository.save(user);
-            String asunto = "Código de Activación";
-            String body = "Su código de activación es: " + user.getActivateCode();
-            emailService.sendActivateEmail(user, asunto, body);
+            emailService.sendActivateEmail(user);
             return true;
         } catch (DataIntegrityViolationException e) {
             return false;
         }
     }
 
+    /*
+     * private static List<GrantedAuthority> getAuthorities(User user) {
+     * return user.getRoles().stream().map(role -> new
+     * SimpleGrantedAuthority("ROLE_" + role))
+     * .collect(Collectors.toList());
+     * 
+     * }
+     */
+
     @Transactional
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
         if (!user.isPresent()) {
-            throw new UsernameNotFoundException("No user present with username: " + username);
+            throw new UsernameNotFoundException("Usuario no presente con nombre: " + username);
         } else {
             return user.get();
         }
 
+    }
+
+    public boolean activateUserCode(String email, String registerCode) {
+
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isPresent() && user.get().getActivateCode().equals(registerCode)) {
+            user.get().setActivate(true);
+            user.get().setRol(Rol.Customer);
+            userRepository.save(user.get());
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
     public User loadUserByEmail(String email) throws UsernameNotFoundException {
@@ -71,5 +96,14 @@ public class UserService implements UserDetailsService {
 
     public void updateUser(User user) {
         userRepository.save(user);
+    }
+
+    public boolean isActivated(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return user.get().getActivate();
+        } else {
+            return false;
+        }
     }
 }

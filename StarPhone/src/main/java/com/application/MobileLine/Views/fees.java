@@ -12,10 +12,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import jakarta.annotation.security.PermitAll;
 
 @AnonymousAllowed
-@PermitAll
+// TODO: @PermitAll + import jakarta.annotation.security.PermitAll;
 @CssImport("./styles/styles.css")
 @PageTitle("Tarifas")
 @Route(value = "/tarifas")

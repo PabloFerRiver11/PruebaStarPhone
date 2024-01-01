@@ -28,7 +28,7 @@ import java.util.Random;
 @AnonymousAllowed
 @PageTitle("Recuperar")
 @Route(value = "/recuperarcredenciales")
-public class forgotPasswordView extends VerticalLayout {
+public class ForgotPasswordView extends VerticalLayout {
 
     private EmailField email = new EmailField("E-mail");
     private User usu;
@@ -45,7 +45,7 @@ public class forgotPasswordView extends VerticalLayout {
 
     private Button crear = new Button("Mandar correo");
 
-    public forgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
+    public ForgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
 
         this.userService = uService;
         this.encoder = encoder;
@@ -65,7 +65,7 @@ public class forgotPasswordView extends VerticalLayout {
                     usu = this.userService.loadUserByEmail(email.getValue());
                 } catch (UsernameNotFoundException dive) {
                     Notification.show("No se ha encontrado el usuario asociado a ese correo. Inténtelo de nuevo");
-                    UI.getCurrent().navigate(forgotPasswordView.class);
+                    UI.getCurrent().navigate(ForgotPasswordView.class);
 
                 }
 

@@ -2,7 +2,6 @@ package com.application.User.Views.registerlogin;
 
 import com.application.User.Services.UserService;
 import com.application.User.Entities.User;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
@@ -70,7 +69,7 @@ public class registerView extends VerticalLayout {
         registerForm.getStyle().set("border-radius", "12px");
 
         // Campos formulario ------------------------------
-        // TODO: Validar DNI
+        // TODO: #8 Validar DNI
         DNI = new TextField("DNI:");
         DNI.addClassName("registerformfield");
         DNI.setMinLength(9);

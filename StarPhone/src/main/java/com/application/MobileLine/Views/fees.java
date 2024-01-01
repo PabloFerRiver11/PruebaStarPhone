@@ -1,6 +1,10 @@
 package com.application.MobileLine.Views;
 
+import java.util.List;
+
 import com.application.Contract.Views.contracts;
+import com.application.MobileLine.Entities.Fee;
+import com.application.MobileLine.Service.FeeService;
 import com.application.views.main.layouts.footer;
 import com.application.views.main.layouts.header;
 import com.vaadin.flow.component.UI;
@@ -27,7 +31,7 @@ public class fees extends VerticalLayout {
     Button butCont;
     footer f;
 
-    public fees() {
+    public fees(FeeService feeService) {
         setWidthFull();
         setHeightFull();
         addClassName("mainView");
@@ -54,20 +58,18 @@ public class fees extends VerticalLayout {
         contratos.setAlignItems(Alignment.CENTER);
         contratos.getStyle().set("gap", "60px");
 
-        for (int i = 1; i <= 4; i++) {
-            // Recuperar descripción y precio de la base de datos
-            cont = new contracts("Tarifa " + i,
-                    "4 líneas para Toda la Familia. " +
-                            "Llamadas y mensajes ilimitados. " +
-                            "Datos compartidos entre todas las líneas. " +
-                            "Control parental y funciones de seguridad. ",
-                    "Conexión de fibra simétrica de 300 Mbps.",
-                    "A elegir entre plataformas o canales.", 55);
+        List<Fee> fees = feeService.findAll();
+
+        for (Fee fee : fees) {
+            cont = new contracts(fee.getTitle(),
+                fee.getDescriptionFiber(),
+                fee.getDescriptionMobile(),
+                fee.getDescriptionTV(),
+                fee.getMonthlyprice());
             contratos.add(cont);
         }
-
+        
         centerDiv.add(contratos);
-
         // if(user.activate() != true)
         butCont = new Button("Continuar");
         butCont.setWidth("245px");

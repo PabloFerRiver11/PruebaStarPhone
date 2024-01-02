@@ -69,10 +69,9 @@ public class registerView extends VerticalLayout {
         registerForm.getStyle().set("border-radius", "12px");
 
         // Campos formulario ------------------------------
-        // TODO: #8 Validar DNI
         DNI = new TextField("DNI:");
         DNI.addClassName("registerformfield");
-        DNI.setMinLength(9);
+        DNI.setMinLength(8);
         DNI.setMaxLength(9);
         DNI.setId("DNI");
 

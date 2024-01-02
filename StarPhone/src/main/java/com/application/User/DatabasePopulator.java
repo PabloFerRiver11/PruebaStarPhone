@@ -1,6 +1,6 @@
 package com.application.User;
 
-import com.application.User.Entities.Rol;
+import com.application.User.Entities.Role;
 import com.application.User.Entities.User;
 import com.application.User.Services.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -11,12 +11,13 @@ import java.time.LocalDate;
 @Component
 public class DatabasePopulator implements CommandLineRunner {
     UserService userservice;
+
     public DatabasePopulator(UserService userservice) {
         this.userservice = userservice;
     }
+
     @Override
     public void run(String... args) throws Exception {
-
 
         if (userservice.count() == 0) {
             User user = new User();
@@ -32,12 +33,9 @@ public class DatabasePopulator implements CommandLineRunner {
 
             user.setPhoneNumber(123456789);
 
-
-
-            user.setRol(Rol.ADMIN);
+            user.addRole(Role.ADMIN);
             userservice.registerUser(user);
             System.out.println("Admin created");
-
 
         }
 

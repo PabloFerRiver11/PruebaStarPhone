@@ -17,10 +17,8 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route(value = "/")
 public class MainView extends VerticalLayout {
 
-    header h;
     navBar m;
     VerticalLayout centerDiv, leftIntoCenterDiv, centerIntoCenterDiv, rightIntoCenterDiv;
-    footer f;
     HorizontalLayout intoCenterDiv;
     Button butcustomer, butnocustomer;
 
@@ -32,8 +30,7 @@ public class MainView extends VerticalLayout {
         setSpacing(false);
         getStyle().set("font-family", "Kavoon");
 
-        h = new header();
-        add(h);
+        add(new header());
 
         centerDiv = new VerticalLayout();
         centerDiv.setWidthFull();
@@ -52,11 +49,11 @@ public class MainView extends VerticalLayout {
 
         leftIntoCenterDiv = new VerticalLayout();
         leftIntoCenterDiv.setWidth(33, Unit.PERCENTAGE);
-        leftIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
+        leftIntoCenterDiv.setHeightFull();
         leftIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         leftIntoCenterDiv.setAlignItems(Alignment.CENTER);
         butcustomer = new Button("Soy Cliente");
-        butcustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menucliente"));
+        butcustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menu"));
         butcustomer.addClassName("mainViewButton");
         butcustomer.getStyle().set("cursor", "pointer");
         leftIntoCenterDiv.add(butcustomer);
@@ -64,11 +61,11 @@ public class MainView extends VerticalLayout {
 
         centerIntoCenterDiv = new VerticalLayout();
         centerIntoCenterDiv.setWidth(34, Unit.PERCENTAGE);
-        centerIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
+        centerIntoCenterDiv.setHeightFull();
         centerIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         centerIntoCenterDiv.setAlignItems(Alignment.CENTER);
         butnocustomer = new Button("Regístrate");
-        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/tarifas"));
+        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/starphonetarifas"));
         butnocustomer.addClassName("mainViewButton");
         butnocustomer.getStyle().set("cursor", "pointer");
         centerIntoCenterDiv.add(butnocustomer);
@@ -76,11 +73,11 @@ public class MainView extends VerticalLayout {
 
         rightIntoCenterDiv = new VerticalLayout();
         rightIntoCenterDiv.setWidth(33, Unit.PERCENTAGE);
-        rightIntoCenterDiv.setHeight(100, Unit.PERCENTAGE);
+        rightIntoCenterDiv.setHeightFull();
         rightIntoCenterDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         rightIntoCenterDiv.setAlignItems(Alignment.CENTER);
         butnocustomer = new Button("Soy Empleado");
-        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menudepartment"));
+        butnocustomer.addClickListener(e -> UI.getCurrent().getPage().setLocation("/menu"));
         butnocustomer.addClassName("mainViewButton");
         butnocustomer.getStyle().set("cursor", "pointer");
         rightIntoCenterDiv.add(butnocustomer);
@@ -90,9 +87,7 @@ public class MainView extends VerticalLayout {
         add(centerDiv);
         expand(centerDiv);
 
-        f = new footer();
-        add(f);
-
+        add(new footer());
     }
 
 }

@@ -148,7 +148,6 @@ vaadin-email-field.activefield::part(input-field)
 /*-----------------------------------*/
 
 /*LOGIN*/
-
 vaadin-login-overlay-wrapper::part(overlay) {
     background: url(images/landscape.jpg) no-repeat;
     background-size: 100vw 100vh;
@@ -203,5 +202,19 @@ vaadin-login-form vaadin-button[theme~="submit"]::part(label)
 vaadin-login-form [slot="forgot-password"] {
     font-size: 14px;
     cursor: pointer;
+}
+/*-----------------------------------*/
+
+/*MENUS*/
+vaadin-app-layout::part(navbar) {
+    background-color: rgb(135, 206, 235);
+}
+
+.sideNavItem {
+    width: auto;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
 }
 /*-----------------------------------*/

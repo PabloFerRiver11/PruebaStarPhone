@@ -32,7 +32,7 @@ public class User extends AbstractEntity implements UserDetails {
     private UUID id;
 
     @NotEmpty(message = "Por favor, introduzca su DNI")
-    @Size(min = 9, max = 9, message = "Introduca de nuevo su dni")
+    @Size(min = 9, max = 9, message = "Revise el DNI introducido")
     @Column(name = "DNI", unique = true)
     private String DNI;
 
@@ -208,8 +208,8 @@ public class User extends AbstractEntity implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Role admin) {
-        this.roles = admin;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public void addRole(Role role) {

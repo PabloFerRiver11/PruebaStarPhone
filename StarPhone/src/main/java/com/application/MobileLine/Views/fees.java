@@ -21,15 +21,13 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 // TODO: @PermitAll + import jakarta.annotation.security.PermitAll;
 @CssImport("./styles/styles.css")
 @PageTitle("Tarifas")
-@Route(value = "/tarifas")
+@Route(value = "/starphonetarifas")
 public class fees extends VerticalLayout {
 
-    header h;
     VerticalLayout centerDiv;
     HorizontalLayout contratos;
     contracts cont;
     Button butCont;
-    footer f;
 
     public fees(FeeService feeService) {
         setWidthFull();
@@ -39,8 +37,7 @@ public class fees extends VerticalLayout {
         setSpacing(false);
         getStyle().set("font-family", "Kavoon");
 
-        h = new header();
-        add(h);
+        add(new header());
 
         centerDiv = new VerticalLayout();
         centerDiv.setWidthFull();
@@ -70,7 +67,6 @@ public class fees extends VerticalLayout {
         }
 
         centerDiv.add(contratos);
-        // if(user.activate() != true)
         butCont = new Button("Continuar");
         butCont.setWidth("245px");
         butCont.setHeight("70px");
@@ -84,7 +80,6 @@ public class fees extends VerticalLayout {
         add(centerDiv);
         expand(centerDiv);
 
-        footer f = new footer();
-        add(f);
+        add(new footer());
     }
 }

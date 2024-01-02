@@ -24,12 +24,12 @@ public class footer extends VerticalLayout {
         setSpacing(false);
 
         topDiv = new HorizontalLayout();
-        topDiv.setWidth(100, Unit.PERCENTAGE);
+        topDiv.setWidthFull();
         topDiv.setHeight(50, Unit.PERCENTAGE);
 
         leftTopDiv = new HorizontalLayout();
         leftTopDiv.setWidth(50, Unit.PERCENTAGE);
-        leftTopDiv.setHeight(100, Unit.PERCENTAGE);
+        leftTopDiv.setHeightFull();
         leftTopDiv.setJustifyContentMode(JustifyContentMode.START);
         leftTopDiv.setAlignItems(Alignment.CENTER);
         titulo = new H1("StarPhone");
@@ -41,7 +41,7 @@ public class footer extends VerticalLayout {
 
         rightTopDiv = new HorizontalLayout();
         rightTopDiv.setWidth(50, Unit.PERCENTAGE);
-        rightTopDiv.setHeight(100, Unit.PERCENTAGE);
+        rightTopDiv.setHeightFull();
         rightTopDiv.setJustifyContentMode(JustifyContentMode.END);
         rightTopDiv.setAlignItems(Alignment.CENTER);
         linkIg = new Anchor("https://www.instagram.com/");
@@ -66,7 +66,7 @@ public class footer extends VerticalLayout {
         add(topDiv);
 
         bottomDiv = new HorizontalLayout();
-        bottomDiv.setWidth(100, Unit.PERCENTAGE);
+        bottomDiv.setWidthFull();
         bottomDiv.setHeight(50, Unit.PERCENTAGE);
         bottomDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         bottomDiv.setAlignItems(Alignment.END);
@@ -77,7 +77,7 @@ public class footer extends VerticalLayout {
         a2 = new Anchor("#", "Política de Cookies");
         a2.addClassName("anchor");
         bottomDiv.add(a2);
-        a3 = new Anchor("/trabaja", "Trabaja con nosotros");
+        a3 = new Anchor("/trabajaconnosotros", "Trabaja con nosotros");
         a3.addClassName("anchor");
         bottomDiv.add(a3);
         a4 = new H3("Copyright© 2023. Todos los derechos reservados.");

@@ -30,14 +30,9 @@ public class UserService implements UserDetailsService {
 
     public boolean registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getRol() == Rol.ADMIN) {
-            user.setActivate(true);
-
+        if (user.getActivate() != true) { // Para cuando la función es llamada desde
+            user.setActivate(false); // el panel de administración
         }
-        else {
-            user.setActivate(false);
-        }
-
         user.setActivateCode(UUID.randomUUID().toString().substring(0, 8));
         user.setRegisterDate(LocalDate.now());
 
@@ -101,10 +96,8 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public  int count() {
+    public int count() {
         return (int) userRepository.count();
     }
-
-
 
 }

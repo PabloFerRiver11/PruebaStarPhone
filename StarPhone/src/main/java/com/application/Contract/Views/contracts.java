@@ -1,6 +1,5 @@
 package com.application.Contract.Views;
 
-import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,7 +19,7 @@ public class contracts extends VerticalLayout {
         getStyle().set("font-family", "Kavoon");
 
         titleDiv = new HorizontalLayout();
-        titleDiv.setWidth(100, Unit.PERCENTAGE);
+        titleDiv.setWidthFull();
         titleDiv.setHeight("60px");
         titleDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         titleDiv.setAlignItems(Alignment.CENTER);
@@ -33,7 +32,7 @@ public class contracts extends VerticalLayout {
         add(titleDiv);
 
         bodyDiv = new VerticalLayout();
-        bodyDiv.setWidth(100, Unit.PERCENTAGE);
+        bodyDiv.setWidthFull();
         bodyDiv.setJustifyContentMode(JustifyContentMode.START);
         bodyDiv.setAlignItems(Alignment.CENTER);
         bodyDiv.getStyle().set("background-color", "rgb(255, 255, 255)");
@@ -46,7 +45,7 @@ public class contracts extends VerticalLayout {
         add(bodyDiv);
 
         footerDiv = new HorizontalLayout();
-        footerDiv.setWidth(100, Unit.PERCENTAGE);
+        footerDiv.setWidthFull();
         footerDiv.setHeight("60px");
         footerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         footerDiv.setAlignItems(Alignment.CENTER);

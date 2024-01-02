@@ -62,13 +62,13 @@ public class fees extends VerticalLayout {
 
         for (Fee fee : fees) {
             cont = new contracts(fee.getTitle(),
-                fee.getDescriptionFiber(),
-                fee.getDescriptionMobile(),
-                fee.getDescriptionTV(),
-                fee.getMonthlyprice());
+                    fee.getDescriptionFiber(),
+                    fee.getDescriptionMobile(),
+                    fee.getDescriptionTV(),
+                    fee.getMonthlyprice());
             contratos.add(cont);
         }
-        
+
         centerDiv.add(contratos);
         // if(user.activate() != true)
         butCont = new Button("Continuar");

@@ -178,7 +178,6 @@ public class registerView extends VerticalLayout {
         // Registro USUARIO
         this.service = service;
         binder = new BeanValidationBinder<>(User.class);
-        binder.bindInstanceFields(this);
         binder.setBean(new User());
     }
 

@@ -1,6 +1,6 @@
 package com.application.User.Services;
 
-import com.application.User.Entities.Rol;
+import com.application.User.Entities.Role;
 import com.application.User.Entities.User;
 import com.application.User.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -50,15 +50,6 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    /*
-     * private static List<GrantedAuthority> getAuthorities(User user) {
-     * return user.getRoles().stream().map(role -> new
-     * SimpleGrantedAuthority("ROLE_" + role))
-     * .collect(Collectors.toList());
-     * 
-     * }
-     */
-
     @Transactional
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -77,7 +68,7 @@ public class UserService implements UserDetailsService {
 
         if (user.isPresent() && user.get().getActivateCode().equals(registerCode)) {
             user.get().setActivate(true);
-            user.get().setRol(Rol.CUSTOMER);
+            user.get().addRole(Role.CUSTOMER);
             userRepository.save(user.get());
             return true;
 

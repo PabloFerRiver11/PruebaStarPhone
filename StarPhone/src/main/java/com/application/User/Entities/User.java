@@ -11,10 +11,12 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 
@@ -81,10 +83,10 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "registerDate")
     private LocalDate registerDate;
 
-    // Rol
+    // Roles
     @Enumerated(EnumType.STRING)
-    @Column(name = "rol")
-    private Rol rol;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
 
     // Contratos
     @OneToMany(mappedBy = "user")
@@ -202,12 +204,16 @@ public class User extends AbstractEntity implements UserDetails {
         this.registerDate = registerDate;
     }
 
-    public Rol getRol() {
-        return rol;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     public List<Contract> getContracts() {
@@ -219,28 +225,10 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     @Override
-    public int hashCode() {
-        if (id != null) {
-            return id.hashCode();
-        }
-        return super.hashCode();
-    }
+    public List<GrantedAuthority> getAuthorities() {
+        return this.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .collect(Collectors.toList());
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof User other)) {
-            return false; // null or other class
-        }
-
-        if (id != null) {
-            return id.equals(other.id);
-        }
-        return super.equals(other);
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
     }
 
     @Override
@@ -261,6 +249,26 @@ public class User extends AbstractEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.activate;
+    }
+
+    @Override
+    public int hashCode() {
+        if (id != null) {
+            return id.hashCode();
+        }
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User other)) {
+            return false; // null or other class
+        }
+
+        if (id != null) {
+            return id.equals(other.id);
+        }
+        return super.equals(other);
     }
 
 }

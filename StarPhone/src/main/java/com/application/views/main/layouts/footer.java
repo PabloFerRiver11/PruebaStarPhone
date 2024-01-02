@@ -71,13 +71,13 @@ public class footer extends VerticalLayout {
         bottomDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         bottomDiv.setAlignItems(Alignment.END);
         bottomDiv.getStyle().set("gap", "200px");
-        a1 = new Anchor("#", "Aviso Legal");
+        a1 = new Anchor("/avisolegal", "Aviso Legal");
         a1.addClassName("anchor");
         bottomDiv.add(a1);
         a2 = new Anchor("#", "Política de Cookies");
         a2.addClassName("anchor");
         bottomDiv.add(a2);
-        a3 = new Anchor("#", "Política de Privacidad");
+        a3 = new Anchor("/trabaja", "Trabaja con nosotros");
         a3.addClassName("anchor");
         bottomDiv.add(a3);
         a4 = new H3("Copyright© 2023. Todos los derechos reservados.");

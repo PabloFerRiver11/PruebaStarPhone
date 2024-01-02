@@ -44,7 +44,7 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "surname")
     private String surname;
 
-    @NotEmpty(message = "Por favor, introduzca su nombre de usuario")
+    @NotEmpty(message = "Por favor, introduzca su usuario")
     @Column(name = "username", unique = true)
     private String username;
 
@@ -208,8 +208,8 @@ public class User extends AbstractEntity implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Role admin) {
+        this.roles = admin;
     }
 
     public void addRole(Role role) {

@@ -30,7 +30,14 @@ public class UserService implements UserDetailsService {
 
     public boolean registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActivate(false); // Por defecto el usuario no está activado
+        if (user.getRol() == Rol.ADMIN) {
+            user.setActivate(true);
+
+        }
+        else {
+            user.setActivate(false);
+        }
+
         user.setActivateCode(UUID.randomUUID().toString().substring(0, 8));
         user.setRegisterDate(LocalDate.now());
 
@@ -102,4 +109,11 @@ public class UserService implements UserDetailsService {
             return false;
         }
     }
+
+    public  int count() {
+        return (int) userRepository.count();
+    }
+
+
+
 }

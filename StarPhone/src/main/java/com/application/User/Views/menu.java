@@ -110,7 +110,7 @@ public class menu extends AppLayout {
             MenuItem userName = userMenu.addItem("");
             HorizontalLayout infosesion = new HorizontalLayout();
             infosesion.add(avatar);
-            infosesion.add(user.getName());
+            infosesion.add(user.getUsername());
             infosesion.add(new Icon("lumo", "dropdown"));
             infosesion.getElement().getStyle().set("display", "flex");
             infosesion.getElement().getStyle().set("align-items", "center");

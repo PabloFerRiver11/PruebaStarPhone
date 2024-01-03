@@ -18,15 +18,15 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 public class LegalAdvertisementView extends VerticalLayout {
 
         header h;
-        H3 titleRegister, CondGenerales, ResponGarantia, PropIndusIntel, LegisAplic, InfoLPD;
+        H3 titleRegister, GeneralCond, ResponWarranty, PropIndusIntel, LegisAplic, InfoLPD;
         H5 CondGenUso, RespGar1, RespGar2, RespGar3, RespGar4, RespGar5, PropIndInt, LegApli, LPD1, LPD2, LPD3, LPD4;
         HorizontalLayout titleDiv;
-        VerticalLayout centerDiv, container, layoutTextoAvisoLegal;
+        VerticalLayout centerDiv, container, layoutTextAL;
         Scroller bodyDiv;
         footer f;
 
         public LegalAdvertisementView() {
-                CondGenerales = new H3("CONDICIONES GENERALES DE USO");
+                GeneralCond = new H3("CONDICIONES GENERALES DE USO");
                 CondGenUso = new H5(
                                 "Este sitio web (en adelante, \"el Sitio\") es propiedad de StarPhone, S.A. (en adelante,"
                                                 +
@@ -35,7 +35,7 @@ public class LegalAdvertisementView extends VerticalLayout {
                                                 "leyes y regulaciones aplicables. Al acceder y utilizar el Sitio, usted acepta estas condiciones de uso "
                                                 +
                                                 "sin modificaciones. Si no están de acuerdo con estas condiciones de uso, no debe utilizar el Sitio.");
-                ResponGarantia = new H3("RESPONSABILIDAD Y GARANTÍA DE GRUPO StarPhone");
+                ResponWarranty = new H3("RESPONSABILIDAD Y GARANTÍA DE GRUPO StarPhone");
                 RespGar1 = new H5(
                                 "StarPhone se reserva el derecho de modificar estas condiciones de uso en cualquier momento y "
                                                 +
@@ -147,12 +147,12 @@ public class LegalAdvertisementView extends VerticalLayout {
                 titleDiv.add(titleRegister);
                 container.add(titleDiv);
 
-                layoutTextoAvisoLegal = new VerticalLayout();
-                layoutTextoAvisoLegal.add(CondGenerales, CondGenUso, ResponGarantia,
+                layoutTextAL = new VerticalLayout();
+                layoutTextAL.add(GeneralCond, CondGenUso, ResponWarranty,
                                 RespGar1, RespGar2, RespGar3, RespGar4, RespGar5,
                                 PropIndusIntel, PropIndInt, LegisAplic, LegApli,
                                 InfoLPD, LPD1, LPD2, LPD3, LPD4);
-                bodyDiv = new Scroller(layoutTextoAvisoLegal);
+                bodyDiv = new Scroller(layoutTextAL);
                 bodyDiv.setWidthFull();
                 bodyDiv.getStyle().set("border-radius", "0 0 12px 12px");
                 bodyDiv.getStyle().set("background-color", "rgb(255, 255, 255)");

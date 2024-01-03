@@ -29,12 +29,10 @@ jobs:
         with:
           java-distribution: 'temurin'
           java-version: '17'
-        
-      - name: Cambiar al directorio del pom.xml
-        run: cd StarPhone
 
-      - name: Imprimir directorio de trabajo y listar archivos
+      - name: Cambiar al directorio del pom.xml
         run: pwd && ls
+        working-directory: /home/runner/work/iw2023-2024-StarPhone/StarPhone
 
       - name: Get Artifact version from pom.xml
         uses: entimaniac/read-pom-version-action@1.0.0

@@ -30,6 +30,9 @@ jobs:
           java-distribution: 'temurin'
           java-version: '17'
 
+      - name: Imprimir directorio de trabajo y listar archivos
+        run: pwd && ls
+
       - name: Get Artifact version from pom.xml
         uses: entimaniac/read-pom-version-action@1.0.0
         id: getVersion

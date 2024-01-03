@@ -37,6 +37,7 @@ jobs:
         uses: entimaniac/read-pom-version-action@1.0.0
         id: getVersion
 
+
       - name: Build with Maven and analyze with Sonar Cloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any

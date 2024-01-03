@@ -34,7 +34,7 @@ jobs:
         run: pwd && ls
         
       - name: Cambiar al directorio del pom.xml
-        run: cd /home/runner/work/iw2023-2024-StarPhone/iw2023-2024-StarPhone/StarPhone/pom.xml
+        run: cd /home/runner/work/iw2023-2024-StarPhone/StarPhone/pom.xml
 
       - name: Get Artifact version from pom.xml
         uses: entimaniac/read-pom-version-action@1.0.0

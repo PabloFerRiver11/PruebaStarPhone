@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,16 +30,37 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean registerUser(User user) {
+        // TODO: Crear contraro de usuario y asociar una línea en caso de que el número
+        // introducido sea válido, hacer validador de número de teléfono
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getActivate() != true) { // Para cuando la función es llamada desde
-            user.setActivate(false); // el panel de administración
-        }
         user.setActivateCode(UUID.randomUUID().toString().substring(0, 8));
         user.setRegisterDate(LocalDate.now());
 
         try {
             userRepository.save(user);
             emailService.sendActivateEmail(user);
+            return true;
+        } catch (DataIntegrityViolationException e) {
+            return false;
+        }
+    }
+
+    public boolean registerUserByAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActivateCode("");
+        user.setActivate(true);
+        user.setRegisterDate(LocalDate.now());
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (DataIntegrityViolationException e) {
+            return false;
+        }
+    }
+
+    public boolean saveUser(User user) {
+        try {
+            userRepository.save(user);
             return true;
         } catch (DataIntegrityViolationException e) {
             return false;
@@ -64,6 +86,7 @@ public class UserService implements UserDetailsService {
         if (user.isPresent() && user.get().getActivateCode().equals(registerCode)) {
             user.get().setActivate(true);
             user.get().addRole(Role.CUSTOMER);
+            user.get().setActivateCode("");
             userRepository.save(user.get());
             return true;
 
@@ -79,7 +102,7 @@ public class UserService implements UserDetailsService {
         if (user.isPresent()) {
             return user.get();
         } else {
-            throw new UsernameNotFoundException(email);
+            return new User(); // Devolver un usuario vacío, como no encontrado
         }
     }
 
@@ -91,6 +114,30 @@ public class UserService implements UserDetailsService {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
             return user.get().getActivate();
+        } else {
+            return false;
+        }
+    }
+
+    public List<String> getDNIByEmail(String emailPart) {
+        return userRepository.findDNIByEmailPart(emailPart);
+    }
+
+    public User findUserByDNI(String dni) {
+        Optional<User> user = userRepository.findByDNI(dni);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            return new User();
+        }
+    }
+
+    public boolean deleteByDNI(String dni) {
+        User u = findUserByDNI(dni);
+        System.out.println(u.getId());
+        if (u.getId() != null) {
+            userRepository.delete(u);
+            return true;
         } else {
             return false;
         }

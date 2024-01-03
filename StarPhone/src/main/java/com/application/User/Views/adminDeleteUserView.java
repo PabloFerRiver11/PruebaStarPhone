@@ -1,8 +1,8 @@
 package com.application.User.Views;
 
 import com.application.User.Services.UserService;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
@@ -10,26 +10,30 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
+
+import java.util.List;
 
 @AnonymousAllowed
-@PageTitle("Activar Usuario")
-@Route(value = "/activaruser")
+// TODO: @RolesAllowed("ROLE_ADMIN") + import jakarta.annotation
 @CssImport("./styles/styles.css")
-public class activateUserView extends VerticalLayout {
+@PageTitle("Borrar Usuario")
+@Route(value = "/borrarusuario", layout = menu.class)
+public class adminDeleteUserView extends VerticalLayout {
 
     VerticalLayout bodyDiv, centerDiv, confirmSquare;
     HorizontalLayout titleDiv, footerDiv;
-    H3 confirmTitle;
+    H3 titleDelete;
     EmailField email;
-    TextField confirmCode;
+    ComboBox<String> DNI;
     Button confirmar;
     UserService userService;
 
-    public activateUserView(UserService uService) {
+    public adminDeleteUserView(UserService uService) {
+        userService = uService;
         setWidthFull();
         setHeightFull();
         addClassName("mainView");
@@ -42,15 +46,26 @@ public class activateUserView extends VerticalLayout {
         email.addClassName("activefield");
         email.setId("email");
         email.setRequired(true);
+        email.setHelperText("Introduce un email, para obtener un DNI.");
+        email.setValueChangeMode(ValueChangeMode.EAGER);
 
-        confirmCode = new TextField("Código de activación:");
-        confirmCode.addClassName("activefield");
-        confirmCode.setId("confirmCode");
-        confirmCode.setRequired(true);
+        DNI = new ComboBox<>("DNI:");
+        DNI.addClassName("activefield");
+        DNI.setId("DNI");
+        DNI.setRequired(true);
+        DNI.setHelperText("Seleccione un DNI de la lista.");
+
+        email.addValueChangeListener(event -> {
+            List<String> l = userService.getDNIByEmail(event.getValue());
+            if (l.size() > 0) {
+                DNI.setItems(l);
+                DNI.setPlaceholder(l.get(0));
+            }
+        });
 
         confirmar = new Button("Confirmar");
         confirmar.addClassName("activebutton");
-        confirmar.addClickListener(e -> onActivateuserClick());
+        confirmar.addClickListener(e -> onDeleteButtonClick());
         // ---------------------------
 
         centerDiv = new VerticalLayout();
@@ -61,8 +76,8 @@ public class activateUserView extends VerticalLayout {
         centerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
 
         confirmSquare = new VerticalLayout();
-        confirmSquare.setWidth("350px");
-        confirmSquare.setHeight("350px");
+        confirmSquare.setWidth("380px");
+        confirmSquare.setHeight("400px");
         confirmSquare.setPadding(false);
         confirmSquare.setSpacing(false);
         confirmSquare.setAlignItems(Alignment.CENTER);
@@ -75,36 +90,39 @@ public class activateUserView extends VerticalLayout {
         titleDiv.setAlignItems(Alignment.CENTER);
         titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
         titleDiv.getStyle().set("background-color", "rgb(135, 206, 235)");
-        confirmTitle = new H3("Activar Usuario");
-        confirmTitle.getStyle().set("font-size", "26px");
-        confirmTitle.getStyle().set("color", "white");
-        titleDiv.add(confirmTitle);
+        titleDelete = new H3("Borrar Usuario");
+        titleDelete.getStyle().set("font-size", "28px");
+        titleDelete.getStyle().set("color", "white");
+        titleDiv.add(titleDelete);
         confirmSquare.add(titleDiv);
 
-        bodyDiv = new VerticalLayout(email, confirmCode, confirmar);
+        bodyDiv = new VerticalLayout(email, DNI, confirmar);
         bodyDiv.setWidthFull();
         bodyDiv.setJustifyContentMode(JustifyContentMode.START);
         bodyDiv.setAlignItems(Alignment.CENTER);
         bodyDiv.getStyle().set("background-color", "rgb(255, 255, 255)");
         bodyDiv.getStyle().set("border-radius", "0 0 12px 12px");
         confirmSquare.add(bodyDiv);
+
+        centerDiv.add(confirmSquare);
+        add(centerDiv);
+        expand(centerDiv);
         expand(bodyDiv);
 
         centerDiv.add(confirmSquare);
         add(centerDiv);
         expand(centerDiv);
-
-        userService = uService;
     }
 
-    public void onActivateuserClick() {
-        if (userService.isActivated(email.getValue()))
-            UI.getCurrent().getPage().setLocation("/");
-        if (userService.activateUserCode(email.getValue(), confirmCode.getValue())) {
-            UI.getCurrent().getPage().setLocation("/menucliente");
+    public void onDeleteButtonClick() {
+        System.out.println(email.getValue());
+        System.out.println(DNI.getValue());
+        if (userService.deleteByDNI(DNI.getValue())) {
+            String text = new String("Genial. Eliminado correctamente!!");
+            Notification.show(text).addThemeVariants(NotificationVariant.LUMO_SUCCESS);
         } else {
-            Notification.show("Código de activación incorrecto").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-            UI.getCurrent().getPage().setLocation("/activateuser");
+            String text = new String("Algo falló! Inténtelo de nuevo.");
+            Notification.show(text).addThemeVariants(NotificationVariant.LUMO_ERROR);
         }
     }
 }

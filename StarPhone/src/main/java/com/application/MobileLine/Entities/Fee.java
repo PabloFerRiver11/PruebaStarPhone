@@ -39,6 +39,10 @@ public class Fee extends AbstractEntity {
     @Column(name = "monthlyprice", nullable = false)
     private double monthlyprice;
 
+    @NotEmpty
+    @Column(name = "maxMobileLines", nullable = false)
+    private int maxMobileLines;
+
     @Override
     public UUID getId() {
         return id;
@@ -86,5 +90,13 @@ public class Fee extends AbstractEntity {
 
     public void setMonthlyprice(double monthlyprice) {
         this.monthlyprice = monthlyprice;
+    }
+
+    public int getMaxMobileLines() {
+        return this.maxMobileLines;
+    }
+
+    public void setMaxMobileLines(int maxMobileLines) {
+        this.maxMobileLines = maxMobileLines;
     }
 }

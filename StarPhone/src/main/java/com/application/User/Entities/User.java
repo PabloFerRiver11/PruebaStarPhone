@@ -89,7 +89,7 @@ public class User extends AbstractEntity implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     // Contratos
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Contract> contracts;
 
     public UUID getId() {

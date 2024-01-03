@@ -40,10 +40,6 @@ public class MobileLine extends AbstractEntity {
     private ServiceType serviceType;
 
     @NotEmpty
-    @Column(name = "monthlyPrice", nullable = false)
-    private double monthlyPrice;
-
-    @NotEmpty
     @Column(name = "phoneNumber", nullable = false)
     private int phoneNumber;
 
@@ -112,14 +108,6 @@ public class MobileLine extends AbstractEntity {
 
     public void setServiceType(ServiceType serviceType) {
         this.serviceType = serviceType;
-    }
-
-    public double getMonthlyPrice() {
-        return monthlyPrice;
-    }
-
-    public void setMonthlyPrice(double monthlyPrice) {
-        this.monthlyPrice = monthlyPrice;
     }
 
     public String getPhoneModel() {

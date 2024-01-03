@@ -77,6 +77,27 @@ public class menu extends AppLayout {
         SideNav nav = new SideNav();
         SideNavItem navItem;
 
+        if (accessChecker.hasAccess(adminRegisterUserView.class)) {
+            navItem = new SideNavItem("Registrar Usuario", adminRegisterUserView.class,
+                    LineAwesomeIcon.GLOBE_SOLID.create());
+            navItem.addClassName("sideNavItem");
+            nav.addItem(navItem);
+        }
+
+        if (accessChecker.hasAccess(adminDeleteUserView.class)) {
+            navItem = new SideNavItem("Borrar Usuario", adminDeleteUserView.class,
+                    LineAwesomeIcon.GLOBE_SOLID.create());
+            navItem.addClassName("sideNavItem");
+            nav.addItem(navItem);
+        }
+
+        if (accessChecker.hasAccess(modifyDataUserView.class)) {
+            navItem = new SideNavItem("Modificar Usuario", modifyDataUserView.class,
+                    LineAwesomeIcon.GLOBE_SOLID.create());
+            navItem.addClassName("sideNavItem");
+            nav.addItem(navItem);
+        }
+
         if (accessChecker.hasAccess(feesViewMenu.class)) {
             navItem = new SideNavItem("Tarifas", feesViewMenu.class,
                     LineAwesomeIcon.GLOBE_SOLID.create());

@@ -1,17 +1,12 @@
 package com.application.User.Views;
 
 import com.application.User.Services.UserService;
-import com.application.MobileLine.Entities.Fee;
-import com.application.MobileLine.Service.FeeService;
+import com.application.User.Entities.Role;
 import com.application.User.Entities.User;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Pre;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -26,14 +21,12 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @AnonymousAllowed
+// TODO: @RolesAllowed("ROLE_ADMIN") + import jakarta.annotation
 @CssImport("./styles/styles.css")
-@PageTitle("Registro")
-@Route(value = "/registro")
-public class registerView extends VerticalLayout {
+@PageTitle("Registrar Usuario")
+@Route(value = "/registrarusuario", layout = menu.class)
+public class adminRegisterUserView extends VerticalLayout {
 
     HorizontalLayout titleDiv, centerDiv, bodySubDiv1, bodySubDiv2, bodySubDiv3,
             bodySubDiv4, bodySubDiv5, footerDiv;
@@ -44,12 +37,12 @@ public class registerView extends VerticalLayout {
     private final EmailField email;
     private final IntegerField phoneNumber;
     private final PasswordField password, repeatPassword;
-    private final Select<String> fees;
+    private final Select<Role> role;
     private final Button confirmar;
     private final BeanValidationBinder<User> binder;
     private final UserService service;
 
-    public registerView(UserService service, FeeService feeService) {
+    public adminRegisterUserView(UserService service) {
         setWidthFull();
         setHeightFull();
         addClassName("mainView");
@@ -77,6 +70,7 @@ public class registerView extends VerticalLayout {
         DNI.addClassName("registerformfield");
         DNI.setMinLength(9);
         DNI.setMaxLength(9);
+        DNI.setRequired(true);
         DNI.setId("DNI");
 
         name = new TextField("Nombre:");
@@ -121,18 +115,13 @@ public class registerView extends VerticalLayout {
         repeatPassword.addClassName("registerformfield");
         repeatPassword.setId("repeatPassword");
 
-        List<Fee> feesList = feeService.findAll();
-        List<String> titles = new ArrayList<>();
-        fees = new Select<>();
-        fees.addClassName("registerformfield");
-        fees.setLabel("Tarifa:");
-        for (Fee fee : feesList) {
-            titles.add(fee.getTitle());
-        }
-        fees.setItems(titles);
-        fees.setValue("Tarifa 1");
+        role = new Select<>();
+        role.addClassName("registerformfield");
+        role.setLabel("Rol inicial:");
+        role.setItems(Role.CUSTOMER, Role.MARKETING, Role.FINANCE, Role.CUSTOMERSUPPORT, Role.ADMIN);
+        role.setId("rol");
 
-        confirmar = new Button("Registrarse");
+        confirmar = new Button("Confirmar");
         confirmar.addClassName("registerformbutton");
         confirmar.addClickListener(e -> {
             onRegisterButtonClick();
@@ -142,13 +131,13 @@ public class registerView extends VerticalLayout {
 
         titleDiv = new HorizontalLayout();
         titleDiv.setWidthFull();
-        titleDiv.setHeight("80px");
+        titleDiv.setHeight("60px");
         titleDiv.setJustifyContentMode(JustifyContentMode.CENTER);
         titleDiv.setAlignItems(Alignment.CENTER);
         titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
         titleDiv.getStyle().set("background-color", "rgb(135, 206, 235)");
-        titleRegister = new H3("Hazte Cliente");
-        titleRegister.getStyle().set("font-size", "38px");
+        titleRegister = new H3("Registrar Usuario");
+        titleRegister.getStyle().set("font-size", "32px");
         titleRegister.getStyle().set("color", "white");
         titleDiv.add(titleRegister);
         registerForm.add(titleDiv);
@@ -163,7 +152,7 @@ public class registerView extends VerticalLayout {
         bodySubDiv1 = new HorizontalLayout(name, surname, DNI);
         bodySubDiv1.setSpacing(false);
         bodySubDiv1.addClassName("bodysregister");
-        bodySubDiv2 = new HorizontalLayout(username, birthdate, fees);
+        bodySubDiv2 = new HorizontalLayout(username, birthdate, role);
         bodySubDiv2.setSpacing(false);
         bodySubDiv2.addClassName("bodysregister");
         bodySubDiv3 = new HorizontalLayout(email, password, repeatPassword);
@@ -195,37 +184,16 @@ public class registerView extends VerticalLayout {
     public void onRegisterButtonClick() {
 
         if (binder.validate().isOk() && password.getValue().equals(repeatPassword.getValue())) {
-            Button closeButton = new Button(new Icon("lumo", "cross"));
-            closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-            closeButton.getElement().setAttribute("aria-label", "Close");
-            Notification not = new Notification();
-            if (service.registerUser(binder.getBean())) {
-                closeButton.addClickListener(event -> {
-                    not.close();
-                    UI.getCurrent().getPage().setLocation("/activaruser");
-                });
-                Pre text = new Pre("Genial. Por favor, revisa tu email!\nClick en la cruz para continuar.");
-                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                layout.setAlignItems(Alignment.CENTER);
-                not.add(layout);
-                not.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-                not.open();
+            binder.getBean().addRole(role.getValue());
+            if (service.registerUserByAdmin(binder.getBean())) {
+                String text = new String("Genial. Registrado correctamente!!");
+                Notification.show(text).addThemeVariants(NotificationVariant.LUMO_SUCCESS);
             } else {
-                closeButton.addClickListener(event -> {
-                    not.close();
-                });
-                Pre text = new Pre("Algo falló. Revise los datos, si el fallo persiste, \n" +
-                        "contacte con nosotros.\n Click en la cruz para continuar.");
-                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                layout.setAlignItems(Alignment.CENTER);
-                not.add(layout);
-                not.addThemeVariants(NotificationVariant.LUMO_ERROR);
-                not.open();
+                String text = new String("Algo falló! Revise los datos.");
+                Notification.show(text).addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
-
         } else {
-            Notification.show("Por favor, revise los datos introducidos.");
+            Notification.show("Error! Revise los datos introducidos.");
         }
-
     }
 }

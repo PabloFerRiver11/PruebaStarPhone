@@ -36,6 +36,10 @@ jobs:
       - name: Get Artifact version from pom.xml
         uses: entimaniac/read-pom-version-action@1.0.0
         id: getVersion
+        env:
+          JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.9-9/x64
+          JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.9-9/x64
+          working-directory: StarPhone
 
       - name: Build with Maven and analyze with Sonar Cloud
         env:

@@ -52,7 +52,7 @@ jobs:
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           application_name: StarPhone   # Configurar nombre de la app
-          environment_name: *********fullstackwebapp-env**********  # Configurar nombre del entorno
+          environment_name: StarPhone  # Configurar nombre del entorno
           region: us-east-1 # Configurar región
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -4,7 +4,6 @@ import com.application.General.AbstractEntity;
 import com.application.Contract.Entities.Contract;
 import com.application.User.Entities.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -35,9 +34,9 @@ public class MobileLine extends AbstractEntity {
     @JoinColumn(name = "contract_id")
     private Contract contract;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "phoneNumber")
-    private int phoneNumber;
+    private Integer phoneNumber;
 
     @Column(name = "roaming", nullable = false)
     private boolean roaming;
@@ -83,11 +82,11 @@ public class MobileLine extends AbstractEntity {
         this.contract = contract;
     }
 
-    public int getPhoneNumber() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -99,7 +98,7 @@ public class MobileLine extends AbstractEntity {
         this.roaming = roaming;
     }
 
-    public boolean isShareData() {
+    public boolean getShareData() {
         return shareData;
     }
 

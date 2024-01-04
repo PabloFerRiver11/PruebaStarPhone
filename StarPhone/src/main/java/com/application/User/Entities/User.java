@@ -61,7 +61,7 @@ public class User extends AbstractEntity implements UserDetails {
 
     @NotNull(message = "Por favor, introduzca su teléfono")
     @Column(name = "phoneNumber")
-    private int phoneNumber;
+    private Integer phoneNumber;
 
     @Email(message = "Por favor, introduzca un email válido")
     @NotEmpty(message = "Por favor, introduzca su email")
@@ -156,11 +156,11 @@ public class User extends AbstractEntity implements UserDetails {
         this.birthdate = birthdate;
     }
 
-    public int getPhoneNumber() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

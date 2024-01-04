@@ -135,7 +135,8 @@ vaadin-text-field.activefield::part(label),
 vaadin-email-field.activefield::part(label),
 vaadin-combo-box.activefield::part(label),
 vaadin-integer-field.activefield::part(label),
-vaadin-select.activefield::part(label)
+vaadin-select.activefield::part(label),
+vaadin-radio-group.activefield::part(label)
 {
     color: black;
     font-size: 18px;
@@ -152,6 +153,9 @@ vaadin-select.activefield::part(input-field)
     font-size: 18px;
 }
 
+vaadin-radio-group.activefield::part(group-field) {
+    font-size: 18px;
+}
 /*-----------------------------------*/
 
 /*LOGIN*/

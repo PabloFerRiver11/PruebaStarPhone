@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface MobileLineRepository extends JpaRepository<MobileLine, UUID> {
+public interface BlockedNumbersRepository extends JpaRepository<MobileLine, UUID> {
 
-    List<MobileLine> findMobileLineByContract_Id(UUID contract_id);
-
-    MobileLine findByPhoneNumber(Integer phoneNumber);
+    List<MobileLine> findMobileLineByBlockedNumbers_BlockedNumber(Integer phoneNumber);
 }

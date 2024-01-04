@@ -22,21 +22,37 @@ public class MobileLineService {
         MobileLine mLine = mobileLineRepository.findByPhoneNumber(phoneNumber);
         blockedNumber.setBlockedNumber(phoneNumberToBlock);
         mLine.addBlockedNumber(blockedNumber);
-        mobileLineRepository.save(mLine);
+        try {
+            mobileLineRepository.save(mLine);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public List<MobileLine> getMobileLineByContractId(UUID contract_id) {
         return mobileLineRepository.findMobileLineByContract_Id(contract_id);
     }
 
-    public void activateRoaming(MobileLine mobileline) {
-        mobileline.setRoaming(true);
-        mobileLineRepository.save(mobileline);
+    public void manageShareData(Integer phoneNumber, boolean shareData) {
+        MobileLine mobileLine = mobileLineRepository.findByPhoneNumber(phoneNumber);
+        if (mobileLine.getId() != null) {
+            mobileLine.setShareData(shareData);
+            System.out.println(mobileLine.getPhoneNumber() + "SD//" + mobileLine.getShareData());
+            mobileLineRepository.save(mobileLine);
+        }
 
     }
 
-    public void activateShareData(MobileLine mobileLine) {
-        mobileLine.setShareData(true);
-        mobileLineRepository.save(mobileLine);
+    public void manageRoaming(Integer phoneNumber, boolean roaming) {
+        MobileLine mobileLine = mobileLineRepository.findByPhoneNumber(phoneNumber);
+        if (mobileLine.getId() != null) {
+            mobileLine.setRoaming(roaming);
+            System.out.println(mobileLine.getPhoneNumber() + "R//" + mobileLine.getShareData());
+            mobileLineRepository.save(mobileLine);
+        }
+    }
+
+    public MobileLine getMobileLineByPhoneNumber(int phoneNumber) {
+        return mobileLineRepository.findByPhoneNumber(phoneNumber);
     }
 }

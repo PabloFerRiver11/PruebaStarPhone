@@ -1,6 +1,8 @@
 package com.application.User.Views;
 
+import com.application.MobileLine.Views.blockNumberUserView;
 import com.application.MobileLine.Views.feesViewMenu;
+import com.application.MobileLine.Views.shareDataAndRoamingView;
 import com.application.User.Entities.User;
 import com.application.User.Security.AuthenticatedUser;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -107,6 +109,13 @@ public class menu extends AppLayout {
 
         if (accessChecker.hasAccess(blockNumberUserView.class)) {
             navItem = new SideNavItem("Bloquear Número", blockNumberUserView.class,
+                    LineAwesomeIcon.GLOBE_SOLID.create());
+            navItem.addClassName("sideNavItem");
+            nav.addItem(navItem);
+        }
+
+        if (accessChecker.hasAccess(shareDataAndRoamingView.class)) {
+            navItem = new SideNavItem("Roaming & Datos Compartidos", shareDataAndRoamingView.class,
                     LineAwesomeIcon.GLOBE_SOLID.create());
             navItem.addClassName("sideNavItem");
             nav.addItem(navItem);

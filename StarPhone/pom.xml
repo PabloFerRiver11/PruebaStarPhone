@@ -17,7 +17,7 @@
     <properties>
         <java.version>17</java.version>
         <vaadin.version>24.2.1</vaadin.version>
-        <sonar.organization>ruizrube</sonar.organization>
+        <sonar.organization>mnpx01</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 

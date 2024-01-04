@@ -17,18 +17,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import com.vaadin.flow.component.textfield.IntegerField;
 
-
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 import jakarta.annotation.security.RolesAllowed;
-
 
 import java.util.List;
 
-
-
- @RolesAllowed("CUSTOMER")
+@RolesAllowed("CUSTOMER")
 
 @CssImport("./styles/styles.css")
 @PageTitle("Bloquear Número")
@@ -41,16 +36,13 @@ public class BlockNumberUserView extends VerticalLayout {
     VerticalLayout bodyDiv, centerDiv, confirmSquare;
     HorizontalLayout titleDiv, footerDiv;
     H3 titleDelete;
-     IntegerField phoneNumber;
-
+    IntegerField phoneNumber;
 
     Button confirmar;
-
 
     public BlockNumberUserView(AuthenticatedUser authenticatedUser, MobileLineService mobileService) {
         this.authenticatedUser = authenticatedUser;
         this.mobileService = mobileService;
-
 
         setWidthFull();
         setHeightFull();
@@ -69,95 +61,89 @@ public class BlockNumberUserView extends VerticalLayout {
         Contrato.setId("Contrato");
         Contrato.setRequired(true);
         Contrato.setHelperText("Seleccione un contrato de la lista.");
-        //Mostrar en el combobox todos los contratos del usuario logueado
+        // Mostrar en el combobox todos los contratos del usuario logueado
         List<Contract> l = authenticatedUser.get().get().getContracts();
-
 
         if (!l.isEmpty()) {
             Contrato.setItems(l);
             Contrato.setPlaceholder(String.valueOf(l.get(0)));
         }
 
+        linea = new ComboBox<>("Líneas:");
+        linea.addClassName("activefield");
+        linea.setId("DNI");
+        linea.setRequired(true);
+        linea.setHelperText("Seleccione una línea de la lista.");
 
-            linea = new ComboBox<>("Líneas:");
-            linea.addClassName("activefield");
-            linea.setId("DNI");
-            linea.setRequired(true);
-            linea.setHelperText("Seleccione una línea de la lista.");
-
-            Contrato.addValueChangeListener(event -> {
-                List<MobileLine> ml = event.getValue().getMobileLines();
-                if (!ml.isEmpty()) {
-                    linea.setItems(ml);
-                    linea.setPlaceholder(String.valueOf(ml.get(0)));
-                }
-            });
-
-
-            confirmar = new Button("Bloquear");
-            confirmar.addClassName("activebutton");
-            confirmar.addClickListener(e -> onBlocknumber());
-            // ---------------------------
-
-            centerDiv = new VerticalLayout();
-            centerDiv.setWidthFull();
-            centerDiv.setPadding(false);
-            centerDiv.setSpacing(false);
-            centerDiv.setAlignItems(Alignment.CENTER);
-            centerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
-
-            confirmSquare = new VerticalLayout();
-            confirmSquare.setWidth("380px");
-            confirmSquare.setHeight("400px");
-            confirmSquare.setPadding(false);
-            confirmSquare.setSpacing(false);
-            confirmSquare.setAlignItems(Alignment.CENTER);
-            confirmSquare.getStyle().set("border-radius", "12px");
-
-            titleDiv = new HorizontalLayout();
-            titleDiv.setWidthFull();
-            titleDiv.setHeight("60px");
-            titleDiv.setJustifyContentMode(JustifyContentMode.CENTER);
-            titleDiv.setAlignItems(Alignment.CENTER);
-            titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
-            titleDiv.getStyle().set("background-color", "rgb(135, 206, 235)");
-            titleDelete = new H3("Bloquear número");
-            titleDelete.getStyle().set("font-size", "28px");
-            titleDelete.getStyle().set("color", "white");
-            titleDiv.add(titleDelete);
-            confirmSquare.add(titleDiv);
-
-            bodyDiv = new VerticalLayout(Contrato, linea, phoneNumber, confirmar);
-            bodyDiv.setWidthFull();
-            bodyDiv.setJustifyContentMode(JustifyContentMode.START);
-            bodyDiv.setAlignItems(Alignment.CENTER);
-            bodyDiv.getStyle().set("background-color", "rgb(255, 255, 255)");
-            bodyDiv.getStyle().set("border-radius", "0 0 12px 12px");
-            confirmSquare.add(bodyDiv);
-
-            centerDiv.add(confirmSquare);
-            add(centerDiv);
-            expand(centerDiv);
-            expand(bodyDiv);
-
-            centerDiv.add(confirmSquare);
-            add(centerDiv);
-            expand(centerDiv);
-        }
-
-
-        public void onBlocknumber () {
-            if (phoneNumber.getValue() != null && Contrato.getValue() != null && linea.getValue() != null) {
-                mobileService.blockNumber(phoneNumber.getValue(), linea.getValue());
-                Notification.show("Número bloqueado");
-
-            } else {
-                Notification.show("Rellene todos los campos");
-
-
+        Contrato.addValueChangeListener(event -> {
+            List<MobileLine> ml = event.getValue().getMobileLines();
+            if (!ml.isEmpty()) {
+                linea.setItems(ml);
+                linea.setPlaceholder(String.valueOf(ml.get(0)));
             }
+        });
 
+        confirmar = new Button("Bloquear");
+        confirmar.addClassName("activebutton");
+        confirmar.addClickListener(e -> onBlocknumber());
+        // ---------------------------
+
+        centerDiv = new VerticalLayout();
+        centerDiv.setWidthFull();
+        centerDiv.setPadding(false);
+        centerDiv.setSpacing(false);
+        centerDiv.setAlignItems(Alignment.CENTER);
+        centerDiv.setJustifyContentMode(JustifyContentMode.CENTER);
+
+        confirmSquare = new VerticalLayout();
+        confirmSquare.setWidth("380px");
+        confirmSquare.setHeight("400px");
+        confirmSquare.setPadding(false);
+        confirmSquare.setSpacing(false);
+        confirmSquare.setAlignItems(Alignment.CENTER);
+        confirmSquare.getStyle().set("border-radius", "12px");
+
+        titleDiv = new HorizontalLayout();
+        titleDiv.setWidthFull();
+        titleDiv.setHeight("60px");
+        titleDiv.setJustifyContentMode(JustifyContentMode.CENTER);
+        titleDiv.setAlignItems(Alignment.CENTER);
+        titleDiv.getStyle().set("border-radius", "12px 12px 0 0");
+        titleDiv.getStyle().set("background-color", "rgb(135, 206, 235)");
+        titleDelete = new H3("Bloquear número");
+        titleDelete.getStyle().set("font-size", "28px");
+        titleDelete.getStyle().set("color", "white");
+        titleDiv.add(titleDelete);
+        confirmSquare.add(titleDiv);
+
+        bodyDiv = new VerticalLayout(Contrato, linea, phoneNumber, confirmar);
+        bodyDiv.setWidthFull();
+        bodyDiv.setJustifyContentMode(JustifyContentMode.START);
+        bodyDiv.setAlignItems(Alignment.CENTER);
+        bodyDiv.getStyle().set("background-color", "rgb(255, 255, 255)");
+        bodyDiv.getStyle().set("border-radius", "0 0 12px 12px");
+        confirmSquare.add(bodyDiv);
+
+        centerDiv.add(confirmSquare);
+        add(centerDiv);
+        expand(centerDiv);
+        expand(bodyDiv);
+
+        centerDiv.add(confirmSquare);
+        add(centerDiv);
+        expand(centerDiv);
+    }
+
+    public void onBlocknumber() {
+        if (phoneNumber.getValue() != null && Contrato.getValue() != null && linea.getValue() != null) {
+            mobileService.blockNumber(phoneNumber.getValue(), linea.getValue());
+            Notification.show("Número bloqueado");
+
+        } else {
+            Notification.show("Rellene todos los campos");
 
         }
 
     }
+
+}

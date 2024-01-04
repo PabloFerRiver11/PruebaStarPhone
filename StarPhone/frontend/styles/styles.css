@@ -73,40 +73,40 @@
     background-color: var(--lumo-contrast-10pct);
 }
 
-vaadin-text-field::part(label),
-vaadin-integer-field::part(label),
-vaadin-date-picker::part(label),
-vaadin-email-field::part(label), 
-vaadin-password-field::part(label),
-vaadin-select::part(label),
-vaadin-combo-box::part(label) {
+vaadin-text-field.registerformfield::part(label),
+vaadin-integer-field.registerformfield::part(label),
+vaadin-date-picker.registerformfield::part(label),
+vaadin-email-field.registerformfield::part(label), 
+vaadin-password-field.registerformfield::part(label),
+vaadin-select.registerformfield::part(label),
+vaadin-combo-box.registerformfield::part(label) {
     color: black;
     font-size: 18px;
 }
 
-vaadin-text-field::part(input-field),
-vaadin-integer-field::part(input-field),
-vaadin-date-picker::part(input-field),
-vaadin-email-field::part(input-field),
-vaadin-password-field::part(input-field),
-vaadin-select::part(input-field),
-vaadin-combo-box::part(input-field) {
+vaadin-text-field.registerformfield::part(input-field),
+vaadin-integer-field.registerformfield::part(input-field),
+vaadin-date-picker.registerformfield::part(input-field),
+vaadin-email-field.registerformfield::part(input-field),
+vaadin-password-field.registerformfield::part(input-field),
+vaadin-select.registerformfield::part(input-field),
+vaadin-combo-box.registerformfield::part(input-field) {
     border: 2px solid black;
     font-size: 16px;
 }
 
-vaadin-text-field::part(error-message),
-vaadin-integer-field::part(error-message),
-vaadin-date-picker::part(error-message),
-vaadin-email-field::part(error-message),
-vaadin-password-field::part(error-message),
-vaadin-select::part(error-message),
-vaadin-combo-box::part(error-message) {
+vaadin-text-field.registerformfield::part(error-message),
+vaadin-integer-field.registerformfield::part(error-message),
+vaadin-date-picker.registerformfield::part(error-message),
+vaadin-email-field.registerformfield::part(error-message),
+vaadin-password-field.registerformfield::part(error-message),
+vaadin-select.registerformfield::part(error-message),
+vaadin-combo-box.registerformfield::part(error-message) {
     color: red;
     font-size: 15px;
 }
 
-vaadin-button::part(label)
+vaadin-button.registerformbutton::part(label)
 {
     color: black;
     font-size: 18px;

@@ -44,7 +44,7 @@ jobs:
         run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=pabloferriver -Dsonar.projectKey=pabloferriver_iw2023-2024-StarPhone -X
         
       - name: Build and Deploy to GitHub Packages
-        run: mvn deploy -Dmaven.test.skip=true -U -B -Pproduction
+        run: mvn deploy -Dmaven.test.skip=true -U -B -Pproduction -X
         env:
           GITHUB_TOKEN: ${{ github.token }}
 

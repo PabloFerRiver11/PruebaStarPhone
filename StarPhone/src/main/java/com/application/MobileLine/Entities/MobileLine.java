@@ -2,8 +2,11 @@ package com.application.MobileLine.Entities;
 
 import com.application.General.AbstractEntity;
 import com.application.Contract.Entities.Contract;
+import com.application.User.Entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -26,13 +29,14 @@ public class MobileLine extends AbstractEntity {
     @JoinColumn(name = "contract_id")
     private Contract contract;
 
-    @NotEmpty
-    @Column(name = "name", nullable = false)
-    private String name;
+
 
     @NotEmpty
-    @Column(name = "surname", nullable = false)
-    private String surname;
+    @Size(min = 9, max = 9)
+    @Column(name = "DNI", unique = true)
+    private String DNI;
+
+
 
     @NotEmpty
     @Enumerated(EnumType.STRING)
@@ -40,7 +44,7 @@ public class MobileLine extends AbstractEntity {
     private ServiceType serviceType;
 
     @NotEmpty
-    @Column(name = "phoneNumber", nullable = false)
+    @Column(name = "phoneNumber", nullable = false,unique = true)
     private int phoneNumber;
 
     @NotEmpty
@@ -69,6 +73,19 @@ public class MobileLine extends AbstractEntity {
     @JoinColumn(name = "mobileLine_id")
     private List<BlockedNumbers> numerosBloqueados;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    @NotNull
+    private User user;
+
     @Override
     public UUID getId() {
         return id;
@@ -86,21 +103,9 @@ public class MobileLine extends AbstractEntity {
         this.contract = contract;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getSurname() {
-        return surname;
-    }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 
     public ServiceType getServiceType() {
         return serviceType;
@@ -169,6 +174,13 @@ public class MobileLine extends AbstractEntity {
     public Double getTotalDataContract() {
         return totalDataContract;
     }
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
 
     public void setTotalDataContract(Double totalDataContract) {
         this.totalDataContract = totalDataContract;
@@ -180,6 +192,9 @@ public class MobileLine extends AbstractEntity {
 
     public void setNumerosBloqueados(List<BlockedNumbers> numerosBloqueados) {
         this.numerosBloqueados = numerosBloqueados;
+    }
+    public void setNumeroBloqueado(BlockedNumbers numeroBloqueado) {
+        this.numerosBloqueados.add(numeroBloqueado);
     }
 
 }

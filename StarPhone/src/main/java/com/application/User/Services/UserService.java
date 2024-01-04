@@ -132,6 +132,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
+
     public boolean deleteByDNI(String dni) {
         User u = findUserByDNI(dni);
         System.out.println(u.getId());
@@ -146,5 +147,7 @@ public class UserService implements UserDetailsService {
     public int count() {
         return (int) userRepository.count();
     }
+
+
 
 }

@@ -98,13 +98,6 @@ public class menu extends AppLayout {
             nav.addItem(navItem);
         }
 
-        if (accessChecker.hasAccess(rolManagementView.class)) {
-            navItem = new SideNavItem("Gestionar Roles", rolManagementView.class,
-                    LineAwesomeIcon.GLOBE_SOLID.create());
-            navItem.addClassName("sideNavItem");
-            nav.addItem(navItem);
-        }
-
         if (accessChecker.hasAccess(feesViewMenu.class)) {
             navItem = new SideNavItem("Tarifas", feesViewMenu.class,
                     LineAwesomeIcon.GLOBE_SOLID.create());

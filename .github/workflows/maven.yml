@@ -32,7 +32,7 @@ jobs:
 
       - name: Get Artifact version from pom.xml
         id: getVersion
-        run: echo "::set-output name=version::$(mvn -f /iw2023-2024-StarPhone/StarPhone/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
+        run: echo "::set-output name=version::$(mvn -f /home/runner/work/iw2023-2024-StarPhone/StarPhone/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
       - name: Use current directory in a command
         run: ls $GITHUB_WORKSPACE
   

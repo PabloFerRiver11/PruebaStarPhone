@@ -93,7 +93,7 @@ public class modifyDataUserView extends VerticalLayout {
         repeatPassword.setId("repeatPassword");
 
         role = new Select<>();
-        role.addClassName("registerformfield");
+        role.addClassName("modifyformfield");
         role.setLabel("Rol inicial:");
         role.setItems(Role.CUSTOMER, Role.MARKETING, Role.FINANCE, Role.CUSTOMERSUPPORT, Role.ADMIN);
         role.setId("rol");

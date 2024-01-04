@@ -30,19 +30,15 @@ jobs:
           java-distribution: 'temurin'
           java-version: '17'
 
-      - name: Cambiar al directorio del pom.xml
-        run: pwd && ls
-
       - name: Get Artifact version from pom.xml
         uses: entimaniac/read-pom-version-action@1.0.0
         id: getVersion
-
 
       - name: Build with Maven and analyze with Sonar Cloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}     # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
-        run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mnpx01_iw2023-2024-StarPhone      
+        run: mvn clean -Dmaven.test.skip=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.organization=mnpx01 -Dsonar.projectKey=mnpx01_iw2023-2024-StarPhone -X
         
       - name: Build and Deploy to GitHub Packages
         run: mvn deploy -Dmaven.test.skip=true -U -B -Pproduction

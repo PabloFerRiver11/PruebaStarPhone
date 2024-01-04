@@ -31,9 +31,11 @@ jobs:
           java-version: '17'
 
       - name: Get Artifact version from pom.xml
-        uses: entimaniac/read-pom-version-action@1.0.0
         id: getVersion
-
+        run: echo "::set-output name=version::$(mvn -f /iw2023-2024-StarPhone/StarPhone/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
+      - name: Use current directory in a command
+        run: ls $GITHUB_WORKSPACE
+  
       - name: Build with Maven and analyze with Sonar Cloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any

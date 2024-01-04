@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <cucumber.version>7.14.0</cucumber.version>
         <vaadin.version>24.2.1</vaadin.version>
         <sonar.organization>pabloferriver</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -112,7 +113,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/pabloferriver/iw2023-2024-StarPhone</url>
+            <url>https://maven.pkg.github.com/PabloFerRiver/iw2023-2024-StarPhone</url>
         </repository>
     </distributionManagement>
 

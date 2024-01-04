@@ -26,7 +26,7 @@ import java.util.Random;
 
 //TODO: @PermitAll + import jakarta.annotation.security.PermitAll;
 @AnonymousAllowed
-@PageTitle("Recuperar")
+@PageTitle("Recuperar Credenciales")
 @Route(value = "/recuperarcredenciales")
 public class ForgotPasswordView extends VerticalLayout {
 
@@ -46,7 +46,7 @@ public class ForgotPasswordView extends VerticalLayout {
     private Button crear = new Button("Mandar correo");
 
     public ForgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
-
+        // TODO: Dar estilo a la vista
         this.userService = uService;
         this.encoder = encoder;
         this.userEmail = uEmail;

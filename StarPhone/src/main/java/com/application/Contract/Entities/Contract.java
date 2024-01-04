@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "contract", indexes = {
-        @Index(name = "idx_user", columnList = "user_id", unique = false)
+        @Index(name = "idx_user", columnList = "user_id, fee_id", unique = false)
 })
 public class Contract extends AbstractEntity {
     @Id
@@ -71,6 +71,14 @@ public class Contract extends AbstractEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Fee getFee() {
+        return fee;
+    }
+
+    public void setFee(Fee fee) {
+        this.fee = fee;
     }
 
     public String getStatus() {

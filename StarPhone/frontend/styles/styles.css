@@ -132,7 +132,10 @@ vaadin-button.registerformbutton::part(label)
 
 vaadin-button.activebutton::part(label),
 vaadin-text-field.activefield::part(label),
-vaadin-email-field.activefield::part(label)
+vaadin-email-field.activefield::part(label),
+vaadin-combo-box.activefield::part(label),
+vaadin-integer-field.activefield::part(label),
+vaadin-select.activefield::part(label)
 {
     color: black;
     font-size: 18px;
@@ -140,7 +143,10 @@ vaadin-email-field.activefield::part(label)
 }
 
 vaadin-text-field.activefield::part(input-field),
-vaadin-email-field.activefield::part(input-field)
+vaadin-email-field.activefield::part(input-field),
+vaadin-combo-box.activefield::part(input-field),
+vaadin-integer-field.activefield::part(input-field),
+vaadin-select.activefield::part(input-field)
 {
     border: 2px solid black;
     font-size: 18px;
@@ -243,6 +249,34 @@ vaadin-app-layout::part(navbar) {
     border: 3px solid black;
     cursor: pointer;
     background-color: var(--lumo-contrast-10pct);
+}
+vaadin-text-field.modifyformfield::part(label),
+vaadin-integer-field.modifyformfield::part(label),
+vaadin-date-picker.modifyformfield::part(label),
+vaadin-email-field.modifyformfield::part(label), 
+vaadin-password-field.modifyformfield::part(label),
+vaadin-select.modifyformfield::part(label),
+vaadin-combo-box.modifyformfield::part(label) {
+    color: black;
+    font-size: 18px;
+}
+
+vaadin-text-field.modifyformfield::part(input-field),
+vaadin-integer-field.modifyformfield::part(input-field),
+vaadin-date-picker.modifyformfield::part(input-field),
+vaadin-email-field.modifyformfield::part(input-field),
+vaadin-password-field.modifyformfield::part(input-field),
+vaadin-select.modifyformfield::part(input-field),
+vaadin-combo-box.modifyformfield::part(input-field) {
+    border: 2px solid black;
+    font-size: 16px;
+}
+
+vaadin-button.modifyformbutton::part(label)
+{
+    color: black;
+    font-size: 18px;
+    font-weight: 500;
 }
 /*-----------------------------------*/
 

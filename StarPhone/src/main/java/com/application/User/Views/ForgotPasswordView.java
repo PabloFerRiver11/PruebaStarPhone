@@ -46,7 +46,7 @@ public class ForgotPasswordView extends VerticalLayout {
     private Button crear = new Button("Mandar correo");
 
     public ForgotPasswordView(UserService uService, PasswordEncoder encoder, UserEmailService uEmail) {
-
+        // TODO: Hacer vista de recuperar contraseña
         this.userService = uService;
         this.encoder = encoder;
         this.userEmail = uEmail;

@@ -1,48 +1,45 @@
 package com.application.User.Views;
 
 import com.application.Contract.Entities.Contract;
+import com.application.Contract.Service.ContractService;
 import com.application.MobileLine.Entities.MobileLine;
-
 import com.application.MobileLine.Service.MobileLineService;
 import com.application.User.Security.AuthenticatedUser;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
-
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H3;
-
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
-
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import jakarta.annotation.security.RolesAllowed;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@RolesAllowed("CUSTOMER")
-
+// TODO: @RolesAllowed("ROLE_CUSTOMER") + import jakarta
+@AnonymousAllowed
 @CssImport("./styles/styles.css")
 @PageTitle("Bloquear Número")
 @Route(value = "/bloquearnumero", layout = menu.class)
-public class BlockNumberUserView extends VerticalLayout {
+public class blockNumberUserView extends VerticalLayout {
     private final MobileLineService mobileService;
     AuthenticatedUser authenticatedUser;
-    ComboBox<Contract> Contrato;
-    ComboBox<MobileLine> linea;
+    Select<Integer> lines;
     VerticalLayout bodyDiv, centerDiv, confirmSquare;
     HorizontalLayout titleDiv, footerDiv;
     H3 titleDelete;
-    IntegerField phoneNumber;
-
+    IntegerField phoneNumberToBlock;
     Button confirmar;
 
-    public BlockNumberUserView(AuthenticatedUser authenticatedUser, MobileLineService mobileService) {
-        this.authenticatedUser = authenticatedUser;
-        this.mobileService = mobileService;
+    public blockNumberUserView(AuthenticatedUser authUser, MobileLineService mService,
+            ContractService contractService) {
+        this.authenticatedUser = authUser;
+        this.mobileService = mService;
 
         setWidthFull();
         setHeightFull();
@@ -52,40 +49,29 @@ public class BlockNumberUserView extends VerticalLayout {
         getStyle().set("font-family", "Kavoon");
 
         // Campos formulario
-        phoneNumber = new IntegerField("Número de teléfono:");
-        phoneNumber.addClassName("activefield");
-        phoneNumber.setId("phoneNumber");
-
-        Contrato = new ComboBox<>("Contratos:");
-        Contrato.addClassName("activefield");
-        Contrato.setId("Contrato");
-        Contrato.setRequired(true);
-        Contrato.setHelperText("Seleccione un contrato de la lista.");
-        // Mostrar en el combobox todos los contratos del usuario logueado
-        List<Contract> l = authenticatedUser.get().get().getContracts();
-
-        if (!l.isEmpty()) {
-            Contrato.setItems(l);
-            Contrato.setPlaceholder(String.valueOf(l.get(0)));
+        List<Contract> contracts = contractService.getContractsByUser_Id(authenticatedUser.get().get().getId());
+        List<MobileLine> mobileLines = new ArrayList<>();
+        for (var c : contracts) {
+            mobileLines.addAll(mobileService.getMobileLineByContractId(c.getId()));
         }
 
-        linea = new ComboBox<>("Líneas:");
-        linea.addClassName("activefield");
-        linea.setId("DNI");
-        linea.setRequired(true);
-        linea.setHelperText("Seleccione una línea de la lista.");
+        List<Integer> phoneNumberlines = new ArrayList<>();
+        for (var m : mobileLines) {
+            phoneNumberlines.add(m.getPhoneNumber());
+        }
 
-        Contrato.addValueChangeListener(event -> {
-            List<MobileLine> ml = event.getValue().getMobileLines();
-            if (!ml.isEmpty()) {
-                linea.setItems(ml);
-                linea.setPlaceholder(String.valueOf(ml.get(0)));
-            }
-        });
+        lines = new Select<Integer>();
+        lines.addClassName("activefield");
+        lines.setLabel("Línea:");
+        lines.setItems(phoneNumberlines);
 
-        confirmar = new Button("Bloquear");
+        phoneNumberToBlock = new IntegerField("Número a bloquear:");
+        phoneNumberToBlock.addClassName("activefield");
+        phoneNumberToBlock.setId("phoneNumberToBlock");
+
+        confirmar = new Button("Confirmar");
         confirmar.addClassName("activebutton");
-        confirmar.addClickListener(e -> onBlocknumber());
+        confirmar.addClickListener(e -> onBlockNumberButton());
         // ---------------------------
 
         centerDiv = new VerticalLayout();
@@ -116,7 +102,7 @@ public class BlockNumberUserView extends VerticalLayout {
         titleDiv.add(titleDelete);
         confirmSquare.add(titleDiv);
 
-        bodyDiv = new VerticalLayout(Contrato, linea, phoneNumber, confirmar);
+        bodyDiv = new VerticalLayout(lines, phoneNumberToBlock, confirmar);
         bodyDiv.setWidthFull();
         bodyDiv.setJustifyContentMode(JustifyContentMode.START);
         bodyDiv.setAlignItems(Alignment.CENTER);
@@ -134,16 +120,16 @@ public class BlockNumberUserView extends VerticalLayout {
         expand(centerDiv);
     }
 
-    public void onBlocknumber() {
-        if (phoneNumber.getValue() != null && Contrato.getValue() != null && linea.getValue() != null) {
-            mobileService.blockNumber(phoneNumber.getValue(), linea.getValue());
-            Notification.show("Número bloqueado");
-
+    public void onBlockNumberButton() {
+        String nText = "";
+        if (lines.getValue() != null && phoneNumberToBlock.getValue() != null) {
+            mobileService.blockNumber(phoneNumberToBlock.getValue(), lines.getValue());
+            nText = "Número bloqueado con éxito!";
+            Notification.show(nText).addThemeVariants(NotificationVariant.LUMO_SUCCESS);
         } else {
-            Notification.show("Rellene todos los campos");
-
+            nText = "Algo falló! Revise los datos introducidos.";
+            Notification.show(nText).addThemeVariants(NotificationVariant.LUMO_ERROR);
         }
 
     }
-
 }

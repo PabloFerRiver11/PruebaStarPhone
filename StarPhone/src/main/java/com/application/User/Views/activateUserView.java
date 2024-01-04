@@ -101,7 +101,7 @@ public class activateUserView extends VerticalLayout {
         if (userService.isActivated(email.getValue()))
             UI.getCurrent().getPage().setLocation("/");
         if (userService.activateUserCode(email.getValue(), confirmCode.getValue())) {
-            UI.getCurrent().getPage().setLocation("/menucliente");
+            UI.getCurrent().getPage().setLocation("/menu");
         } else {
             Notification.show("Código de activación incorrecto").addThemeVariants(NotificationVariant.LUMO_SUCCESS);
             UI.getCurrent().getPage().setLocation("/activateuser");

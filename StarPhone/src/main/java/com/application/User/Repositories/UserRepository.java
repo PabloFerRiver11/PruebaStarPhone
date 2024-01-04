@@ -24,4 +24,10 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
         @Query("SELECT u.DNI FROM User u WHERE u.email LIKE %:email%")
         List<String> findDNIByEmailPart(@Param("email") String emailPart);
+
+        @Query("SELECT u.email FROM User u WHERE u.email LIKE %:email%")
+        List<String> findFullEmailByEmailPart(@Param("email") String emailPart);
+
+        @Query("SELECT u.username FROM User u WHERE u.username LIKE %:username%")
+        List<String> findFullUsernameByUsernamePart(@Param("username") String partusername);
 }

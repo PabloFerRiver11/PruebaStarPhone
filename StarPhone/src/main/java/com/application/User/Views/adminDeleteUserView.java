@@ -9,8 +9,6 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.EmailField;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -27,7 +25,7 @@ public class adminDeleteUserView extends VerticalLayout {
     VerticalLayout bodyDiv, centerDiv, confirmSquare;
     HorizontalLayout titleDiv, footerDiv;
     H3 titleDelete;
-    EmailField email;
+    ComboBox<String> email;
     ComboBox<String> DNI;
     Button confirmar;
     UserService userService;
@@ -42,18 +40,31 @@ public class adminDeleteUserView extends VerticalLayout {
         getStyle().set("font-family", "Kavoon");
 
         // Campos formulario
-        email = new EmailField("Email:");
+        email = new ComboBox<String>();
         email.addClassName("activefield");
+        email.setLabel("Email:");
+        email.setHelperText("Tras escribir, despliegue para marcar una opción.");
         email.setId("email");
-        email.setRequired(true);
-        email.setHelperText("Introduce un email, para obtener un DNI.");
-        email.setValueChangeMode(ValueChangeMode.EAGER);
+
+        email.setAllowCustomValue(true);
+        email.addCustomValueSetListener(event -> {
+            String text = event.getDetail();
+            if (text != null && !text.isEmpty()) {
+                List<String> usernames = userService.getFullEmailByEmailPart(text);
+                email.setItems(usernames);
+                email.setValue(text);
+                email.setOpened(true);
+            } else {
+                email.setItems("");
+            }
+        });
 
         DNI = new ComboBox<>("DNI:");
         DNI.addClassName("activefield");
-        DNI.setId("DNI");
         DNI.setRequired(true);
         DNI.setHelperText("Seleccione un DNI de la lista.");
+        DNI.setAllowCustomValue(false);
+        DNI.setId("DNI");
 
         email.addValueChangeListener(event -> {
             List<String> l = userService.getDNIByEmail(event.getValue());
@@ -115,8 +126,6 @@ public class adminDeleteUserView extends VerticalLayout {
     }
 
     public void onDeleteButtonClick() {
-        System.out.println(email.getValue());
-        System.out.println(DNI.getValue());
         if (userService.deleteByDNI(DNI.getValue())) {
             String text = new String("Genial. Eliminado correctamente!!");
             Notification.show(text).addThemeVariants(NotificationVariant.LUMO_SUCCESS);

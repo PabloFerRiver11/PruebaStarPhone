@@ -123,6 +123,14 @@ public class UserService implements UserDetailsService {
         return userRepository.findDNIByEmailPart(emailPart);
     }
 
+    public List<String> getFullEmailByEmailPart(String emailPart) {
+        return userRepository.findFullEmailByEmailPart(emailPart);
+    }
+
+    public List<String> getFullUsernameByPartUsername(String partusername) {
+        return userRepository.findFullUsernameByUsernamePart(partusername);
+    }
+
     public User findUserByDNI(String dni) {
         Optional<User> user = userRepository.findByDNI(dni);
         if (user.isPresent()) {
@@ -131,7 +139,6 @@ public class UserService implements UserDetailsService {
             return new User();
         }
     }
-
 
     public boolean deleteByDNI(String dni) {
         User u = findUserByDNI(dni);
@@ -144,10 +151,25 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public void giveRole(String username, Role role) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            user.get().addRole(role);
+            userRepository.save(user.get());
+        }
+    }
+
+    public void removeRole(String username, Role role) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            System.out.println("Eliminando rol " + role + " a usuario " + username);
+            user.get().getRoles().remove(role);
+            userRepository.save(user.get());
+        }
+    }
+
     public int count() {
         return (int) userRepository.count();
     }
-
-
 
 }

@@ -115,7 +115,7 @@ public class adminRegisterUserView extends VerticalLayout {
         repeatPassword.addClassName("registerformfield");
         repeatPassword.setId("repeatPassword");
 
-        role = new Select<>();
+        role = new Select<Role>();
         role.addClassName("registerformfield");
         role.setLabel("Rol inicial:");
         role.setItems(Role.CUSTOMER, Role.MARKETING, Role.FINANCE, Role.CUSTOMERSUPPORT, Role.ADMIN);

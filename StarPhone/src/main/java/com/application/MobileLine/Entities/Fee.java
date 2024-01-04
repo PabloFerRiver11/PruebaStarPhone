@@ -3,6 +3,8 @@ package com.application.MobileLine.Entities;
 import com.application.General.AbstractEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import java.util.UUID;
@@ -34,6 +36,18 @@ public class Fee extends AbstractEntity {
     @NotEmpty
     @Column(name = "descriptionTV", nullable = false)
     private String descriptionTV;
+
+    @NotNull
+    @Column(name = "availableData", nullable = false)
+    private Double availableData;
+
+    @NotNull
+    @Column(name = "availableCalls", nullable = false)
+    private int availableCalls;
+
+    @NotNull
+    @Column(name = "availableSMS", nullable = false)
+    private int availableSMS;
 
     @NotEmpty
     @Column(name = "monthlyprice", nullable = false)
@@ -82,6 +96,30 @@ public class Fee extends AbstractEntity {
 
     public void setDescription(String descriptionTV) {
         this.descriptionTV = descriptionTV;
+    }
+
+    public Double getAvailableData() {
+        return this.availableData;
+    }
+
+    public void setAvailableData(Double availableData) {
+        this.availableData = availableData;
+    }
+
+    public int getAvailableCalls() {
+        return this.availableCalls;
+    }
+
+    public void setAvailableCalls(int availableCalls) {
+        this.availableCalls = availableCalls;
+    }
+
+    public int getAvailableSMS() {
+        return this.availableSMS;
+    }
+
+    public void setAvailableSMS(int availableSMS) {
+        this.availableSMS = availableSMS;
     }
 
     public double getMonthlyprice() {

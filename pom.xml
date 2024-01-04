@@ -113,7 +113,7 @@
         <repository>
             <id>github</id>
             <name>GitHub PabloFerRiver Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/PabloFerRiver/iw2023-2024-StarPhone</url>
+            <url>https://maven.pkg.github.com/mnpx01/iw2023-2024-StarPhone</url>
         </repository>
     </distributionManagement>
 

@@ -112,7 +112,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/PabloFerRiver/PruebaStarPhone</url>
+            <url>https://maven.pkg.github.com/PabloFerRiver/iw2023-2024-StarPhone</url>
         </repository>
     </distributionManagement>
 
